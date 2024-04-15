@@ -1,5 +1,5 @@
 {
-  "name": "penca-ucu",
+  "name": "penca-ucucode",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:PencaUCU": "node dist/penca-ucu/server/server.mjs"
+    "serve:ssr:PencaUCUCode": "node dist/penca-ucucode/server/server.mjs"
   },
   "private": true,
   "dependencies": {

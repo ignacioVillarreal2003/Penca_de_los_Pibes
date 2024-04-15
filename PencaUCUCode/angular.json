@@ -3,9 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "PencaUCU": {
+    "PencaUCUCode": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/penca-ucu",
+            "outputPath": "dist/penca-ucucode",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -62,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "PencaUCU:build:production"
+              "buildTarget": "PencaUCUCode:build:production"
             },
             "development": {
-              "buildTarget": "PencaUCU:build:development"
+              "buildTarget": "PencaUCUCode:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "PencaUCU:build"
+            "buildTarget": "PencaUCUCode:build"
           }
         },
         "test": {
