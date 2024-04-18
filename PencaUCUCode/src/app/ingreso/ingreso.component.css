@@ -1,0 +1,79 @@
+.ingreso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-image: url(../../assets/bg.jpg);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.ingreso .cuadro {
+    width: 500px;
+    height: 500px;
+    background-color: #1017208c;
+    display: flex;
+    align-items: center;
+    padding: 40px 20px;
+    flex-direction: column;
+    box-sizing: border-box;
+    transition: all .15s ease-in;
+}
+
+.ingreso .cuadro:hover {
+    background-color: #101720b9;
+}
+
+.ingreso .cuadro h1 {
+    color: white;
+    font-size: 40px;
+}
+
+.ingreso .cuadro input {
+    width: 300px;
+    height: 40px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    transition: all .15s ease-in;
+    font-size: 20px;
+}
+
+.ingreso .cuadro input:hover {
+    transform: scale(1.05);
+}
+
+.ingreso .cuadro input:focus-visible {
+    outline: black auto 1px;
+}
+
+.ingreso .cuadro .options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ingreso .cuadro .options button {
+    margin-top: 40px;
+    width: 160px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    transition: all .2s ease-in;
+    font-size: 18px;
+    color: white;
+}
+
+.ingreso .cuadro .options button:hover {
+    background-color: #5BBCFF;
+    color: black;
+}
+
+.ingreso .cuadro .link-forget-password {
+    color: #5BBCFF;
+    text-decoration: none;
+    position: relative;
+    top: 90px;
+}
