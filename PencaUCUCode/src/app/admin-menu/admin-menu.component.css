@@ -1,0 +1,200 @@
+.admin-menu {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.admin-menu header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 5%;
+    background-color: #fefefe;
+    border-bottom: 1px solid #C6D2D9
+}
+
+.admin-menu header h1 {
+    font-size: 30px;
+}
+
+.admin-menu header .btn-options {
+    background-color: transparent;
+    border: none;
+}
+
+.admin-menu header .btn-options img {
+    width: 40px;
+    height: 40px;
+}
+
+.admin-menu .content {
+    height: 100%;
+    display: flex;
+}
+
+.admin-menu .content aside {
+    height: 100%;
+    width: 200px;
+    background: #fefefe;
+    box-shadow: 1px 0 #c6d2d9;
+}
+
+.admin-menu .content aside h2 {
+    text-align: center;
+    color: #333;
+    background-color: white;
+    margin: 0;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-menu .content aside ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.admin-menu .content aside ul li button {
+    width: 200px;
+    height: 40px;
+    text-align: start;
+    padding: 0 0 0 20px;
+    border: none;
+    font-size: 16px;
+    background-color: transparent;
+    color: #333;
+    transition: all .3s ease;
+}
+
+.admin-menu .content aside ul li button:hover {
+    background-color: #e8ecec;
+}
+
+.admin-menu .content .modes {
+    width: 100%;
+}
+
+.admin-menu .content .modes .mode {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    flex-direction: column;
+    background-color: #f2f6f8;
+}
+
+.admin-menu .content .modes #mode2 {
+    display: flex;
+}
+
+.admin-menu .content .modes #mode1,
+.admin-menu .content .modes #mode3,
+.admin-menu .content .modes #mode4,
+.admin-menu .content .modes #mode5,
+.admin-menu .content .modes #mode6 {
+    display: none;
+}
+
+.admin-menu .content .modes .mode h2 {
+    margin-bottom: 40px;
+}
+
+.admin-menu .content .modes .mode2-content,
+.admin-menu .content .modes .mode3-content,
+.admin-menu .content .modes .mode4-content,
+.admin-menu .content .modes .mode5-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.admin-menu .content .modes .mode2-content .input,
+.admin-menu .content .modes .mode3-content .input,
+.admin-menu .content .modes .mode4-content .input,
+.admin-menu .content .modes .mode5-content .input{
+    box-shadow: 0 0 20px #0000001a;
+    border-bottom: 1px solid #C6D2D9;
+    background-color: #fefefe;
+    border: 1px solid #C6D2D9;
+    border-radius: 2px;
+    height: 4.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+}
+
+.admin-menu .content .modes .mode2-content .input label,
+.admin-menu .content .modes .mode3-content .input label,
+.admin-menu .content .modes .mode4-content .input label,
+.admin-menu .content .modes .mode5-content .input label {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.admin-menu .content .modes .mode2-content .input input,
+.admin-menu .content .modes .mode3-content .input input,
+.admin-menu .content .modes .mode4-content .input input,
+.admin-menu .content .modes .mode5-content .input input,
+.admin-menu .content .modes .mode4-content .input select {
+    box-shadow: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    height: calc(2.7rem + 2px);
+    padding: .6rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fefefe;
+    background-clip: padding-box;
+    border-radius: 2px;
+    border: transparent;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.admin-menu .content .modes .mode2-content .input input:focus-visible,
+.admin-menu .content .modes .mode2-content .input input:hover,
+.admin-menu .content .modes .mode3-content .input input:focus-visible,
+.admin-menu .content .modes .mode3-content .input input:hover,
+.admin-menu .content .modes .mode4-content .input input:focus-visible,
+.admin-menu .content .modes .mode4-content .input input:hover,
+.admin-menu .content .modes .mode5-content .input input:focus-visible,
+.admin-menu .content .modes .mode5-content .input input:hover,
+.admin-menu .content .modes .mode4-content .input select:hover,
+.admin-menu .content .modes .mode4-content .input select:focus-visible {
+    border: 1px solid #C6D2D9;
+}
+
+@media (max-width: 1050px) {
+    .admin-menu .content .modes .mode2-content .input,
+    .admin-menu .content .modes .mode3-content .input,
+    .admin-menu .content .modes .mode4-content .input,
+    .admin-menu .content .modes .mode5-content .input {
+      display: flex;
+      flex-direction: column;
+      height: 6.2rem;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .admin-menu .content .modes .mode2-content .input label,
+    .admin-menu .content .modes .mode3-content .input label,
+    .admin-menu .content .modes .mode4-content .input label,
+    .admin-menu .content .modes .mode5-content .input label {
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+}  
+

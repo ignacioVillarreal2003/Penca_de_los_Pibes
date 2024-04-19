@@ -1,0 +1,110 @@
+<div class="admin-menu">
+    <header>
+        <h1>Admin mode</h1>
+        <button class="btn-options"><img src="../../assets/opcion.png" alt=""></button>
+    </header>
+
+    <div class="content">
+        <aside>
+            <h2>Menu</h2>
+            <ul>
+                <li><button (click)="ChangeMode(1)">Inicio</button></li>
+                <li><button (click)="ChangeMode(2)">Crear campeonato</button></li>
+                <li><button (click)="ChangeMode(3)">Añadir equipo</button></li>
+                <li><button (click)="ChangeMode(4)">Añadir resultado</button></li>
+                <li><button (click)="ChangeMode(5)">Añadir partidos</button></li>
+                <li><button (click)="ChangeMode(6)">Aprobar usuarios</button></li>
+            </ul>
+        </aside>
+
+        <div class="modes">
+            <div id="mode1" class="mode">
+                <h2>Welcome {{username}}</h2>
+            </div>
+
+            <div id="mode2" class="mode">
+                <h2>Crear campeonato</h2>
+                <div class="mode2-content">
+                    <div class="input">
+                        <label for="input-nombre-campeonato">Nombre campeonato</label>
+                        <input type="text" id="input-nombre-campeonato" class="input-nombre-campeonato">
+                    </div>
+                    <div class="input">
+                        <label for="input-fecha-comienzo">Fecha comienzo</label>
+                        <input type="date" id="input-fecha-comienzo" class="input-fecha-comienzo">
+                    </div>
+                    <div class="input">
+                        <label for="input-fecha-fin">Fecha fin</label>
+                        <input type="date" id="input-fecha-fin" class="input-fecha-fin">
+                    </div>
+                </div>
+            </div>
+
+            <div id="mode3" class="mode">
+                <h2>Añadir equipo</h2>
+                <div class="mode3-content">
+                    <div class="input">
+                        <label for="input-nombre-equipo">Nombre equipo</label>
+                        <input type="text" id="input-nombre-equipo" class="input-nombre-equipo">
+                    </div>
+                    <div class="input">
+                        <label for="input-nombre-pais">Pais</label>
+                        <input type="text" id="input-nombre-pais" class="input-nombre-pais">
+                    </div>
+                </div>
+            </div>
+
+            <div id="mode4" class="mode">
+                <h2>Añadir resultado</h2>
+                <div class="mode4-content">
+                    <div class="input">
+                        <label for="input-seleccion-partido">Selecciona un partido</label>
+                        <select id="input-seleccion-partido" class="input-seleccion-partido">
+                            <option value="opcion1">Opción 1</option>
+                            <option value="opcion2">Opción 2</option>
+                            <option value="opcion3">Opción 3</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="input-goles-equipo-1">Goles equipo 1</label>
+                        <input type="number" id="input-goles-equipo-1" class="input-goles-equipo-1">
+                    </div>
+                    <div class="input">
+                        <label for="input-goles-equipo-2">Goles equipo 2</label>
+                        <input type="number" id="input-goles-equipo-2" class="input-goles-equipo-2">
+                    </div>
+                </div>
+            </div>
+
+            <div id="mode5" class="mode">
+                <h2>Añadir partido</h2>
+                <div class="mode5-content">
+                    <div class="input">
+                        <label for="input-nombre-equipo-1">Nombre equipo 1</label>
+                        <input type="text" id="input-nombre-equipo-1" class="input-nombre-equipo-1">
+                    </div>
+                    <div class="input">
+                        <label for="input-nombre-equipo-2">Nombre equipo 2</label>
+                        <input type="text" id="input-nombre-equipo-2" class="input-nombre-equipo-2">
+                    </div>
+                    <div class="input">
+                        <label for="input-ubicacion-partido">Ubicacion</label>
+                        <input type="text" id="input-ubicacion-partido" class="input-ubicacion-partido">
+                    </div>
+                    <div class="input">
+                        <label for="input-fecha-partido">Fecha partido</label>
+                        <input type="date" id="input-fecha-partido" class="input-fecha-partido">
+                    </div>
+                    <div class="input">
+                        <label for="input-hora-partido">Hora partido</label>
+                        <input type="time" id="input-hora-partido" class="input-hora-partido">
+                    </div>
+                </div>
+            </div>
+
+            <div id="mode6" class="mode">
+                <h2>Aprobar usuarios</h2>
+            </div>
+        </div>
+    </div>
+</div>

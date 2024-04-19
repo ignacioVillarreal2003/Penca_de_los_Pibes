@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { IngresoComponent } from './ingreso/ingreso.component';
+import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IngresoComponent
+    IngresoComponent,
+    AdminMenuComponent
   ],
   imports: [
     BrowserModule,
