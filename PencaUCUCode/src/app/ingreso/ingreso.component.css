@@ -36,12 +36,43 @@
     background-color: #101720b9;
 }
 
-.ingreso .cuadro h1 {
-    color: white;
-    font-size: 40px;
+.ingreso .cuadro .options {
+    display: flex;
+    margin-bottom: 30px;
 }
 
-.ingreso .cuadro input {
+.ingreso .cuadro .options button {
+    width: 160px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    transition: all .2s ease-in;
+    font-size: 18px;
+    color: white;
+    border-bottom: 2px solid transparent;
+}
+
+.ingreso .cuadro .options button:hover {
+    border-bottom: 2px solid #5BBCFF;
+}
+
+.ingreso .cuadro .mode-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.ingreso .cuadro .mode-register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: none;
+}
+
+.ingreso .cuadro .mode-login input,
+.ingreso .cuadro .mode-register input {
     width: 300px;
     height: 40px;
     padding: 20px;
@@ -51,22 +82,17 @@
     font-size: 20px;
 }
 
-.ingreso .cuadro input:hover {
+.ingreso .cuadro .mode-login input:hover,
+.ingreso .cuadro .mode-register input:hover {
     transform: scale(1.05);
 }
 
-.ingreso .cuadro input:focus-visible {
+.ingreso .cuadro .mode-login input:focus-visible,
+.ingreso .cuadro .mode-register input:focus-visible {
     outline: black auto 1px;
 }
 
-.ingreso .cuadro .options {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.ingreso .cuadro .options button {
-    margin-top: 40px;
+.ingreso .cuadro .btn-ingreso {
     width: 160px;
     height: 50px;
     background-color: transparent;
@@ -74,16 +100,24 @@
     transition: all .2s ease-in;
     font-size: 18px;
     color: white;
+    margin-top: 40px;
 }
 
-.ingreso .cuadro .options button:hover {
-    background-color: #5BBCFF;
+.ingreso .cuadro .btn-ingreso:hover {
+    background: #5BBCFF;
     color: black;
 }
 
-.ingreso .cuadro .link-forget-password {
-    color: #5BBCFF;
-    text-decoration: none;
-    position: relative;
-    top: 90px;
+.ingreso .btn-ingreso-admin{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: none;
+    background-color: transparent;
+    filter:invert();
+}
+
+.ingreso .btn-ingreso-admin img {
+    width: 60px;
+    height: 60px;
 }
