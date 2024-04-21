@@ -91,15 +91,13 @@
     background-color: #f2f6f8;
 }
 
-.admin-menu .content .modes #mode2 {
+.admin-menu .content .modes #mode1 {
     display: flex;
 }
 
 .admin-menu .content .modes #mode1,
 .admin-menu .content .modes #mode3,
-.admin-menu .content .modes #mode4,
-.admin-menu .content .modes #mode5,
-.admin-menu .content .modes #mode6 {
+.admin-menu .content .modes #mode4 {
     display: none;
 }
 
@@ -107,19 +105,19 @@
     margin-bottom: 40px;
 }
 
+.admin-menu .content .modes .mode1-content,
 .admin-menu .content .modes .mode2-content,
 .admin-menu .content .modes .mode3-content,
-.admin-menu .content .modes .mode4-content,
-.admin-menu .content .modes .mode5-content {
+.admin-menu .content .modes .mode4-content {
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
 
+.admin-menu .content .modes .mode1-content .input,
 .admin-menu .content .modes .mode2-content .input,
 .admin-menu .content .modes .mode3-content .input,
-.admin-menu .content .modes .mode4-content .input,
-.admin-menu .content .modes .mode5-content .input{
+.admin-menu .content .modes .mode4-content .input{
     box-shadow: 0 0 20px #0000001a;
     border-bottom: 1px solid #C6D2D9;
     background-color: #fefefe;
@@ -132,19 +130,19 @@
     padding: 5px 10px;
 }
 
+.admin-menu .content .modes .mode1-content .input label,
 .admin-menu .content .modes .mode2-content .input label,
 .admin-menu .content .modes .mode3-content .input label,
-.admin-menu .content .modes .mode4-content .input label,
-.admin-menu .content .modes .mode5-content .input label {
+.admin-menu .content .modes .mode4-content .input label {
     width: 200px;
     margin-right: 20px;
 }
 
+.admin-menu .content .modes .mode1-content .input input,
 .admin-menu .content .modes .mode2-content .input input,
 .admin-menu .content .modes .mode3-content .input input,
-.admin-menu .content .modes .mode4-content .input input,
-.admin-menu .content .modes .mode5-content .input input,
-.admin-menu .content .modes .mode4-content .input select {
+.admin-menu .content .modes .mode4-content .input input, 
+.admin-menu .content .modes .mode3-content .input .input-seleccion-partido{
     box-shadow: none;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -164,24 +162,24 @@
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.admin-menu .content .modes .mode1-content .input input:focus-visible,
+.admin-menu .content .modes .mode1-content .input input:hover,
 .admin-menu .content .modes .mode2-content .input input:focus-visible,
 .admin-menu .content .modes .mode2-content .input input:hover,
 .admin-menu .content .modes .mode3-content .input input:focus-visible,
 .admin-menu .content .modes .mode3-content .input input:hover,
 .admin-menu .content .modes .mode4-content .input input:focus-visible,
 .admin-menu .content .modes .mode4-content .input input:hover,
-.admin-menu .content .modes .mode5-content .input input:focus-visible,
-.admin-menu .content .modes .mode5-content .input input:hover,
-.admin-menu .content .modes .mode4-content .input select:hover,
-.admin-menu .content .modes .mode4-content .input select:focus-visible {
+.admin-menu .content .modes .mode3-content .input .input-seleccion-partido:hover,
+.admin-menu .content .modes .mode3-content .input .input-seleccion-partido:focus-visible {
     border: 1px solid #C6D2D9;
 }
 
 @media (max-width: 1050px) {
+    .admin-menu .content .modes .mode1-content .input,
     .admin-menu .content .modes .mode2-content .input,
     .admin-menu .content .modes .mode3-content .input,
-    .admin-menu .content .modes .mode4-content .input,
-    .admin-menu .content .modes .mode5-content .input {
+    .admin-menu .content .modes .mode4-content .input {
       display: flex;
       flex-direction: column;
       height: 6.2rem;
@@ -189,10 +187,10 @@
       justify-content: flex-start;
     }
 
+    .admin-menu .content .modes .mode1-content .input label,
     .admin-menu .content .modes .mode2-content .input label,
     .admin-menu .content .modes .mode3-content .input label,
-    .admin-menu .content .modes .mode4-content .input label,
-    .admin-menu .content .modes .mode5-content .input label {
+    .admin-menu .content .modes .mode4-content .input label {
         margin-right: 0px;
         margin-bottom: 10px;
     }

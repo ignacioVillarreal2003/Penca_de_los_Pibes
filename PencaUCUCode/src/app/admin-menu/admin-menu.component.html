@@ -1,6 +1,6 @@
 <div class="admin-menu">
     <header>
-        <h1>Admin mode</h1>
+        <h1>Welcome Admin</h1>
         <button class="btn-options"><img src="../../assets/opcion.png" alt=""></button>
     </header>
 
@@ -8,23 +8,17 @@
         <aside>
             <h2>Menu</h2>
             <ul>
-                <li><button (click)="ChangeMode(1)">Inicio</button></li>
-                <li><button (click)="ChangeMode(2)">Crear campeonato</button></li>
-                <li><button (click)="ChangeMode(3)">Añadir equipo</button></li>
-                <li><button (click)="ChangeMode(4)">Añadir resultado</button></li>
-                <li><button (click)="ChangeMode(5)">Añadir partidos</button></li>
-                <li><button (click)="ChangeMode(6)">Aprobar usuarios</button></li>
+                <li><button (click)="ChangeMode(1)">Crear campeonato</button></li>
+                <li><button (click)="ChangeMode(2)">Añadir equipo</button></li>
+                <li><button (click)="ChangeMode(3)">Añadir resultado</button></li>
+                <li><button (click)="ChangeMode(4)">Añadir partidos</button></li>
             </ul>
         </aside>
 
         <div class="modes">
             <div id="mode1" class="mode">
-                <h2>Welcome {{username}}</h2>
-            </div>
-
-            <div id="mode2" class="mode">
                 <h2>Crear campeonato</h2>
-                <div class="mode2-content">
+                <div class="mode1-content">
                     <div class="input">
                         <label for="input-nombre-campeonato">Nombre campeonato</label>
                         <input type="text" id="input-nombre-campeonato" class="input-nombre-campeonato">
@@ -40,9 +34,9 @@
                 </div>
             </div>
 
-            <div id="mode3" class="mode">
+            <div id="mode2" class="mode">
                 <h2>Añadir equipo</h2>
-                <div class="mode3-content">
+                <div class="mode2-content">
                     <div class="input">
                         <label for="input-nombre-equipo">Nombre equipo</label>
                         <input type="text" id="input-nombre-equipo" class="input-nombre-equipo">
@@ -54,9 +48,9 @@
                 </div>
             </div>
 
-            <div id="mode4" class="mode">
+            <div id="mode3" class="mode">
                 <h2>Añadir resultado</h2>
-                <div class="mode4-content">
+                <div class="mode3-content">
                     <div class="input">
                         <label for="input-seleccion-partido">Selecciona un partido</label>
                         <select id="input-seleccion-partido" class="input-seleccion-partido">
@@ -76,9 +70,9 @@
                 </div>
             </div>
 
-            <div id="mode5" class="mode">
+            <div id="mode4" class="mode">
                 <h2>Añadir partido</h2>
-                <div class="mode5-content">
+                <div class="mode4-content">
                     <div class="input">
                         <label for="input-nombre-equipo-1">Nombre equipo 1</label>
                         <input type="text" id="input-nombre-equipo-1" class="input-nombre-equipo-1">
@@ -100,10 +94,6 @@
                         <input type="time" id="input-hora-partido" class="input-hora-partido">
                     </div>
                 </div>
-            </div>
-
-            <div id="mode6" class="mode">
-                <h2>Aprobar usuarios</h2>
             </div>
         </div>
     </div>

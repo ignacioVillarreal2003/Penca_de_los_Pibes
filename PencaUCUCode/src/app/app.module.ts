@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 
 import { IngresoComponent } from './ingreso/ingreso.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
+import { UserMenuComponent } from './user-menu/user-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IngresoComponent,
-    AdminMenuComponent
+    AdminMenuComponent,
+    UserMenuComponent
   ],
   imports: [
     BrowserModule,

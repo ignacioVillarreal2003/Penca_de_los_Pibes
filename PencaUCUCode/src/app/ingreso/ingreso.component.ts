@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { log } from 'console';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ingreso',
@@ -12,6 +12,8 @@ export class IngresoComponent {
   password: string = "";
   nombre: string = "";
   mode: "login" | "register" = "login";
+
+  constructor(private router: Router){}
 
   ChangeModeLogin(){
     const modeLogin = document.querySelector('.ingreso .mode-login') as HTMLElement;
@@ -112,6 +114,7 @@ export class IngresoComponent {
         showConfirmButton: false,
         timer: 1500
       });
+      this.router.navigate(["/admin"])
     }
   }
   
