@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { IngresoComponent } from './ingreso/ingreso.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
+import { JuegoComponent } from './juego/juego.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IngresoComponent,
     AdminMenuComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    JuegoComponent
   ],
   imports: [
     BrowserModule,

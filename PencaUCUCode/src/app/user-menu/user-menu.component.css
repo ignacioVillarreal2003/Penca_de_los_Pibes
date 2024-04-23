@@ -10,6 +10,7 @@
 
 .user-menu header {
     width: 90%;
+    margin-bottom: 50px;
 }
 
 .user-menu header nav {
@@ -99,13 +100,89 @@
     font-size: 4rem;
 }
 
-.user-menu .container1{
-    width: 90%;
-    min-height: 100vh;
-    background-color: white;
-}
-
 .user-menu footer{
     width: 100%;
     min-height: 50vh;
 }
+
+@media (max-width: 1650px){
+    .user-menu .introduccion .imagen img {
+        width: 600px;
+        height: 400px;
+    }
+
+    .user-menu .introduccion .nombre-copa .name p{
+        font-size: 3rem;
+    }
+
+    .user-menu .introduccion .nombre-copa{
+        height: 400px;
+    }
+    
+    .user-menu .introduccion .nombre-copa .pseudo-imagen{
+        width: 350px;
+        height: 350px;
+    }
+}
+
+@media (max-width: 1300px){
+    .user-menu .introduccion {
+        flex-direction: column;
+    }
+
+    .user-menu .introduccion .imagen img {
+        width: 800px;
+        height: 500px;
+    }
+
+    .user-menu .introduccion .nombre-copa .name p{
+        font-size: 4rem;
+    }
+
+    .user-menu .introduccion .nombre-copa{
+        height: 500px;
+    }
+    
+    .user-menu .introduccion .nombre-copa .pseudo-imagen{
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 900px){
+    .user-menu .introduccion .imagen img {
+        width: 100%;
+        height: auto;
+    }
+
+    .user-menu .introduccion .nombre-copa .name p{
+        font-size: 3rem;
+    }
+
+    .user-menu .introduccion .nombre-copa{
+        height: 400px;
+        width: 100%;
+    }
+    
+    .user-menu .introduccion .nombre-copa .pseudo-imagen{
+        width: 90%;
+        height: 90%;
+    }
+}
+
+@media (max-width: 700px){
+    .user-menu header nav ul li{
+        width: 80px;
+        height: 45px;
+    }
+    
+    .user-menu header nav ul li button{
+        font-size: 15px;
+    }
+
+    .user-menu .introduccion .nombre-copa .name p{
+        font-size: 2.4rem;
+    }
+}
+
+
