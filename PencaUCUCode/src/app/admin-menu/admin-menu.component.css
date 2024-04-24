@@ -5,30 +5,6 @@
     flex-direction: column;
 }
 
-.admin-menu header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0px 5%;
-    background-color: #fefefe;
-    border-bottom: 1px solid #C6D2D9
-}
-
-.admin-menu header h1 {
-    font-size: 30px;
-}
-
-.admin-menu header .btn-options {
-    background-color: transparent;
-    border: none;
-}
-
-.admin-menu header .btn-options img {
-    width: 40px;
-    height: 40px;
-}
-
 .admin-menu .content {
     height: 100%;
     display: flex;
@@ -39,17 +15,7 @@
     width: 200px;
     background: #fefefe;
     box-shadow: 1px 0 #c6d2d9;
-}
-
-.admin-menu .content aside h2 {
-    text-align: center;
-    color: #333;
-    background-color: white;
-    margin: 0;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 10px;
 }
 
 .admin-menu .content aside ul {
@@ -86,10 +52,58 @@
 .admin-menu .content .modes .mode {
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 40px;
     flex-direction: column;
     background-color: #f2f6f8;
 }
+
+.btn-configuration{
+    background-color: transparent;
+    height: 61%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px;
+    gap: 8px;
+    height: 36px;
+    width: 120px;
+    border: none;
+    background: #08111b;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .lable {
+    line-height: 20px;
+    font-size: 17px;
+    color: white;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+  }
+  
+  .button:hover {
+    background: #12273d;
+  }
+  
+  .button:hover .svg-icon {
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
 .admin-menu .content .modes #mode1 {
     display: flex;
