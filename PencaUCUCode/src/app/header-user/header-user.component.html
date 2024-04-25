@@ -1,0 +1,47 @@
+<div class="header-user">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="" routerLink="home"><p>Home</p><div class="shape"></div></a></li>
+                <li><a href="" routerLink="games"><p>Games</p><div class="shape"></div></a></li>
+                <li><a href="" routerLink="penca"><p>Penca</p><div class="shape"></div></a></li>
+            </ul>
+        </nav>
+        <div class="configuration">
+            <p>Username</p>
+            <button class="avatar" (click)="OpenConfigurations()"><img src="../../assets/avatar/avatar-1.png" alt=""></button>
+        </div>
+    </header>
+        
+    <div class="background"></div>
+
+    <div class="configuration-section">
+        <div class="content">
+            <ul class="options">
+                <ul>
+                    <li><button (click)="ChangeOption(1)"><p>Password</p><div class="shape"></div></button></li>
+                    <li><button (click)="ChangeOption(2)"><p>Avatar</p><div class="shape"></div></button></li>
+                    <li><button (click)="CloseConfigurations()"><p>Close</p><div class="shape-red"></div></button></li>
+                </ul>
+                <div class="toggle-mode">
+                    <label class="switch-label">
+                      <input type="checkbox" class="checkbox">
+                      <span class="slider"></span>
+                    </label>
+                </div>  
+            </ul>
+            <div class="option">
+                <div class="option-password">
+                    <input type="password" id="" placeholder="old password">
+                    <input type="password" id="" placeholder="new password">
+                    <button>Submit</button>
+                </div>
+                <ul class="option-avatar">
+                    <li><button><img src="../../assets/avatar/avatar-1.png"></button></li>
+                    <li><button><img src="../../assets/avatar/avatar-1.png"></button></li>
+                    <li><button><img src="../../assets/avatar/avatar-1.png"></button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

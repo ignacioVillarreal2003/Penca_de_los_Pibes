@@ -1,0 +1,445 @@
+.header-user .background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url(../../assets/background/bg-1.jpg);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-user header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    padding: 0 20px;
+    position: fixed;
+    z-index: 2;
+    transition: all .5s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.header-user header nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    list-style: none;
+    gap: 20px;
+    padding: 20px;
+    margin: 0;
+}
+
+.header-user header nav ul li {
+    width: 120px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.header-user header nav ul li a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header-user header nav ul li a p {
+    color: white;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.header-user header nav ul li a .shape {
+    width: 60%;
+    height: 2px;
+    background-color: transparent;
+    transition: all .200s ease-in-out;
+    position: relative;
+    top: 10px;
+}
+
+.header-user header nav ul li a:hover .shape {
+    width: 100%;
+    background-color: white;
+    top: 0;
+}
+
+.header-user header .configuration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.header-user header .configuration p {
+    color: white;
+    font-size: 17px;
+}
+
+.header-user header .configuration .avatar {
+    background-color: #6871f1;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.header-user header .configuration .avatar img {
+    width: 40px;
+    height: 40px;
+}
+
+.header-user .configuration-section {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.747);
+    z-index: 4;
+    position: fixed;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-user .configuration-section .content {
+    width: 700px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    transition: 0.2s ease-in-out;
+}
+
+.header-user .configuration-section .content .options {
+    width: 150px;
+    height: 500px;
+    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.header-user .configuration-section .content .options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.header-user .configuration-section .content .options ul li button {
+    background-color: transparent;
+    width: 100%;
+    height: 50px;
+    border: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-user .configuration-section .content .options ul li button p {
+    font-size: 18px;
+    z-index: 4;
+}
+
+.header-user .configuration-section .content .options ul li button .shape {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #5BBCFF;
+    transition: width 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.header-user .configuration-section .content .options ul li button .shape-red {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgb(218, 21, 21);
+    transition: width 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.header-user .configuration-section .content .options ul li button:hover .shape,
+.header-user .configuration-section .content .options ul li button:hover .shape-red {
+    width: 100%;
+}
+
+.header-user .configuration-section .content .options ul li button:hover p {
+    color: white;
+}
+
+.header-user .configuration-section .content .options .toggle-mode {
+    position: relative;
+    width: 80px;
+    height: 40px;
+    --light: #d8dbe0;
+    --dark: #28292c;
+    --link: rgb(27, 129, 112);
+    --link-hover: rgb(24, 94, 82);
+    margin-bottom: 20px;
+}
+
+.header-user .configuration-section .content .options .toggle-mode .switch-label {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    background-color: var(--dark);
+    border-radius: 25px;
+    cursor: pointer;
+    border: 3px solid var(--dark);
+}
+
+.header-user .configuration-section .content .options .toggle-mode .checkbox {
+    position: absolute;
+    display: none;
+}
+
+.header-user .configuration-section .content .options .toggle-mode .slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.header-user .configuration-section .content .options .toggle-mode .checkbox:checked~.slider {
+    background-color: var(--light);
+}
+
+.header-user .configuration-section .content .options .toggle-mode .slider::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    -webkit-box-shadow: inset 12px -4px 0px 0px var(--light);
+    box-shadow: inset 12px -4px 0px 0px var(--light);
+    background-color: var(--dark);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.header-user .configuration-section .content .options .toggle-mode .checkbox:checked~.slider::before {
+    transform: translateX(38px);
+    background-color: var(--dark);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.header-user .configuration-section .content .option {
+    width: 550px;
+    height: 500px;
+    background: #0f0c29;
+    background: #C9CCD3;
+    background-image: linear-gradient(-180deg, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%);
+    background-blend-mode: lighten;
+}
+
+.header-user .configuration-section .content .option .option-password {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding: 40px 30px;
+    gap: 30px;
+}
+
+.header-user .configuration-section .content .option .option-password input {
+    border: 2px solid transparent;
+    width: 300px;
+    height: 40px;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.header-user .configuration-section .content .option .option-password input:hover,
+.header-user .configuration-section .content .option .option-password input:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+}
+
+.header-user .configuration-section .content .option .option-password button {
+    padding: 17px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all 0.5s ease;
+    margin-top: 10px;
+}
+
+.header-user .configuration-section .content .option .option-password button:hover {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+.header-user .configuration-section .content .option .option-password button:active {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+}
+
+.header-user .configuration-section .content .option .option-avatar {
+    display: none;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    padding: 40px 30px;
+    gap: 20px;
+    list-style: none;
+}
+
+.header-user .configuration-section .content .option .option-avatar li button {
+    background-color: #f2b67b;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+    width: 90px;
+    height: 90px;
+    border: none;
+}
+
+.header-user .configuration-section .content .option .option-avatar li button img {
+    width: 70px;
+    height: 70px;
+    transition: all .2s ease;
+}
+
+.header-user .configuration-section .content .option .option-avatar li button:hover img {
+    transform: scale(1.05);
+}
+
+.header-user .configuration-section .content .option .option-theme {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .header-user header {
+        padding: 0 8px;
+    }
+
+    .header-user header nav ul {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .header-user header nav ul li {
+        width: 65px;
+        height: 40px;
+    }
+
+    .header-user header nav ul li a p {
+        font-size: 13px;
+    }
+
+    .header-user header .configuration p {
+        display: none;
+    }
+
+    .header-user header .configuration .avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header-user header .configuration .avatar img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .header-user .configuration-section .content {
+        width: 300px;
+        height: 400px;
+    }
+
+    .header-user .configuration-section .content .options {
+        width: 80px;
+        height: 400px;
+    }
+
+    .header-user .configuration-section .content .options ul li button p {
+        font-size: 10px;
+    }
+
+    .header-user .configuration-section .content .options .toggle-mode {
+        width: 50px;
+        height: 26px;
+    }
+
+    .header-user .configuration-section .content .options .toggle-mode .switch-label {
+        height: 26px;
+    }
+
+    .header-user .configuration-section .content .options .toggle-mode .slider::before {
+        top: 1px;
+        left: 2px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .header-user .configuration-section .content .options .toggle-mode .checkbox:checked~.slider::before {
+        transform: translateX(20px);
+    }
+
+    .header-user .configuration-section .content .option {
+        width: 220px;
+        height: 400px;
+    }
+
+    .header-user .configuration-section .content .option .option-password input {
+        width: 100%;
+        height: 30px;
+    }
+
+    .header-user .configuration-section .content .option .option-password button {
+        padding: 10px 28px;
+        font-size: 10px;
+    }
+
+    .header-user .configuration-section .content .option .option-avatar {
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .header-user .configuration-section .content .option .option-avatar li button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .header-user .configuration-section .content .option .option-avatar li button img {
+        width: 40px;
+        height: 40px;
+    }
+}

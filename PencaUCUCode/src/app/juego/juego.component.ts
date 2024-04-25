@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-juego',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class JuegoComponent {
 
+  
 }

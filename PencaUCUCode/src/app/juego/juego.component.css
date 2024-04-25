@@ -3,330 +3,201 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    background-color: aliceblue;
     width: 100%;
     min-height: 100vh;
 }
 
-.juego header {
+/* PARTIDOS */
+.juego .container-1 {
     width: 90%;
-    margin-bottom: 50px;
+    margin-top: 140px;
+    z-index: 1;
 }
 
-.juego header nav {
-    width: 100%;
-    background-color: white;
-}
-
-.juego header nav ul {
+.juego .container-1 .options {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    list-style: none;
-    gap: 20px;
-    padding: 20px 0;
-    margin: 0;
-    margin-top: 10px;
+    background: #f5f5f575;
+    box-shadow: 8px 8px 50px #23232333;
+    padding: 4px;
+    height: 84px;
 }
 
-.juego header nav ul li {
-    width: 120px;
-    height: 50px;
-    transition: all ease-out 300ms;
-    border-bottom: 2px solid transparent;
-}
-
-.juego header nav ul li:hover {
-    border-bottom: 2px solid #1a2434;
-}
-
-.juego header nav ul li button {
-    text-decoration: none;
-    color: black;
-    font-size: 20px;
+.juego .container-1 .options button,
+.juego .container-1 .options select {
     width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-}
-
-.juego .container-1 {
-    width: 90%;
-    margin: 60px 0;
-}
-
-.juego .container-1 .title {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
     padding: 20px;
-    box-shadow: 5px 5px 27px #0000002d,
-    -5px -5px 27px #00000041;
-}
-
-.juego .container-1 .title h2 {
-    font-size: 26px;
-    margin: 0;
-    margin-bottom: 10px;
-    width: 100%;
+    background-color: transparent;
+    font-size: 24px;
     text-align: center;
-}
-
-.juego .container-1 .title .filtros {
-    display: flex;
-    flex-direction: column;
-}
-
-.juego .container-1 .title .filtros .opcion{
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.juego .container-1 .title .filtros .opcion .descripcion {
-    width: 120px;
-    margin-right: 30px;
-    font-size: 18px;
-}
-
-.juego .container-1 .title .filtros .opcion  .cbx {
-    position: relative;
-    top: 1px;
-    width: 25px;
-    height: 25px;
-    border: 1px solid #c8ccd4;
-    border-radius: 3px;
-    vertical-align: middle;
-    transition: all 0.1s ease;
-    cursor: pointer;
-    display: block;
-}
-
-.juego .container-1 .title .filtros .opcion  .cbx:after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 8px;
-    width: 6px;
-    height: 12px;
-    opacity: 0;
-    transform: rotate(45deg) scale(0);
-    border-right: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    transition: all 0.3s ease;
-    transition-delay: 0.15s;
-}
-
-.juego .container-1 .title .filtros .opcion  .lbl {
-    margin-left: 5px;
-    vertical-align: middle;
-    cursor: pointer;
-}
-
-.juego .container-1 .title .filtros .opcion  #filtro-completos:checked~.cbx {
-    border-color: transparent;
-    background: #6871f1;
-    animation: jelly 0.6s ease;
-}
-
-.juego .container-1 .title .filtros .opcion  #filtro-completos:checked~.cbx:after {
-    opacity: 1;
-    transform: rotate(45deg) scale(1);
-}
-
-.juego .container-1 .title .filtros .opcion  .cntr {
-    position: relative;
-}
-
-@keyframes jelly {
-    from {
-        transform: scale(1, 1);
-    }
-
-    30% {
-        transform: scale(1.25, 0.75);
-    }
-
-    40% {
-        transform: scale(0.75, 1.25);
-    }
-
-    50% {
-        transform: scale(1.15, 0.85);
-    }
-
-    65% {
-        transform: scale(0.95, 1.05);
-    }
-
-    75% {
-        transform: scale(1.05, 0.95);
-    }
-
-    to {
-        transform: scale(1, 1);
-    }
-}
-
-.juego .container-1 .title .filtros .opcion  .hidden-xs-up {
-    display: none !important;
-}
-
-.juego .container-1 .title .filtros .opcion  #filtro-cuadro{
-    width: 90%;
     border: none;
-    font-size: 18px;
-    border-radius: 10px;
-    padding: 5px 20px;
-    border: 1px solid #C6D2D9;
+    transition: all .2s ease-in-out;
+}
+
+.juego .container-1 .options button:hover,
+.juego .container-1 .options select:hover {
+    color: white;
+    background-color: rgba(52, 73, 94, 0.89);
+    font-size: 26px;
 }
 
 .juego .container-1 ul {
     list-style: none;
     padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px);
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
 }
 
 .juego .container-1 ul li {
+    width: 350px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.juego .container-1 ul li a {
     width: 100%;
+    height: 100%;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.4) 10px 20px 30px, rgba(0, 0, 0, 0.3) 10px 1px 53px 3px, rgba(1, 0, 0, 0.2) 0px -1px 3px inset;
+    transition: all 0.5s;
+}
+
+.juego .container-1 ul li a:hover {
+    transform: scale(1.021);
+}
+
+.juego .container-1 ul li a:active {
+    transform: scale(0.95) rotateZ(1.1deg);
+}
+
+.juego .container-1 ul li a .front {
+    width: 100%;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    opacity: 0.8;
-    transition: all .35s ease-in-out;
-    margin-bottom: 30px;
-    background-color: white;
-    box-shadow: 2px 2px 10px 0px rgba(94, 94, 94, 0.75);
+    padding: 40px 25px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background: #0f202798;  
 }
 
-.juego .container-1 ul li:hover {
-    opacity: 1;
-}
-
-.juego .container-1 ul li a {
-    color: black;
-    text-decoration: none;
+.juego .container-1 ul li a .front h3 {
+    font-size: 28px;
     width: 100%;
-    padding-bottom: 30px;
+    margin: 0;
+    color: white;
 }
 
-.juego .container-1 ul li a h2 {
-    background-color: #393E46;
+.juego .container-1 ul li a .front .cuadro-1 {
+    text-align: start;
+}
+
+.juego .container-1 ul li a .front .cuadro-2 {
+    text-align: end;
+}
+
+.juego .container-1 ul li a .front p {
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+    color: white;
+}
+
+.juego .container-1 ul li a .info {
+    background: #212121;
+    width: 100%;
+    height: 100px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 10px 20px;
+}
+
+.juego .container-1 ul li a .info h2 {
+    margin: 0;
+    font-size: 26px;
     width: 100%;
     text-align: center;
     color: white;
+}
+
+.juego .container-1 ul li a .info p {
     margin: 0;
-    padding: 10px 0;
-    font-size: 20px;
-    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    width: auto;
+    color: white;
 }
 
-.juego .container-1 ul li a .description {
-    margin: 0;
-    padding: 5px 0;
-    font-size: 16px;
-}
-
-.juego .container-1 ul li a .targeta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-}
-
-.juego .container-1 ul li a .targeta .equipo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.juego .container-1 ul li a .targeta .equipo h3 {
-    font-size: 22px;
-}
-
-.juego .container-1 ul li a .targeta .equipo img {
-    width: 50px;
-    height: 50px;
-}
-
-.juego .container-1 ul li a .targeta .separador {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.juego .container-1 ul li a .targeta .separador p {
-    font-size: 22px;
-}
-
-.juego .container-1 ul li a .targeta .separador .forma {
-    background-color: black;
-    width: 30px;
-    height: 4px;
-}
-
-.juego .container-1 ul li a .mas {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 20px;
-}
-
-.juego .container-1 ul li a .mas .btn-mas {
-    background-color: #393E46;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 14px;
-    margin: 12px 14px;
-    cursor: pointer;
-    transition: all .35s ease;
-}
-
-.juego .container-1 ul li a .mas .btn-mas:hover {
-    scale: 1.05;
-}
-
-
-@media (max-width: 700px) {
-    .juego header {
-        margin-bottom: 0;
+@media (max-width: 700px) { 
+    .juego .container-1 {
+        margin-top: 100px;
     }
-
-    .juego header nav ul {
-        gap: 10px;
+     
+    .juego .container-1 .options {
+        height: 120px;
+        flex-wrap: wrap;
     }
+    
+    .juego .container-1 .options button,
+    .juego .container-1 .options select {
+        padding: 15px;
+        font-size: 16px;
+        width: 50%;
 
-    .juego header nav ul li {
-        width: 80px;
-        height: 40px;
     }
-
-    .juego header nav ul li button {
-        font-size: 17px;
+    
+    .juego .container-1 .options button:hover,
+    .juego .container-1 .options select:hover {
+        background-color: rgba(52, 73, 94, 0.89);
+        font-size: 16px;
     }
+    
+}
 
-    .juego .container-1 .title h2 {
-        font-size: 22px;
+@media (max-width: 700px) { 
+    .juego .container-1 ul {
+        grid-template-columns: repeat(auto-fill, 280px);
+        gap: 20px;
     }
-
-    .juego .container-1 .title .filtros .opcion .descripcion {
-        width: 90px;
-        margin-right: 10px;
+    
+    .juego .container-1 ul li {
+        width: 280px;
+        height: 240px;
+    }
+    
+    .juego .container-1 ul li a .front {
+        height: 150px;
+        padding: 20px 12px;
+    }
+    
+    .juego .container-1 ul li a .front h3 {
+        font-size: 20px;
+    }
+    
+    .juego .container-1 ul li a .front p {
         font-size: 14px;
     }
 
-    .juego .container-1 ul li a .targeta .equipo h3 {
-        display: none;
+    .juego .container-1 ul li a .info {
+        height: 90px;
     }
-
-    .juego .container-1 ul li a .description {
-        display: none;
+    
+    
+    .juego .container-1 ul li a .info h2 {
+        font-size: 20px;
     }
+    
+    .juego .container-1 ul li a .info p {
+        font-size: 12px;
+    }
+    
 }
