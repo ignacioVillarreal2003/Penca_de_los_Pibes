@@ -124,4 +124,4 @@ Y a continuación presionar el botón con el texto "ingresar como administrador"
 # Integrantes
 - Emiliano Fau
 - Ignacio Villareal
-- Joaquín Gasco
+- Floriana Locatelli
