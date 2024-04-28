@@ -3,11 +3,11 @@ import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-ingreso',
-  templateUrl: './ingreso.component.html',
-  styleUrl: './ingreso.component.css'
+  selector: 'app-auth-user',
+  templateUrl: './auth-user.component.html',
+  styleUrl: './auth-user.component.css'
 })
-export class IngresoComponent {
+export class AuthUserComponent {
   cedula: string = "";
   password: string = "";
   nombre: string = "";
@@ -117,5 +117,4 @@ export class IngresoComponent {
       this.router.navigate(["/admin"])
     }
   }
-  
 }

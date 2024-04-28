@@ -1,4 +1,4 @@
-.juego {
+.games {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -8,24 +8,24 @@
 }
 
 /* PARTIDOS */
-.juego .container-1 {
+.games .matches {
     width: 90%;
     margin-top: 140px;
     z-index: 1;
 }
 
-.juego .container-1 .options {
+.games .matches .options {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f5f5f575;
+    background: var(--targetColor);
     box-shadow: 8px 8px 50px #23232333;
     padding: 4px;
     height: 84px;
 }
 
-.juego .container-1 .options button,
-.juego .container-1 .options select {
+.games .matches .options button,
+.games .matches .options select {
     width: 100%;
     padding: 20px;
     background-color: transparent;
@@ -33,16 +33,19 @@
     text-align: center;
     border: none;
     transition: all .2s ease-in-out;
+    color: var(--textColor);
 }
 
-.juego .container-1 .options button:hover,
-.juego .container-1 .options select:hover {
-    color: white;
-    background-color: rgba(52, 73, 94, 0.89);
-    font-size: 26px;
+.games .matches .options button:hover,
+.games .matches .options select:hover {
+    background-color: var(--color1);
 }
 
-.juego .container-1 ul {
+.games .matches .options select option {
+    color: black;
+}
+
+.games .matches ul {
     list-style: none;
     padding: 0;
     display: grid;
@@ -52,7 +55,7 @@
     margin-top: 50px;
 }
 
-.juego .container-1 ul li {
+.games .matches ul li {
     width: 350px;
     height: 300px;
     display: flex;
@@ -60,7 +63,7 @@
     justify-content: center;
 }
 
-.juego .container-1 ul li a {
+.games .matches ul li a {
     width: 100%;
     height: 100%;
     text-decoration: none;
@@ -68,15 +71,15 @@
     transition: all 0.5s;
 }
 
-.juego .container-1 ul li a:hover {
+.games .matches ul li a:hover {
     transform: scale(1.021);
 }
 
-.juego .container-1 ul li a:active {
+.games .matches ul li a:active {
     transform: scale(0.95) rotateZ(1.1deg);
 }
 
-.juego .container-1 ul li a .front {
+.games .matches ul li a .front {
     width: 100%;
     height: 200px;
     display: flex;
@@ -86,34 +89,34 @@
     padding: 40px 25px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    background: #0f202798;  
+    background: var(--cardColor2);
 }
 
-.juego .container-1 ul li a .front h3 {
+.games .matches ul li a .front h3 {
     font-size: 28px;
     width: 100%;
     margin: 0;
-    color: white;
+    color: var(--textColor);
 }
 
-.juego .container-1 ul li a .front .cuadro-1 {
+.games .matches ul li a .front .match-1 {
     text-align: start;
 }
 
-.juego .container-1 ul li a .front .cuadro-2 {
+.games .matches ul li a .front .match-2 {
     text-align: end;
 }
 
-.juego .container-1 ul li a .front p {
+.games .matches ul li a .front p {
     font-size: 20px;
     width: 100%;
     text-align: center;
     margin: 5px 0;
-    color: white;
+    color: var(--textColor);
 }
 
-.juego .container-1 ul li a .info {
-    background: #212121;
+.games .matches ul li a .info {
+    background: var(--cardColor1);
     width: 100%;
     height: 100px;
     border-bottom-left-radius: 8px;
@@ -121,83 +124,82 @@
     padding: 10px 20px;
 }
 
-.juego .container-1 ul li a .info h2 {
+.games .matches ul li a .info h2 {
     margin: 0;
     font-size: 26px;
     width: 100%;
     text-align: center;
-    color: white;
+    color: var(--textColor);
 }
 
-.juego .container-1 ul li a .info p {
+.games .matches ul li a .info p {
     margin: 0;
     border-radius: 5px;
     padding: 5px;
     width: auto;
-    color: white;
+    color: var(--textColor);
 }
 
-@media (max-width: 700px) { 
-    .juego .container-1 {
+@media (max-width: 700px) {
+    .games .matches {
         margin-top: 100px;
     }
-     
-    .juego .container-1 .options {
+
+    .games .matches .options {
         height: 120px;
         flex-wrap: wrap;
     }
-    
-    .juego .container-1 .options button,
-    .juego .container-1 .options select {
+
+    .games .matches .options button,
+    .games .matches .options select {
         padding: 15px;
         font-size: 16px;
         width: 50%;
 
     }
-    
-    .juego .container-1 .options button:hover,
-    .juego .container-1 .options select:hover {
+
+    .games .matches .options button:hover,
+    .games .matches .options select:hover {
         background-color: rgba(52, 73, 94, 0.89);
         font-size: 16px;
     }
-    
+
 }
 
-@media (max-width: 700px) { 
-    .juego .container-1 ul {
+@media (max-width: 700px) {
+    .games .matches ul {
         grid-template-columns: repeat(auto-fill, 280px);
         gap: 20px;
     }
-    
-    .juego .container-1 ul li {
+
+    .games .matches ul li {
         width: 280px;
         height: 240px;
     }
-    
-    .juego .container-1 ul li a .front {
+
+    .games .matches ul li a .front {
         height: 150px;
         padding: 20px 12px;
     }
-    
-    .juego .container-1 ul li a .front h3 {
+
+    .games .matches ul li a .front h3 {
         font-size: 20px;
     }
-    
-    .juego .container-1 ul li a .front p {
+
+    .games .matches ul li a .front p {
         font-size: 14px;
     }
 
-    .juego .container-1 ul li a .info {
+    .games .matches ul li a .info {
         height: 90px;
     }
-    
-    
-    .juego .container-1 ul li a .info h2 {
+
+    .games .matches ul li a .info h2 {
         font-size: 20px;
     }
-    
-    .juego .container-1 ul li a .info p {
+
+    .games .matches ul li a .info p {
         font-size: 12px;
     }
-    
+
 }

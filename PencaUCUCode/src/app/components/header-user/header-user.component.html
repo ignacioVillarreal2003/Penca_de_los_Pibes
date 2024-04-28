@@ -2,14 +2,14 @@
     <header>
         <nav>
             <ul>
-                <li><a href="" routerLink="home"><p>Home</p><div class="shape"></div></a></li>
-                <li><a href="" routerLink="games"><p>Games</p><div class="shape"></div></a></li>
-                <li><a href="" routerLink="penca"><p>Penca</p><div class="shape"></div></a></li>
+                <li><a routerLink="/home"><p>Home</p><div class="shape"></div></a></li>
+                <li><a routerLink="/games"><p>Games</p><div class="shape"></div></a></li>
+                <li><a routerLink="/penca"><p>Penca</p><div class="shape"></div></a></li>
             </ul>
         </nav>
         <div class="configuration">
             <p>Username</p>
-            <button class="avatar" (click)="OpenConfigurations()"><img src="../../assets/avatar/avatar-1.png" alt=""></button>
+            <button class="avatar" (click)="OpenConfigurations()"><img src="../../../assets/avatar/{{avatar}}" alt=""></button>
         </div>
     </header>
         
@@ -25,8 +25,8 @@
                 </ul>
                 <div class="toggle-mode">
                     <label class="switch-label">
-                      <input type="checkbox" class="checkbox">
-                      <span class="slider"></span>
+                        <input type="checkbox" class="input-mode" (change)="ChangeDarkColor()">
+                        <span class="slider"></span>
                     </label>
                 </div>  
             </ul>
@@ -37,9 +37,7 @@
                     <button>Submit</button>
                 </div>
                 <ul class="option-avatar">
-                    <li><button><img src="../../assets/avatar/avatar-1.png"></button></li>
-                    <li><button><img src="../../assets/avatar/avatar-1.png"></button></li>
-                    <li><button><img src="../../assets/avatar/avatar-1.png"></button></li>
+                    <li *ngFor="let avatar of avatars"><button (click)="SetAvatar(avatar)"><img src="../../../assets/avatar/{{avatar}}"></button></li>
                 </ul>
             </div>
         </div>

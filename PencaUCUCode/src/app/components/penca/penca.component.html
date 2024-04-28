@@ -1,0 +1,35 @@
+<app-header-user></app-header-user>
+
+<div class="penca">
+    <div class="selection">
+        <h2>Select a match</h2>
+        <select id="match-selection" [(ngModel)]="selectedMatch" (change)="ClearGoals()">
+            <option *ngFor="let match of matches" [ngValue]="match">{{ match.team1 }} vs {{ match.team2 }}</option>
+        </select>
+    </div>
+
+    <div class="survey" *ngIf="selectedMatch">
+        <div class="teams">
+            <div class="team-1">
+                <h3>{{selectedMatch.team1}}</h3>
+                <img src="../../../assets/{{selectedMatch.shieldTeam1}}" alt="">
+                <div class="goals">
+                    <input type="range" min="0" max="12" value="0" class="input-goals" [(ngModel)]="team1Goals">
+                    <p>{{team1Goals}} goals</p>
+                </div>
+            </div>
+            <div class="team-2">
+                <h3>{{selectedMatch.team2}}</h3>
+                <img src="../../../assets/{{selectedMatch.shieldTeam2}}" alt="">
+                <div class="goals">
+                    <input type="range" min="0" max="12" value="0" class="input-goals" [(ngModel)]="team2Goals">
+                    <p>{{team2Goals}} goals</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="submit">
+            <button class="btn-submit" (click)="SubmitPrediction()">Submit</button>
+        </div>
+    </div>
+</div>

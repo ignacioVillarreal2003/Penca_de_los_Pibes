@@ -7,6 +7,8 @@ import { Component, HostListener } from '@angular/core';
 })
 export class HeaderUserComponent {
   previousScrollPosition = 0;
+  avatar: String = "avatar-1.png";
+  avatars: string[] = ["avatar-1.png", "avatar-2.png", "avatar-3.png", "avatar-4.png", "avatar-5.png", "avatar-6.png", "avatar-7.png", "avatar-8.png", "avatar-9.png", "avatar-10.png"]
   
   constructor() { }
 
@@ -62,6 +64,23 @@ export class HeaderUserComponent {
     } else if (n == 2){
       mod1.style.display = "none";
       mod2.style.display = "flex";
+    }
+  }
+
+  SetAvatar(avatar: String){
+    this.avatar = avatar;
+    this.CloseConfigurations();
+  }
+
+  ChangeDarkColor(): void {    
+    const body = document.querySelector('body') as HTMLElement;
+    const mode = document.querySelector('.header-user .toggle-mode .input-mode') as HTMLInputElement;
+    if (mode.checked == false){
+      body.classList.remove("light-mode");
+      body.classList.add("dark-mode");
+    } else {
+      body.classList.remove("dark-mode");
+      body.classList.add("light-mode");
     }
   }
 }
