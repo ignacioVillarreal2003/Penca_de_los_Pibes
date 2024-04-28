@@ -13,7 +13,35 @@ export class PencaComponent {
   matches: IMatch[] = [];
 
   ngOnInit(){
-    this.matches = []
+    this.matches = [
+      {
+        team1: "Peru",
+        team2: "Uruguay",
+        shieldTeam1: "barcelona.png",
+        shieldTeam2: "barcelona.png",
+        title: "papaya",
+        description: "polaca",
+        date: new Date()
+      },
+      {
+        team1: "Bolivia",
+        team2: "Uruguay",
+        shieldTeam1: "barcelona.png",
+        shieldTeam2: "barcelona.png",
+        title: "papaya",
+        description: "polaca",
+        date: new Date()
+      },
+      {
+        team1: "Bolivia",
+        team2: "Uruguay",
+        shieldTeam1: "barcelona.png",
+        shieldTeam2: "barcelona.png",
+        title: "papaya",
+        description: "polaca",
+        date: new Date()
+      }
+    ]
   }
 
   SubmitPrediction(){

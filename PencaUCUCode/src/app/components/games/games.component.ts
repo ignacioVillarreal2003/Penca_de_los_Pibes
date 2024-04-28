@@ -23,7 +23,7 @@ export class GamesComponent {
         shieldTeam2: "barcelona.png",
         title: "papaya",
         description: "polaca",
-        date: new Date();
+        date: new Date()
       },
       {
         team1: "Bolivia",
@@ -32,7 +32,7 @@ export class GamesComponent {
         shieldTeam2: "barcelona.png",
         title: "papaya",
         description: "polaca",
-        date: new Date();
+        date: new Date()
       },
       {
         team1: "Bolivia",
@@ -41,7 +41,7 @@ export class GamesComponent {
         shieldTeam2: "barcelona.png",
         title: "papaya",
         description: "polaca",
-        date: new Date();
+        date: new Date()
       },
     ]
     this.selectedMatches = this.matches;
