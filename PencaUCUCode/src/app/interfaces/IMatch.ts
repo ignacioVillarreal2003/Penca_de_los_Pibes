@@ -6,4 +6,5 @@ export interface IMatch{
     title: string,
     description: string,
     date: Date
+    //stage: string
 }
