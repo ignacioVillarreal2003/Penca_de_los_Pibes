@@ -119,7 +119,7 @@
 .header-user .configuration-section .content .options {
     width: 150px;
     height: 500px;
-    background-color: var(--cardColor3);
+    background-color: #e6e9f0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -157,7 +157,7 @@
     top: 0;
     width: 0;
     height: 100%;
-    background-color: #5BBCFF;
+    background-color: var(--color1);
     transition: width 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
@@ -167,7 +167,7 @@
     top: 0;
     width: 0;
     height: 100%;
-    background-color: rgb(218, 21, 21);
+    background-color: var(--color2);
     transition: width 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
@@ -244,7 +244,7 @@
 .header-user .configuration-section .content .option {
     width: 550px;
     height: 500px;
-    background-color: var(--cardColor4);
+    background-color: #C9CCD3;
     background-image: linear-gradient(-180deg, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%);
     background-blend-mode: lighten;
     padding: 0;

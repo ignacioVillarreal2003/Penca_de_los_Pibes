@@ -1,0 +1,272 @@
+.predictions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.predictions .selectors {
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    background-color: var(--targetColor);
+    padding: 40px 10px;
+}
+
+.predictions .selectors .group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.predictions .selectors .group button {
+    width: 140px;
+    height: 44px;
+    font-size: 22px;
+    padding: 5px 10px;
+    border: none;
+    transition: all .2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    background-color: var(--textColor);
+    color: var(--bgColor);
+}
+
+.predictions .selectors .stage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.predictions .selectors .stage button {
+    width: 280px;
+    height: 44px;
+    font-size: 22px;
+    padding: 5px 10px;
+    border: none;
+    transition: all .2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    background-color: var(--textColor);
+    color: var(--bgColor);
+}
+
+.predictions .predict {
+    margin: 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    background-color: var(--targetColor);
+    padding: 40px;
+}
+
+.predictions .predict h2 {
+    color: var(--textColor);
+    font-size: 42px;
+}
+
+.predictions .predict ul {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 400px);
+    gap: 20px;
+    padding: 0;
+    width: 100%;
+}
+
+.predictions .predict li {
+    width: 380px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: var(--cardColor3);
+}
+
+.predictions .predict li .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    padding: 10px 20px;
+    background-color: var(--color1);
+}
+
+.predictions .predict li .title .date {
+    font-size: 20px;
+    color: var(--textColor);
+}
+
+.predictions .predict li .title .group {
+    font-size: 16px;
+    color: var(--textColor);
+    background-color: var(--bgColor);
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+
+.predictions .predict li .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 200px;
+}
+
+.predictions .predict li .content .team {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 35%;
+}
+
+.predictions .predict li .content .team img {
+    width: 50px;
+    height: 50px;
+}
+
+.predictions .predict li .content .team h3 {
+    font-size: 22px;
+    margin: 10px 0 0 0;
+}
+
+.predictions .predict li .content .score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 10%;
+    background-color: rgb(207, 207, 207);
+    border-radius: 8px;
+}
+
+.predictions .predict li .content .score button {
+    width: 100%;
+    height: 30px;
+    background-color: #f3f7fe;
+    color: var(--color1);
+    border: none;
+    border-radius: 8px;
+    transition: .3s;
+    font-size: 18px;
+}
+
+.predictions .predict li .content .score button:hover{
+    background-color: var(--color1);
+    box-shadow: 0 0 0 3px #3b83f65f;
+    color: #fff;
+}
+
+.predictions .predict li .content .score p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.predictions .predict li .submit {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.predictions .predict li .submit .btn-submit{
+    width: 100px;
+    height: 30px;
+    background-color: #f3f7fe;
+    color: var(--color1);
+    border: none;
+    border-radius: 8px;
+    transition: .3s;
+    font-size: 18px;
+}
+
+.predictions .predict li .submit .btn-submit:hover{
+    background-color: var(--color1);
+    box-shadow: 0 0 0 6px #3b83f65f;
+    color: #fff;
+}
+
+@media (max-width: 700px) {
+    .predictions .selectors .group button {
+        width: 40%;
+        height: 35px;
+        font-size: 18px;
+    }
+    
+    .predictions .predict {
+        margin-top: 50px;
+        width: 96%;
+        padding: 40px 5px;
+    }
+
+    .predictions .predict h2 {
+        font-size: 32px;
+    }
+    
+    .predictions .predict ul {
+        grid-template-columns: repeat(auto-fill, 290px);
+    }
+    
+    .predictions .predict li {
+        width: 290px;
+        height: 260px;
+    }
+    
+    .predictions .predict li .title {
+        height: 30px;
+        padding: 5px 15px;
+    }
+    
+    .predictions .predict li .title .date {
+        font-size: 15px;
+    }
+    
+    .predictions .predict li .title .group {
+        font-size: 13px;
+    }
+
+    .predictions .predict li .content {
+        height: 180px;
+    }
+    
+    .predictions .predict li .content .team img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .predictions .predict li .content .team h3 {
+        font-size: 18px;
+    }
+    
+    .predictions .predict li .content .score button {
+        font-size: 16px;
+    }
+    
+    .predictions .predict li .content .score p {
+        font-size: 16px;
+    }
+    
+    .predictions .predict li .submit {
+        height: 40px;
+    } 
+    
+    .predictions .predict li .submit .btn-submit{
+        font-size: 16px;
+    }
+}

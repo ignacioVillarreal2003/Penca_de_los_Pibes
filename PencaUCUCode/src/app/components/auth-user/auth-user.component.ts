@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-auth-user',
@@ -10,10 +11,11 @@ import { Router } from '@angular/router';
 export class AuthUserComponent {
   cedula: string = "";
   password: string = "";
-  nombre: string = "";
+  username: string = "";
+
   mode: "login" | "register" = "login";
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private userService: UserService){}
 
   ChangeModeLogin(){
     const modeLogin = document.querySelector('.ingreso .mode-login') as HTMLElement;
@@ -42,21 +44,25 @@ export class AuthUserComponent {
   LoginUsuario(){
     if (this.CheckUserDataLogin()){
       // mandar a bd
+      this.userService.setAvatarLocalStorage("avatar-1.png");
+      this.userService.setUsernameLocalStorage(this.username);
     }
   }
 
   RegistrarUsuario(){
     if (this.CheckUserDataRegister()){
       // mandar a bd
+      this.userService.setAvatarLocalStorage("avatar-1.png");
+      this.userService.setUsernameLocalStorage(this.username);
     }
   }
 
   CheckUserDataLogin(){
     if (this.cedula.length < 8){
-      this.ErrorMessage("The cedula must be 8 characters long.")
+      this.ErrorMessage("La cedula es muy corta.")
       return false;
     } else if (this.password.length < 8){
-      this.ErrorMessage("The password must be 8 characters long.")
+      this.ErrorMessage("La contraseña es muy corta.")
       return false;
     }
     return true;
@@ -64,13 +70,13 @@ export class AuthUserComponent {
 
   CheckUserDataRegister(){
     if (this.cedula.length < 8){
-      this.ErrorMessage("The cedula must be 8 characters long.")
+      this.ErrorMessage("La cedula es muy corta.")
       return false;
     } else if (this.password.length < 8){
-      this.ErrorMessage("The password must be 8 characters long.")
+      this.ErrorMessage("La contraseña es muy corta.")
       return false;
-    } else if (this.nombre.length == 0){
-      this.ErrorMessage("The name was incorrect.")
+    } else if (this.username.length == 0){
+      this.ErrorMessage("El usuario es incorrecto.")
       return false;
     }
     return true;

@@ -3,8 +3,9 @@ export interface IMatch{
     team2: string,
     shieldTeam1: string,
     shieldTeam2: string,
-    title: string,
-    description: string,
-    date: Date
-    //stage: string
+    scoreTeam1: number,
+    scoreTeam2: number,
+    date: Date,
+    group: string,
+    stage: string
 }

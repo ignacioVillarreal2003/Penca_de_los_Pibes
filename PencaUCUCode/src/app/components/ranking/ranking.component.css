@@ -1,0 +1,54 @@
+.ranking {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.ranking ul {
+    margin-top: 150px;
+    margin-bottom: 60px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--targetColor);
+    padding: 0;
+}
+
+.ranking ul li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.ranking ul li:hover {
+    background-color: var(--color1);
+}
+
+.ranking ul li .person {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.ranking ul li .person h2 {
+    font-size: 26px;
+    color: var(--textColor);
+}
+
+.ranking ul li .person img {
+    width: 50px;
+    height: 50px;
+}
+
+.ranking ul li .score {
+    font-size: 20px;
+    color: var(--textColor);
+}

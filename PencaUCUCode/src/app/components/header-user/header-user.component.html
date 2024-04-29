@@ -3,12 +3,12 @@
         <nav>
             <ul>
                 <li><a routerLink="/home"><p>Home</p><div class="shape"></div></a></li>
-                <li><a routerLink="/games"><p>Games</p><div class="shape"></div></a></li>
-                <li><a routerLink="/penca"><p>Penca</p><div class="shape"></div></a></li>
+                <li><a routerLink="/predictions"><p>Predictions</p><div class="shape"></div></a></li>
+                <li><a routerLink="/ranking"><p>Ranking</p><div class="shape"></div></a></li>
             </ul>
         </nav>
         <div class="configuration">
-            <p>Username</p>
+            <p>{{username}}</p>
             <button class="avatar" (click)="OpenConfigurations()"><img src="../../../assets/avatar/{{avatar}}" alt=""></button>
         </div>
     </header>
@@ -32,9 +32,9 @@
             </ul>
             <div class="option">
                 <div class="option-password">
-                    <input type="password" id="" placeholder="old password">
-                    <input type="password" id="" placeholder="new password">
-                    <button>Submit</button>
+                    <input type="password" id="" placeholder="old password" [(ngModel)]="oldPassword">
+                    <input type="password" id="" placeholder="new password" [(ngModel)]="newPassword">
+                    <button (click)="ChangePassword()">Submit</button>
                 </div>
                 <ul class="option-avatar">
                     <li *ngFor="let avatar of avatars"><button (click)="SetAvatar(avatar)"><img src="../../../assets/avatar/{{avatar}}"></button></li>

@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import Swal from 'sweetalert2'
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header-user',
@@ -6,11 +8,25 @@ import { Component, HostListener } from '@angular/core';
   styleUrl: './header-user.component.css'
 })
 export class HeaderUserComponent {
+  username: string = ""
+  avatar: string = "";
+
   previousScrollPosition = 0;
-  avatar: String = "avatar-1.png";
   avatars: string[] = ["avatar-1.png", "avatar-2.png", "avatar-3.png", "avatar-4.png", "avatar-5.png", "avatar-6.png", "avatar-7.png", "avatar-8.png", "avatar-9.png", "avatar-10.png"]
   
-  constructor() { }
+  oldPassword: string = "";
+  newPassword: string = "";
+
+  constructor(private userService: UserService) {
+    const username = userService.getUsernameLocalStorage();
+    const avatar = userService.getAvatarLocalStorage();
+    if (username != null){
+      this.username = username;
+    }
+    if (avatar != null){
+      this.avatar = avatar;
+    }
+  }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: any) {
@@ -20,12 +36,10 @@ export class HeaderUserComponent {
     const scrollDifference = currentScrollPosition - this.previousScrollPosition;
     
     if (scrollDifference > 100) {
-      console.log('El usuario está bajando más de 50px');
       header.style.top = "-100px";
       this.previousScrollPosition = currentScrollPosition;
 
     } else if (scrollDifference < -100) {
-      console.log('El usuario está subiendo más de 50px');
       header.style.top = "0px";
       this.previousScrollPosition = currentScrollPosition;
     }
@@ -67,8 +81,9 @@ export class HeaderUserComponent {
     }
   }
 
-  SetAvatar(avatar: String){
+  SetAvatar(avatar: string){
     this.avatar = avatar;
+    this.userService.setAvatarLocalStorage(avatar);
     this.CloseConfigurations();
   }
 
@@ -82,5 +97,35 @@ export class HeaderUserComponent {
       body.classList.remove("dark-mode");
       body.classList.add("light-mode");
     }
+  }
+
+  ChangePassword(){
+    if (this.oldPassword.length == 0 || this.newPassword.length == 0){
+      this.ErrorMessage("Error en los datos ingresados.");
+    } else {
+      this.SuccesMessage("Contraseña cambiada con exito.")
+    }
+  }
+
+  ErrorMessage(message: string){
+    Swal.fire({
+      title: 'Error!',
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'Close',
+      timer: 2000,
+      timerProgressBar: true
+    })
+  }
+
+  SuccesMessage(message: string){
+    Swal.fire({
+      title: 'Bien!',
+      text: message,
+      icon: 'success',
+      confirmButtonText: 'Close',
+      timer: 2000,
+      timerProgressBar: true
+    })
   }
 }

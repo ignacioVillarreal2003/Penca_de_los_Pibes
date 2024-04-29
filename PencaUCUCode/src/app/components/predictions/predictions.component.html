@@ -1,0 +1,57 @@
+<app-header-user></app-header-user>
+
+<div class="predictions">
+    <div class="selectors">
+        <div class="group">
+            <button (click)="FilterGroup('Grupo A')" (click)="MarcarBoton($event)">Grupo A</button>
+            <button (click)="FilterGroup('Grupo B')" (click)="MarcarBoton($event)">Grupo B</button>
+            <button (click)="FilterGroup('Grupo C')" (click)="MarcarBoton($event)">Grupo C</button>
+            <button (click)="FilterGroup('Grupo D')" (click)="MarcarBoton($event)">Grupo D</button>
+            <button (click)="FilterGroup('Grupo E')" (click)="MarcarBoton($event)">Grupo E</button>
+            <button (click)="FilterGroup('Grupo F')" (click)="MarcarBoton($event)">Grupo F</button>
+            <button (click)="FilterGroup('Grupo G')" (click)="MarcarBoton($event)">Grupo G</button>
+            <button (click)="FilterGroup('Grupo H')" (click)="MarcarBoton($event)">Grupo H</button>
+        </div>
+        <div class="stage">
+            <button (click)="FilterStage('Octavos')" (click)="MarcarBoton($event)">Octavos</button>
+            <button (click)="FilterStage('Cuartos')" (click)="MarcarBoton($event)">Cuartos</button>
+            <button (click)="FilterStage('Semifinal')" (click)="MarcarBoton($event)">Semifinal</button>
+            <button (click)="FilterStage('Final')" (click)="MarcarBoton($event)">Final</button>
+        </div>
+    </div>
+
+    <div class="predict">
+        <h2>{{modeFilter}}</h2>
+        <ul *ngIf="selectedMatches">
+            <li *ngFor="let match of selectedMatches">
+                <div class="title">
+                    <p class="date">{{match.date.toISOString().substring(0, 10)}}</p>
+                    <p class="group">{{match.group}}</p>
+                </div>
+                <div class="content">
+                    <div class="team">
+                        <img src="../../../assets/{{match.shieldTeam1}}" alt="">
+                        <h3>{{match.team1}}</h3>
+                    </div>
+                    <div class="score">
+                        <button (click)="ChangeScore(match,1,1)">+</button>
+                        <p>{{match.scoreTeam1}}</p>
+                        <button (click)="ChangeScore(match,1,-1)">-</button>
+                    </div>
+                    <div class="score">
+                        <button (click)="ChangeScore(match,2,1)">+</button>
+                        <p>{{match.scoreTeam2}}</p>
+                        <button (click)="ChangeScore(match,2,-1)">-</button>
+                    </div>
+                    <div class="team">
+                        <img src="../../../assets/{{match.shieldTeam2}}" alt="">
+                        <h3>{{match.team2}}</h3>
+                    </div>
+                </div>
+                <div class="submit">
+                    <button class="btn-submit" (click)="SubmitPrediction(match)">Submit</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

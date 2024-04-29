@@ -9,8 +9,8 @@ import { AuthUserComponent } from './components/auth-user/auth-user.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 import { HeaderUserComponent } from './components/header-user/header-user.component';
 import { HomeComponent } from './components/home/home.component';
-import { GamesComponent } from './components/games/games.component';
-import { PencaComponent } from './components/penca/penca.component';
+import { PredictionsComponent } from './components/predictions/predictions.component';
+import { RankingComponent } from './components/ranking/ranking.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +19,8 @@ import { PencaComponent } from './components/penca/penca.component';
     AdminMenuComponent,
     HeaderUserComponent,
     HomeComponent,
-    GamesComponent,
-    PencaComponent
+    PredictionsComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,
