@@ -50,7 +50,10 @@ export class PredictionsComponent {
         scoreTeam2: 0,
       }
     ]
-    this.selectedMatches = this.matches;
+    this.FilterGroup(this.modeFilter);
+    const clickedButton = document.querySelector('.predictions .btn-A') as HTMLElement;
+    clickedButton.style.backgroundColor = "var(--color1)";
+    clickedButton.style.color = "var(--textColor)";
   }
 
   FilterGroup(value: string) {

@@ -4,6 +4,7 @@
     height: 100%;
     z-index: -1;
     background-image: url(../../../assets/background/bg-2city.jpg);
+    filter: blur(1.5px);
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;
