@@ -114,10 +114,6 @@ Contraseña: admin123
 ```
 Y a continuación presionar el botón con el texto "ingresar como administrador".
 
-## Crear un archivo en el servidor con el nombre .env y escribir:
->- MAIL="El email desde donde se van a mandar mensajes"
->- PASS="Contraseña de aplicacion(al verificar en dos pasos, en el gmail de origen)"
-
 # Integrantes
 - Emiliano Fau
 - Ignacio Villareal
