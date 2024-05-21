@@ -2,7 +2,7 @@ const gameServices = require('../services/gameServices');
 
 const errorMessage = "Error processing the request.";
 
-const getMatches = async (req: any, res: any) => {
+const getMatches = async (res: any) => {
     try {
         const result = await gameServices.getMatches();
         if (result) {
@@ -32,7 +32,6 @@ const postMatchResult = async (req: any, res: any) => {
         res.status(500).send({ message: errorMessage });
     }
 }
-
 
 module.exports = {
     getMatches,

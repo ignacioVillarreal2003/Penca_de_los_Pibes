@@ -1,10 +1,6 @@
-require('dotenv').config();
-
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGOSTRING)
-    .then(() => console.log('Connected!'));
 
 //////////////////////////////////////////* Operaciones //////////////////////////////////////////*
+/*
 async function getRoomType(roomCode: string): Promise<string | undefined> {
     try {
         const result = await RoomType.findOne({ roomCode: { $eq: roomCode } });
@@ -42,3 +38,4 @@ module.exports = {
     postRoomType, 
 }
 
+*/

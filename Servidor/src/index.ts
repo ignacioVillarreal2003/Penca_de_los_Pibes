@@ -1,12 +1,11 @@
-import express from 'express';
+import mysql from "mysql2/promise";
+require('dotenv').config();
 
-const sessionRoutes = require('./routes/sessionRoutes');
-const gameRoutes = require('./routes/gameRoutes');
+const express = require('express');
+const app = express();
+import cors from 'cors';
 
-export const app = express();
-const cors = require('cors');
-
-var corsOptions = {
+const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
     methods: "GET, PUT, POST, DELETE",
@@ -17,10 +16,21 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 const PORT = 3001;
-
-app.use('/session', sessionRoutes);
-app.use('/game', gameRoutes);
-
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
+
+// Conexión con la base de datos
+const pool = mysql.createPool({
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASS,
+    database: process.env.NAME
+})
+
+async function queryDatabase() {
+    const result = await pool.query("SELECT * FROM Usuario");
+    console.log(result);
+}
+
+queryDatabase();
