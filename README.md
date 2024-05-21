@@ -1,15 +1,12 @@
-# Penca_de_los_Pibes
-
-# No le den bola a lo q dice el readme, es solo para tenerlo ahí
+# Aplicación de penca
 
 # Introducción
-### El proyecto cuenta con 4 pantallas
-- La pantalla de inicio de sesión, en la cual los usuarios pueden registrar o iniciar sesión (de tener un usuario), ya sea admin o funcionario.
-- De ingresar como admin, se presentan funcionalidades para modificar las fechas de consulta y de formulario.
-- De ser funcionario, se lo redirige a un formulario para rellenar sus datos y, de no tener carné de salud o este estar vencido,
-se le permite solicitarlo (reservando una fecha para la consulta). Si se presenta con un carné de salud vigente a la fecha, se le pide al usuario subir el comprobante del mismo.
-- En el caso de ser un funcionario nuevo va a ser necesario que se registre, siendo este formulario más extenso que el anteriormente mencionado.
+El siguiente proyecto trata sobre la realización de una aplicación para la penca de la Copa América 2024, aunque en nuestro caso decidimos expandirlo a la posibilidad de que esta sea utilizada para diversos eventos, incluso siendo estos simultáneos entre sí.
 
+La aplicación cuenta con distintas pantallas, entre estas:
+- La pantalla de inicio de sesión, en la cual los usuarios se pueden registrar o iniciar sesión (en caso de tener un usuario), ya sea admin o participante. Cada uno se presenta con su respectivo menu consiguiente.
+- De ingresar como administrador, se presentan funcionalidades tanto para crear o modificar campeonatos como para manipular la información de los partidos dentro de un campeonato, ya sea agregar, eliminar o modificar sus atributos.
+- De ser participante, se lo redirige a la página principal en la cual este será capaz de hacer sus apuestas sobre los partidos del campeonato seleccionado. También se le presentan algunas funcionalidades extra tales como cabiar la estética de su página principal (modo claro o oscuro), cambiar su avatar o sus datos personales, entre otros. Además, cada participante tiene acceso a la tabla de rankings, donde se muestra en que puesto se ubica teniendo en cuenta los puntos obtenidos por cada predicción sobre los diferentes partidos.
   
 # Requerimientos
 - Se requiere tener instalado tanto Angular como NodeJS.
@@ -116,10 +113,6 @@ Usuario: admin123
 Contraseña: admin123
 ```
 Y a continuación presionar el botón con el texto "ingresar como administrador".
-
-## Crear un archivo en el servidor con el nombre .env y escribir:
->- MAIL="El email desde donde se van a mandar mensajes"
->- PASS="Contraseña de aplicacion(al verificar en dos pasos, en el gmail de origen)"
 
 # Integrantes
 - Emiliano Fau
