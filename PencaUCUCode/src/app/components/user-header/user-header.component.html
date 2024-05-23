@@ -1,10 +1,10 @@
-<div class="header-user">
+<div class="user-header">
     <header>
         <nav>
             <ul>
-                <li><a routerLink="/home"><p>Home</p><div class="shape"></div></a></li>
-                <li><a routerLink="/predictions"><p>Predictions</p><div class="shape"></div></a></li>
-                <li><a routerLink="/ranking"><p>Ranking</p><div class="shape"></div></a></li>
+                <li><a routerLink="/userhome"><p>Inicio</p><div class="shape"></div></a></li>
+                <li><a routerLink="/userPredictions"><p>Predicciones</p><div class="shape"></div></a></li>
+                <li><a routerLink="/userRanking"><p>Ranking</p><div class="shape"></div></a></li>
             </ul>
         </nav>
         <div class="configuration">
@@ -19,9 +19,9 @@
         <div class="content">
             <ul class="options">
                 <ul>
-                    <li><button (click)="ChangeOption(1)"><p>Password</p><div class="shape"></div></button></li>
+                    <li><button (click)="ChangeOption(1)"><p>Contraseña</p><div class="shape"></div></button></li>
                     <li><button (click)="ChangeOption(2)"><p>Avatar</p><div class="shape"></div></button></li>
-                    <li><button (click)="CloseConfigurations()"><p>Close</p><div class="shape-red"></div></button></li>
+                    <li><button (click)="CloseConfigurations()"><p>Cerrar</p><div class="shape-red"></div></button></li>
                 </ul>
                 <div class="toggle-mode">
                     <label class="switch-label">
@@ -32,9 +32,9 @@
             </ul>
             <div class="option">
                 <div class="option-password">
-                    <input type="password" id="" placeholder="old password" [(ngModel)]="oldPassword">
-                    <input type="password" id="" placeholder="new password" [(ngModel)]="newPassword">
-                    <button (click)="ChangePassword()">Submit</button>
+                    <input type="password" id="" placeholder="contraseña antigua" [(ngModel)]="oldPassword">
+                    <input type="password" id="" placeholder="contraseña nueva" [(ngModel)]="newPassword">
+                    <button (click)="ChangePassword()">Subir</button>
                 </div>
                 <ul class="option-avatar">
                     <li *ngFor="let avatar of avatars"><button (click)="SetAvatar(avatar)"><img src="../../../assets/avatar/{{avatar}}"></button></li>

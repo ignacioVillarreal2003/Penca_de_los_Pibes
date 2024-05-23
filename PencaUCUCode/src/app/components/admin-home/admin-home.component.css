@@ -1,0 +1,148 @@
+.admin-home {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    background: #fefefe;
+}
+
+.admin-home header {
+    width: 100%;
+    height: 80px;
+    padding: 20px 40px;
+}
+
+.admin-home header h1 {
+    padding: 0;
+    margin: 0;
+}
+
+.admin-home .content {
+    height: 100%;
+    display: flex;
+}
+
+.admin-home .content aside {
+    height: 100%;
+    width: 300px;
+    background: #fefefe;
+    position: relative;
+}
+
+.admin-home .content aside ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.admin-home .content aside ul li {
+    width: 100%;
+}
+
+.admin-home .content aside ul li button {
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+    color: #333;
+    transition: all .3s ease;
+}
+
+.admin-home .content aside ul li button:hover {
+    background-color: #e8ecec;
+}
+
+.admin-home .content aside ul li button.highlightOption {
+    background-color: #57575771;
+}
+
+.admin-home .content aside ul li .btn-submit {
+    background-color: rgb(32, 163, 32);
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-size: 24px;
+}
+
+.admin-home .content aside ul li .btn-submit:hover {
+    background-color: green;
+}
+
+.admin-home .content .modes {
+    width: 100%;
+    background-color: transparent;
+}
+
+.admin-home .content .modes .mode {
+    width: 100%;
+    height: 100%;
+    padding: 60px;
+    flex-direction: column;
+    background-color: #f2f6f8;
+    display: flex;
+    gap: 40px;
+}
+
+.admin-home .content .modes #mode2,
+.admin-home .content .modes #mode3,
+.admin-home .content .modes #mode4 {
+    display: none;
+}
+
+.admin-home .content .modes .mode h2 {
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+.admin-home .content .modes .data{
+    box-shadow: 0 0 20px #0000001a;
+    border-bottom: 1px solid #C6D2D9;
+    background-color: #fefefe;
+    border: 1px solid #C6D2D9;
+    border-radius: 2px;
+    height: 4.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+}
+
+.admin-home .content .modes .data label {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.admin-home .content .modes .data input,
+.admin-home .content .modes .data select {
+    box-shadow: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    height: calc(2.7rem + 2px);
+    padding: .6rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fefefe;
+    background-clip: padding-box;
+    border-radius: 2px;
+    border: transparent;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.admin-home .content .modes .data input:focus-visible,
+.admin-home .content .modes .data input:hover,
+.admin-home .content .modes .data select:hover,
+.admin-home .content .modes .data select:focus-visible {
+    border: 1px solid #C6D2D9;
+}

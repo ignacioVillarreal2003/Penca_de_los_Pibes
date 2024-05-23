@@ -7,20 +7,8 @@ export class UserService {
 
   constructor() { }
 
-  getUsernameLocalStorage(){
-    return localStorage.getItem('username');
-  }
+  avatars: string[] = ["avatar-1.png", "avatar-2.png", "avatar-3.png", "avatar-4.png", "avatar-5.png", "avatar-6.png", "avatar-7.png", "avatar-8.png", "avatar-9.png", "avatar-10.png"]
+  username: string = ""
+  avatar: string = "";
 
-  setUsernameLocalStorage(username: string){
-    localStorage.setItem('username', username);
-    console.log("user");
-  }
-
-  getAvatarLocalStorage(){
-    return localStorage.getItem('avatar');
-  }
-
-  setAvatarLocalStorage(avatar: string){
-    localStorage.setItem('avatar', avatar);
-  }
 }

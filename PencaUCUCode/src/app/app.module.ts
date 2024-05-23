@@ -7,22 +7,24 @@ import { AuthenticationInterceptor } from './interceptor/authentication.intercep
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AuthUserComponent } from './components/auth-user/auth-user.component';
-import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
-import { HeaderUserComponent } from './components/header-user/header-user.component';
-import { HomeComponent } from './components/home/home.component';
-import { PredictionsComponent } from './components/predictions/predictions.component';
-import { RankingComponent } from './components/ranking/ranking.component';
+import { UserAccessComponent } from './components/user-access/user-access.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { UserHeaderComponent } from './components/user-header/user-header.component';
+import { UserHomeComponent } from './components/user-home/user-home.component';
+import { UserPredictionsComponent } from './components/user-predictions/user-predictions.component';
+import { UserRankingComponent } from './components/user-ranking/user-ranking.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthUserComponent,
-    AdminMenuComponent,
-    HeaderUserComponent,
-    HomeComponent,
-    PredictionsComponent,
-    RankingComponent
+    UserAccessComponent,
+    AdminHomeComponent,
+    UserHeaderComponent,
+    UserHomeComponent,
+    UserPredictionsComponent,
+    UserRankingComponent
   ],
   imports: [
     BrowserModule,

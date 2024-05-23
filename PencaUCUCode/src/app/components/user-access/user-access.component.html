@@ -1,0 +1,21 @@
+<div class="user-access">
+    <div class="content">
+        <div class="options">
+            <button (click)="ChangeMode('login')">Inicio sesion</button>
+            <button (click)="ChangeMode('register')">Registro</button>
+        </div>
+        <div class="access-mode" id="mode-login">
+            <input type="text" [(ngModel)]="ci" placeholder="cedula">
+            <input type="password" [(ngModel)]="password" placeholder="password">
+            <button class="btn-entry-user" (click)="UserLogin()">Iniciar sesion</button>
+        </div>
+        <div class="access-mode" id="mode-register">
+            <input type="text" [(ngModel)]="ci" placeholder="cedula">
+            <input type="password" [(ngModel)]="password" placeholder="contraseña">
+            <input type="text" [(ngModel)]="username" placeholder="nombre de usuario">
+            <button class="btn-entry-user" (click)="UserRegistration()">Crear una cuenta</button>
+        </div>
+        <button class="btn-entry-admin" (click)="AdminLogin()">¿Sos un administrador?</button>
+    </div>
+    <div class="background"></div>
+</div>

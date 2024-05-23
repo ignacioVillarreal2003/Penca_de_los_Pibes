@@ -1,4 +1,4 @@
-.ingreso {
+.user-access {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     height: 100vh;
 }
 
-.ingreso .background {
+.user-access .background {
     width: 100%;
     height: 100vh;
     background-image: url(../../../assets/background/bg-3bm.jpg);
@@ -18,7 +18,7 @@
     position: fixed;
 }
 
-.ingreso .cuadro {
+.user-access .content {
     width: 500px;
     height: 500px;
     background-color: #1017208c;
@@ -29,6 +29,7 @@
     box-sizing: border-box;
     transition: all .15s ease-in;
     animation: animation1 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    position: relative;
 }
 
 @keyframes animation1 {
@@ -38,18 +39,18 @@
     100% {
         transform: scale(1);
     }
-  }
+}
   
-.ingreso .cuadro:hover {
+.user-access .content:hover {
     background-color: #101720b9;
 }
 
-.ingreso .cuadro .options {
+.user-access .content .options {
     display: flex;
     margin-bottom: 30px;
 }
 
-.ingreso .cuadro .options button {
+.user-access .content .options button {
     width: 160px;
     height: 50px;
     background-color: transparent;
@@ -60,27 +61,22 @@
     border-bottom: 2px solid transparent;
 }
 
-.ingreso .cuadro .options button:hover {
+.user-access .content .options button:hover {
     border-bottom: 2px solid #5BBCFF;
 }
 
-.ingreso .cuadro .mode-login{
+.user-access .content .access-mode{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.ingreso .cuadro .mode-register{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.user-access .content #mode-register{
     display: none;
 }
 
-.ingreso .cuadro .mode-login input,
-.ingreso .cuadro .mode-register input {
+.user-access .content .access-mode input {
     width: 300px;
     height: 40px;
     padding: 20px;
@@ -90,17 +86,15 @@
     font-size: 20px;
 }
 
-.ingreso .cuadro .mode-login input:hover,
-.ingreso .cuadro .mode-register input:hover {
+.user-access .content .access-mode input:hover {
     transform: scale(1.05);
 }
 
-.ingreso .cuadro .mode-login input:focus-visible,
-.ingreso .cuadro .mode-register input:focus-visible {
+.user-access .content .access-mode input:focus-visible {
     outline: black auto 1px;
 }
 
-.ingreso .cuadro .btn-ingreso {
+.user-access .content .btn-entry-user {
     width: 160px;
     height: 50px;
     background-color: transparent;
@@ -108,24 +102,20 @@
     transition: all .2s ease-in;
     font-size: 18px;
     color: white;
-    margin-top: 40px;
+    position: absolute;
+    bottom: 120px;
 }
 
-.ingreso .cuadro .btn-ingreso:hover {
+.user-access .content .btn-entry-user:hover {
     background: #5BBCFF;
     color: black;
 }
 
-.ingreso .btn-ingreso-admin{
+.user-access .content .btn-entry-admin{
     position: absolute;
-    top: 20px;
-    right: 20px;
+    bottom: 20px;
     border: none;
     background-color: transparent;
-    filter:invert();
-}
-
-.ingreso .btn-ingreso-admin img {
-    width: 60px;
-    height: 60px;
+    color: #5BBCFF;
+    font-size: 16px;
 }

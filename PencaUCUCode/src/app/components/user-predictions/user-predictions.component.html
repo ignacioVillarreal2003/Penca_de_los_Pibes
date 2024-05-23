@@ -1,22 +1,22 @@
-<app-header-user></app-header-user>
+<app-user-header></app-user-header>
 
 <div class="predictions">
     <div class="selectors">
         <div class="group">
-            <button class="btn-A" (click)="FilterGroup('Grupo A')" (click)="MarcarBoton($event)">Grupo A</button>
-            <button (click)="FilterGroup('Grupo B')" (click)="MarcarBoton($event)">Grupo B</button>
-            <button (click)="FilterGroup('Grupo C')" (click)="MarcarBoton($event)">Grupo C</button>
-            <button (click)="FilterGroup('Grupo D')" (click)="MarcarBoton($event)">Grupo D</button>
-            <button (click)="FilterGroup('Grupo E')" (click)="MarcarBoton($event)">Grupo E</button>
-            <button (click)="FilterGroup('Grupo F')" (click)="MarcarBoton($event)">Grupo F</button>
-            <button (click)="FilterGroup('Grupo G')" (click)="MarcarBoton($event)">Grupo G</button>
-            <button (click)="FilterGroup('Grupo H')" (click)="MarcarBoton($event)">Grupo H</button>
+            <button class="btn-highlight" (click)="FilterGroup('Grupo A')" (click)="HighlightButton($event)">Grupo A</button>
+            <button (click)="FilterGroup('Grupo B')" (click)="HighlightButton($event)">Grupo B</button>
+            <button (click)="FilterGroup('Grupo C')" (click)="HighlightButton($event)">Grupo C</button>
+            <button (click)="FilterGroup('Grupo D')" (click)="HighlightButton($event)">Grupo D</button>
+            <button (click)="FilterGroup('Grupo E')" (click)="HighlightButton($event)">Grupo E</button>
+            <button (click)="FilterGroup('Grupo F')" (click)="HighlightButton($event)">Grupo F</button>
+            <button (click)="FilterGroup('Grupo G')" (click)="HighlightButton($event)">Grupo G</button>
+            <button (click)="FilterGroup('Grupo H')" (click)="HighlightButton($event)">Grupo H</button>
         </div>
         <div class="stage">
-            <button (click)="FilterStage('Octavos')" (click)="MarcarBoton($event)">Octavos</button>
-            <button (click)="FilterStage('Cuartos')" (click)="MarcarBoton($event)">Cuartos</button>
-            <button (click)="FilterStage('Semifinal')" (click)="MarcarBoton($event)">Semifinal</button>
-            <button (click)="FilterStage('Final')" (click)="MarcarBoton($event)">Final</button>
+            <button (click)="FilterStage('Octavos')" (click)="HighlightButton($event)">Octavos</button>
+            <button (click)="FilterStage('Cuartos')" (click)="HighlightButton($event)">Cuartos</button>
+            <button (click)="FilterStage('Semifinal')" (click)="HighlightButton($event)">Semifinal</button>
+            <button (click)="FilterStage('Final')" (click)="HighlightButton($event)">Final</button>
         </div>
     </div>
 

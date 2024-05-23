@@ -1,0 +1,83 @@
+<div class="admin-home">
+    <header>
+        <h1>Penca UCU</h1>
+    </header>
+    <div class="content">
+        <aside>
+            <ul>
+                <li><button (click)="ChangeMode(1)" (click)="HighlightOption($event)">Crear campeonato</button></li>
+                <li><button (click)="ChangeMode(2)" (click)="HighlightOption($event)">Añadir equipo</button></li>
+                <li><button (click)="ChangeMode(3)" (click)="HighlightOption($event)">Añadir resultado</button></li>
+                <li><button (click)="ChangeMode(4)" (click)="HighlightOption($event)">Añadir partidos</button></li>
+                <li><button class="btn-submit" (click)="Submit()">Subir</button></li>
+            </ul>
+        </aside>
+        <div class="modes">
+            <div id="mode1" class="mode">
+                <div class="data">
+                    <label for="input-name-championship">Nombre campeonato</label>
+                    <input type="text" id="input-name-championship">
+                </div>
+                <div class="data">
+                    <label for="input-start-date">Fecha comienzo</label>
+                    <input type="date" id="input-start-date">
+                </div>
+                <div class="data">
+                    <label for="input-end-date">Fecha fin</label>
+                    <input type="date" id="input-end-date">
+                </div>
+            </div>
+            <div id="mode2" class="mode">
+                <div class="data">
+                    <label for="input-team-name">Nombre equipo</label>
+                    <input type="text" id="input-team-name">
+                </div>
+                <div class="data">
+                    <label for="input-country-name">Pais</label>
+                    <input type="text" id="input-country-name">
+                </div>
+            </div>
+            <div id="mode3" class="mode">
+                <div class="data">
+                    <label for="input-selection-match">Selecciona un partido</label>
+                    <select id="input-selection-match">
+                        <option value="opcion1">Opción 1</option>
+                        <option value="opcion2">Opción 2</option>
+                        <option value="opcion3">Opción 3</option>
+                    </select>
+                </div>
+                <div class="data">
+                    <label for="input-goals-team-1">Goles equipo 1</label>
+                    <input type="number" id="input-goals-team-1">
+                </div>
+                <div class="data">
+                    <label for="input-goals-team-2">Goles equipo 2</label>
+                    <input type="number" id="input-goals-team-2">
+                </div>
+            </div>
+
+            <div id="mode4" class="mode">
+                <div class="data">
+                    <label for="input-team-name-1">Nombre equipo 1</label>
+                    <input type="text" id="input-team-name-1">
+                </div>
+                <div class="data">
+                    <label for="input-team-name-2">Nombre equipo 2</label>
+                    <input type="text" id="input-team-name-2">
+                </div>
+                <div class="data">
+                    <label for="input-location-match">Ubicacion</label>
+                    <input type="text" id="input-location-match">
+                </div>
+                <div class="data">
+                    <label for="input-match-date">Fecha partido</label>
+                    <input type="date" id="input-match-date">
+                </div>
+                <div class="data">
+                    <label for="input-time-match">Hora partido</label>
+                    <input type="time" id="input-time-match">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,7 @@
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
+    overflow-y: hidden;
 }
 
 .predictions .selectors {
@@ -57,6 +58,16 @@
     transition: all .2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
     background-color: var(--textColor);
     color: var(--bgColor);
+}
+
+.predictions .selectors .group button.btn-highlight {
+    background-color: var(--color1);
+    color: var(--textColor);
+}
+
+.predictions .selectors .stage button.btn-highlight {
+    background-color: var(--color1);
+    color: var(--textColor);
 }
 
 .predictions .predict {
@@ -202,71 +213,3 @@
     color: #fff;
 }
 
-@media (max-width: 700px) {
-    .predictions .selectors .group button {
-        width: 40%;
-        height: 35px;
-        font-size: 18px;
-    }
-    
-    .predictions .predict {
-        margin-top: 50px;
-        width: 96%;
-        padding: 40px 5px;
-    }
-
-    .predictions .predict h2 {
-        font-size: 32px;
-    }
-    
-    .predictions .predict ul {
-        grid-template-columns: repeat(auto-fill, 290px);
-    }
-    
-    .predictions .predict li {
-        width: 290px;
-        height: 260px;
-    }
-    
-    .predictions .predict li .title {
-        height: 30px;
-        padding: 5px 15px;
-    }
-    
-    .predictions .predict li .title .date {
-        font-size: 15px;
-    }
-    
-    .predictions .predict li .title .group {
-        font-size: 13px;
-    }
-
-    .predictions .predict li .content {
-        height: 180px;
-    }
-    
-    .predictions .predict li .content .team img {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .predictions .predict li .content .team h3 {
-        font-size: 18px;
-    }
-    
-    .predictions .predict li .content .score button {
-        font-size: 16px;
-    }
-    
-    .predictions .predict li .content .score p {
-        font-size: 16px;
-    }
-    
-    .predictions .predict li .submit {
-        height: 40px;
-    } 
-    
-    .predictions .predict li .submit .btn-submit{
-        font-size: 16px;
-    }
-}

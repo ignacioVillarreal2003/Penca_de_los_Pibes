@@ -3,57 +3,18 @@ import { IMatch } from '../../interfaces/IMatch';
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-predictions',
-  templateUrl: './predictions.component.html',
-  styleUrl: './predictions.component.css'
+  selector: 'app-user-predictions',
+  templateUrl: './user-predictions.component.html',
+  styleUrl: './user-predictions.component.css'
 })
-export class PredictionsComponent {
+export class UserPredictionsComponent {
   modeFilter: string = "Grupo A";
   matches: IMatch[] = [];
   selectedMatches: IMatch[] = []
 
   ngOnInit() {
-    const mañana = new Date();
-    mañana.setMonth(5);
-    this.matches = [
-      {
-        team1: "Peru",
-        team2: "Uruguay",
-        shieldTeam1: "barcelona.png",
-        shieldTeam2: "barcelona.png",
-        date: new Date(),
-        group: "Grupo A",
-        stage: "semifinal",
-        scoreTeam1: 0,
-        scoreTeam2: 0,
-      },
-      {
-        team1: "Bolivia",
-        team2: "Uruguay",
-        shieldTeam1: "barcelona.png",
-        shieldTeam2: "barcelona.png",
-        date: mañana,
-        group: "Grupo A",
-        stage: "octavos",
-        scoreTeam1: 0,
-        scoreTeam2: 0,
-      },
-      {
-        team1: "Bolivia",
-        team2: "Uruguay",
-        shieldTeam1: "barcelona.png",
-        shieldTeam2: "barcelona.png",
-        date: new Date(),
-        group: "Grupo B",
-        stage: "octavos",
-        scoreTeam1: 0,
-        scoreTeam2: 0,
-      }
-    ]
+    this.matches = []
     this.FilterGroup(this.modeFilter);
-    const clickedButton = document.querySelector('.predictions .btn-A') as HTMLElement;
-    clickedButton.style.backgroundColor = "var(--color1)";
-    clickedButton.style.color = "var(--textColor)";
   }
 
   FilterGroup(value: string) {
@@ -99,15 +60,16 @@ export class PredictionsComponent {
     }
   }
 
-  MarcarBoton(event: any){
+  HighlightButton(event: any){
+    const target = event.target as HTMLElement;    
     const buttons = document.querySelectorAll('.predictions .selectors button') as NodeListOf<HTMLElement>;
-    buttons.forEach((e: HTMLElement) => {
-      e.style.backgroundColor = "var(--textColor)";
-      e.style.color = "var(--bgColor)";
-    })
-    const clickedButton = event.target as HTMLElement;
-    clickedButton.style.backgroundColor = "var(--color1)";
-    clickedButton.style.color = "var(--textColor)";
+    buttons.forEach((button: HTMLElement) => {
+      if (button === target) {
+        button.classList.add('btn-highlight');
+      } else {
+        button.classList.remove('btn-highlight');
+      }
+    });
   }
 
   SubmitPrediction(match: IMatch) {
@@ -139,5 +101,4 @@ export class PredictionsComponent {
       timerProgressBar: true
     })
   }
-
 }
