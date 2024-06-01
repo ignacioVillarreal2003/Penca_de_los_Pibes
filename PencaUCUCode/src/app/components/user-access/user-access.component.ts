@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { HttpService } from '../../services/http.service';
+import { IChampionship } from '../../types';
 
 @Component({
   selector: 'app-user-access',
@@ -12,21 +14,40 @@ export class UserAccessComponent {
 
   ci: string = "";
   password: string = "";
-  username: string = ""
+  username: string = "";
+  championship: IChampionship | undefined = undefined;
   coutries: string[] = ["asdas", "sad asd"]
 
-  constructor(private router: Router, private userService: UserService){}
+  constructor(private router: Router, private userService: UserService, private httpService: HttpService){}
 
   ngOnInit(){
-    // Traer campeonato, para saber id y realizar las demas operaciones
+    this.httpService.GetChampionshipUser().subscribe(
+      (response: any) => {
+        this.championship = response;
+      },
+      (error: any) => {
+        this.ErrorMessage(error);
+      }
+    );
   }
 
   UserLogin(){
     if (this.CheckUserDataLogin()){
-      // mandar a bd
-      this.userService.username = this.username;  
-      this.userService.avatar = "avatar-1.png";  
-      this.router.navigate(["/userhome"])
+      const user = {
+        ci: this.ci,
+        password: this.password,
+      }
+      this.httpService.LoginUser(user).subscribe(
+        (response: any) => {
+          localStorage.setItem('token', response);
+          this.router.navigate(["/userhome"])
+          this.userService.username = this.username;  
+          this.userService.avatar = "avatar-1.png";  
+        },
+        (error: any) => {
+          this.ErrorMessage(error);
+        }
+      );
     }
   }
 
@@ -34,10 +55,24 @@ export class UserAccessComponent {
     if (this.CheckUserDataRegister()){
       const championshipData = await this.EnterChampionshipData()
       if (championshipData != undefined){
-        // mandar a bd
-        this.userService.username = this.username; 
-        this.userService.avatar = "avatar-1.png";   
-        this.router.navigate(["/userhome"])      
+        const user = {
+          ci: this.ci,
+          password: this.password,
+          username: this.username,
+          champion: championshipData[0],
+          runnerUp: championshipData[1]
+        }
+        this.httpService.RegisterUser(user).subscribe(
+          (response: any) => {
+            localStorage.setItem('token', response);
+            this.router.navigate(["/userhome"])
+            this.userService.username = this.username;  
+            this.userService.avatar = "avatar-1.png";  
+          },
+          (error: any) => {
+            this.ErrorMessage(error);
+          }
+        );
       }
     }
   }
@@ -45,8 +80,19 @@ export class UserAccessComponent {
   async AdminLogin(){
     const adminData = await this.EnterAdminData();
     if (adminData != undefined){
-      // checkear datos en la base      
-      this.router.navigate(["/adminHome"])
+      const user = {
+        ci: this.ci,
+        password: this.password,
+      }
+      this.httpService.LoginUser(user).subscribe(
+        (response: any) => {
+          localStorage.setItem('token', response);
+          this.router.navigate(["/adminHome"])
+        },
+        (error: any) => {
+          this.ErrorMessage(error);
+        }
+      );   
     }
   }
 

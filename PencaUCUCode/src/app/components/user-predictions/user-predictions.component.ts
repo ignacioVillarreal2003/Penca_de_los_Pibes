@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IMatch } from '../../interfaces/IMatch';
 import Swal from 'sweetalert2'
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-user-predictions',
@@ -11,6 +12,8 @@ export class UserPredictionsComponent {
   modeFilter: string = "Grupo A";
   matches: IMatch[] = [];
   selectedMatches: IMatch[] = []
+
+  constructor(private httpService: HttpService){}
 
   ngOnInit() {
     this.matches = []
@@ -73,8 +76,15 @@ export class UserPredictionsComponent {
   }
 
   SubmitPrediction(match: IMatch) {
-    if (match.date >= new Date){
-      this.SuccesMessage("Se ha registrado la prediccion.")
+    if (match.date < new Date){
+      this.httpService.PostMatch(match).subscribe(
+        (response: any) => {
+          this.SuccesMessage("Se ha registrado la prediccion.")
+        },
+        (error: any) => {
+          this.ErrorMessage(error);
+        }
+      );
     } else {
       this.ErrorMessage("Se acabo el tiempo.")
     }
