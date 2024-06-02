@@ -29,6 +29,7 @@ import { UserRankingComponent } from './components/user-ranking/user-ranking.com
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [

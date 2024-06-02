@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpService } from '../../services/http.service';
-import { IChampionship } from '../../types';
+import { IChampionship, ITeam } from '../../types';
 
 @Component({
   selector: 'app-user-access',
@@ -15,15 +15,14 @@ export class UserAccessComponent {
   ci: string = "";
   password: string = "";
   username: string = "";
-  championship: IChampionship | undefined = undefined;
-  coutries: string[] = ["asdas", "sad asd"]
+  teams: ITeam[] = [];
 
   constructor(private router: Router, private userService: UserService, private httpService: HttpService){}
 
   ngOnInit(){
-    /*this.httpService.GetChampionshipUser().subscribe(
+    /*this.httpService.GetChampionshipTeams().subscribe(
       (response: any) => {
-        this.championship = response;
+        this.teams = response;
       },
       (error: any) => {
         this.ErrorMessage(error);
@@ -60,7 +59,7 @@ export class UserAccessComponent {
           password: this.password,
           username: this.username,
           champion: championshipData[0],
-          runnerUp: championshipData[1]
+          subChampion: championshipData[1]
         }
         this.httpService.RegisterUser(user).subscribe(
           (response: any) => {
@@ -98,17 +97,17 @@ export class UserAccessComponent {
 
   async EnterChampionshipData(){
     let dataChampion = `<select id="swal-select-champion" class="swal2-select" name="options">`
-    let dataRunnerUp = `<select id="swal-select-runner-up" class="swal2-select" name="options">`
-    this.coutries.forEach((country: string) => {
-      dataChampion += `<option class="swal2-option" value=${country}>${country}</option>`
-      dataRunnerUp += `<option class="swal2-option" value=${country}>${country}</option>`
+    let dataSubChampion = `<select id="swal-select-runner-up" class="swal2-select" name="options">`
+    this.teams.forEach((team: ITeam) => {
+      dataChampion += `<option class="swal2-option" value=${team.teamName}>${team.teamName}</option>`
+      dataSubChampion += `<option class="swal2-option" value=${team.teamName}>${team.teamName}</option>`
     })
     dataChampion += `</select>`
-    dataRunnerUp += `</select>`
+    dataSubChampion += `</select>`
     const { value: formValues } = await Swal.fire({
       title: "Ingrese sus predicciones!",
       showCancelButton: true,
-      html: dataChampion + dataRunnerUp,
+      html: dataChampion + dataSubChampion,
       focusConfirm: false,
       preConfirm: () => {
         const champion = document.getElementById("swal-select-champion") as HTMLInputElement;
@@ -166,7 +165,7 @@ export class UserAccessComponent {
     }
   }
 
-  ChangeMode(mode: string){
+  ChangeMode(mode: string){    
     const modeLogin = document.querySelector('.user-access #mode-login') as HTMLElement;
     const modeRegister = document.querySelector('.user-access #mode-register') as HTMLElement;
     if (mode == "login") {

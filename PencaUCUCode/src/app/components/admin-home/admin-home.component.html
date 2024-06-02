@@ -7,8 +7,8 @@
             <ul>
                 <li><button (click)="ChangeMode(1)" (click)="HighlightOption($event)">Crear campeonato</button></li>
                 <li><button (click)="ChangeMode(2)" (click)="HighlightOption($event)">Añadir equipo</button></li>
-                <li><button (click)="ChangeMode(3)" (click)="HighlightOption($event)">Añadir resultado</button></li>
-                <li><button (click)="ChangeMode(4)" (click)="HighlightOption($event)">Añadir partidos</button></li>
+                <li><button (click)="ChangeMode(3)" (click)="HighlightOption($event)">Añadir partidos</button></li>
+                <li><button (click)="ChangeMode(4)" (click)="HighlightOption($event)">Añadir resultado</button></li>
                 <li><button class="btn-submit" (click)="Submit()">Subir</button></li>
             </ul>
         </aside>
@@ -16,68 +16,80 @@
             <div id="mode1" class="mode">
                 <div class="data">
                     <label for="input-name-championship">Nombre campeonato</label>
-                    <input type="text" id="input-name-championship">
+                    <input type="text" id="input-name-championship" [(ngModel)]="championshipName">
                 </div>
                 <div class="data">
                     <label for="input-start-date">Fecha comienzo</label>
-                    <input type="date" id="input-start-date">
+                    <input type="date" id="input-start-date" [(ngModel)]="startDate">
                 </div>
                 <div class="data">
                     <label for="input-end-date">Fecha fin</label>
-                    <input type="date" id="input-end-date">
+                    <input type="date" id="input-end-date" [(ngModel)]="endDate">
                 </div>
             </div>
             <div id="mode2" class="mode">
                 <div class="data">
-                    <label for="input-team-name">Nombre equipo</label>
-                    <input type="text" id="input-team-name">
+                    <label for="input-selection-championship-2">Selecciona un campeonato</label>
+                    <select id="input-selection-championship-2" [(ngModel)]="selectedChampionship">
+                        <option value="opcion1" *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                    </select>
                 </div>
                 <div class="data">
-                    <label for="input-country-name">Pais</label>
-                    <input type="text" id="input-country-name">
+                    <label for="input-team-name">Nombre equipo</label>
+                    <input type="text" id="input-team-name" [(ngModel)]="teamName">
                 </div>
             </div>
             <div id="mode3" class="mode">
                 <div class="data">
+                    <label for="input-selection-championship-3">Selecciona un campeonato</label>
+                    <select id="input-selection-championship-3" [(ngModel)]="selectedChampionship">
+                        <option value="opcion1" *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                    </select>
+                </div>
+                <div class="data">
+                    <label for="input-team-name-1" [(ngModel)]="team1">Nombre equipo 1</label>
+                    <input type="text" id="input-team-name-1">
+                </div>
+                <div class="data">
+                    <label for="input-team-name-2" [(ngModel)]="team2">Nombre equipo 2</label>
+                    <input type="text" id="input-team-name-2">
+                </div>
+                <div class="data">
+                    <label for="input-location-match" [(ngModel)]="location">Ubicacion</label>
+                    <input type="text" id="input-location-match">
+                </div>
+                <div class="data">
+                    <label for="input-match-date" [(ngModel)]="dateMatch">Fecha partido</label>
+                    <input type="date" id="input-match-date">
+                </div>
+                <div class="data">
+                    <label for="input-time-match" [(ngModel)]="hourMatch">Hora partido</label>
+                    <input type="time" id="input-time-match">
+                </div>
+            </div>
+            <div id="mode4" class="mode">
+                <div class="data">
+                    <label for="input-selection-championship-4">Selecciona un campeonato</label>
+                    <select id="input-selection-championship-4" [(ngModel)]="selectedChampionship" (click)="UpdateMatches()">
+                        <option value="opcion1" *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                    </select>
+                </div>
+                <div class="data">
                     <label for="input-selection-match">Selecciona un partido</label>
-                    <select id="input-selection-match">
-                        <option value="opcion1">Opción 1</option>
-                        <option value="opcion2">Opción 2</option>
-                        <option value="opcion3">Opción 3</option>
+                    <select id="input-selection-match" [(ngModel)]="selectedMatch">
+                        <option value="opcion1" *ngFor="let match of matches">{{match.team1}} vs {{match.team2}}</option>
                     </select>
                 </div>
                 <div class="data">
                     <label for="input-goals-team-1">Goles equipo 1</label>
-                    <input type="number" id="input-goals-team-1">
+                    <input type="number" id="input-goals-team-1" [(ngModel)]="scoreTeam1">
                 </div>
                 <div class="data">
                     <label for="input-goals-team-2">Goles equipo 2</label>
-                    <input type="number" id="input-goals-team-2">
+                    <input type="number" id="input-goals-team-2" [(ngModel)]="scoreTeam2">
                 </div>
             </div>
 
-            <div id="mode4" class="mode">
-                <div class="data">
-                    <label for="input-team-name-1">Nombre equipo 1</label>
-                    <input type="text" id="input-team-name-1">
-                </div>
-                <div class="data">
-                    <label for="input-team-name-2">Nombre equipo 2</label>
-                    <input type="text" id="input-team-name-2">
-                </div>
-                <div class="data">
-                    <label for="input-location-match">Ubicacion</label>
-                    <input type="text" id="input-location-match">
-                </div>
-                <div class="data">
-                    <label for="input-match-date">Fecha partido</label>
-                    <input type="date" id="input-match-date">
-                </div>
-                <div class="data">
-                    <label for="input-time-match">Hora partido</label>
-                    <input type="time" id="input-time-match">
-                </div>
-            </div>
         </div>
     </div>
 </div>

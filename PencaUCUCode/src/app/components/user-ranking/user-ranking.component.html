@@ -2,12 +2,12 @@
 
 <div class="ranking">
     <ul>
-        <li *ngFor="let i of ranking">
+        <li *ngFor="let person of ranking">
             <div class="person">
-                <h2>Usuario 1</h2>
+                <h2>{{person.username}}</h2>
                 <img src="../../../assets/avatar/avatar-1.png" alt="">
             </div>
-            <p class="score">10</p>
+            <p class="score">{{person.score}}</p>
         </li>
     </ul>
 </div>

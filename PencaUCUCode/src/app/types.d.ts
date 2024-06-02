@@ -1,3 +1,5 @@
+import { Time } from "@angular/common";
+
 export type Room = 'Feedback' | 'MultipleChoice' | 'Brainstorming' | 'Quiz';
 
 /* User */
@@ -6,7 +8,7 @@ export interface IRegister{
     ci: string
     password: string,
     champion: string,
-    runnerUp: string
+    subChampion: string
 }
 
 export interface ILogin{
@@ -17,16 +19,17 @@ export interface ILogin{
 export interface IMatch{
     team1: string,
     team2: string,
-    shieldTeam1: string,
-    shieldTeam2: string,
     scoreTeam1: number,
     scoreTeam2: number,
     date: Date,
     group: string,
-    stage: string
+    stage: string,
+    location: string,
+    hour: Time,
+    championshipName: string
 }
 
-export interface IRanking{
+export interface IRanking {
     username: string,
     score: number
 }
@@ -34,16 +37,10 @@ export interface IRanking{
 export interface IChampionship{
     championshipName: string,
     startDate: Date,
-    endDate
+    endDate: Date
 }
 
 export interface ITeam{
-    teamName: string,
-    country: string,
-}
-
-export interface IResult{
-    match: IMatch,
-    scoreTeam1: number,
-    scoreTeam2: number
+    championshipName: string,
+    teamName: string
 }
