@@ -21,14 +21,14 @@ export class UserAccessComponent {
   constructor(private router: Router, private userService: UserService, private httpService: HttpService){}
 
   ngOnInit(){
-    this.httpService.GetChampionshipUser().subscribe(
+    /*this.httpService.GetChampionshipUser().subscribe(
       (response: any) => {
         this.championship = response;
       },
       (error: any) => {
         this.ErrorMessage(error);
       }
-    );
+    );*/
   }
 
   UserLogin(){

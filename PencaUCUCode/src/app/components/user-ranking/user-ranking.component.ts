@@ -15,14 +15,14 @@ export class UserRankingComponent {
   ranking: IRanking[] | undefined = undefined;
 
   ngOnInit() {
-    this.httpService.GetRanking().subscribe(
+    /*this.httpService.GetRanking().subscribe(
       (response: any) => {
         this.ranking = response
       },
       (error: any) => {
         this.ErrorMessage(error);
       }
-    );
+    );*/
   }
 
   ErrorMessage(message: string){
