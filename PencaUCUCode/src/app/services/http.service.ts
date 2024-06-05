@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, Subject, throwError } from 'rxjs';
-import { IMatch, IRegister, ILogin, IRanking, IChampionship, ITeam, IChampionshipAdmin, IMatchAdmin, IResultAdmin, ITeamAdmin } from '../types';
+import { IMatch, IRegister, ILogin, IRanking, IChampionship, ITeam, IChampionshipAdmin, IMatchAdmin, IResultAdmin, ITeamAdmin, IResult } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +24,14 @@ export class HttpService {
   }
 
   /* Ingreso end points */
-
-  RegisterUser(requestBody: IRegister): Observable<any> {
+  RegisterUser(ci: string, password: string, username: string, champion: string, subChampion: string): Observable<any> {
+    const requestBody = {
+      ci: ci,
+      password: password,
+      username: username,
+      champion: champion,
+      subChampion: subChampion
+    }
     return this.http.post<any>('http://localhost:3001/session/registerUser', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
@@ -37,7 +43,11 @@ export class HttpService {
     );
   }
 
-  LoginUser(requestBody: ILogin): Observable<any> {
+  LoginUser(ci: string, password: string): Observable<any> {
+    const requestBody = {
+      ci: ci,
+      password: password,
+    }
     return this.http.post<any>('http://localhost:3001/session/loginUser', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
@@ -49,7 +59,11 @@ export class HttpService {
     );
   }
 
-  LoginAdmin(requestBody: ILogin): Observable<any> {
+  LoginAdmin(ci: string, password: string): Observable<any> {
+    const requestBody = {
+      ci: ci,
+      password: password,
+    }
     return this.http.post<any>('http://localhost:3001/session/loginAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
@@ -190,7 +204,13 @@ export class HttpService {
     );
   }
 
-  PostMatchPrediction(requestBody: IMatch): Observable<any> {
+  PostMatchPrediction(match: IMatch): Observable<any> {
+    const requestBody: IResult = {
+      team1: match.team1,
+      team2: match.team2,
+      scoreTeam1: match.scoreTeam1,
+      scoreTeam2: match.scoreTeam2
+    }
     return this.http.post<any>('http://localhost:3001/game/postMatchPrediction', requestBody, this.httpOptions).pipe(
       catchError(this.handleError)
     );

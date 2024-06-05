@@ -32,11 +32,7 @@ export class UserAccessComponent {
 
   UserLogin(){
     if (this.CheckUserDataLogin()){
-      const user = {
-        ci: this.ci,
-        password: this.password,
-      }
-      this.httpService.LoginUser(user).subscribe(
+      this.httpService.LoginUser(this.username, this.password).subscribe(
         (response: any) => {
           localStorage.setItem('token', response);
           this.router.navigate(["/userhome"])
@@ -54,14 +50,7 @@ export class UserAccessComponent {
     if (this.CheckUserDataRegister()){
       const championshipData = await this.EnterChampionshipData()
       if (championshipData != undefined){
-        const user = {
-          ci: this.ci,
-          password: this.password,
-          username: this.username,
-          champion: championshipData[0],
-          subChampion: championshipData[1]
-        }
-        this.httpService.RegisterUser(user).subscribe(
+        this.httpService.RegisterUser(this.ci, this.password, this.username, championshipData[0], championshipData[1]).subscribe(
           (response: any) => {
             localStorage.setItem('token', response);
             this.router.navigate(["/userhome"])
@@ -79,14 +68,10 @@ export class UserAccessComponent {
   async AdminLogin(){
     const adminData = await this.EnterAdminData();
     if (adminData != undefined){
-      const user = {
-        ci: this.ci,
-        password: this.password,
-      }
-      this.httpService.LoginUser(user).subscribe(
+      this.httpService.LoginUser(this.ci, this.password).subscribe(
         (response: any) => {
           localStorage.setItem('token', response);
-          this.router.navigate(["/adminHome"])
+          this.router.navigate(["/adminHome"]);
         },
         (error: any) => {
           this.ErrorMessage(error);
