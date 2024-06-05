@@ -63,45 +63,80 @@
     background-color: #57575771;
 }
 
-.admin-home .content aside ul li .btn-submit {
-    background-color: rgb(32, 163, 32);
-    position: absolute;
-    bottom: 0;
-    color: white;
-    font-size: 24px;
-}
-
-.admin-home .content aside ul li .btn-submit:hover {
-    background-color: green;
-}
-
-.admin-home .content .modes {
+.admin-home .modes {
     width: 100%;
     background-color: transparent;
 }
 
-.admin-home .content .modes .mode {
+.admin-home #mode-championship,
+.admin-home #mode-team,
+.admin-home #mode-match,
+.admin-home #mode-result {
     width: 100%;
     height: 100%;
     padding: 60px;
     flex-direction: column;
     background-color: #f2f6f8;
-    display: flex;
-    gap: 40px;
-}
-
-.admin-home .content .modes #mode2,
-.admin-home .content .modes #mode3,
-.admin-home .content .modes #mode4 {
     display: none;
+    gap: 30px;
 }
 
-.admin-home .content .modes .mode h2 {
-    margin-bottom: 40px;
-    margin-top: 0;
+.admin-home #mode-championship {
+    display: flex;
 }
 
-.admin-home .content .modes .data{
+.admin-home .content .options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-home .content .options button {
+    width: 100%;
+    background-color: rgb(231, 231, 231);
+    border: none;
+    font-size: 20px;
+    padding: 18px;
+    transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.admin-home .content .options button:hover {
+    background-color: rgb(185, 185, 185);
+}
+
+.admin-home .content .cont{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    max-height: 700px;
+}
+
+.admin-home .content .option-view,
+.admin-home .content .option-create,
+.admin-home .content .option-modify {
+    display: none;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.admin-home .content .option-view {
+    display: flex;
+}
+
+.admin-home .content.option-view ul{
+    list-style: none;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.admin-home .content.option-view ul li {
+    background-color: #fefefe;
+}
+
+.admin-home .content .data{
     box-shadow: 0 0 20px #0000001a;
     border-bottom: 1px solid #C6D2D9;
     background-color: #fefefe;
@@ -114,13 +149,13 @@
     padding: 5px 10px;
 }
 
-.admin-home .content .modes .data label {
+.admin-home .content .data label {
     width: 200px;
     margin-right: 20px;
 }
 
-.admin-home .content .modes .data input,
-.admin-home .content .modes .data select {
+.admin-home .content .data input,
+.admin-home .content .data select {
     box-shadow: none;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -140,9 +175,23 @@
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-.admin-home .content .modes .data input:focus-visible,
-.admin-home .content .modes .data input:hover,
-.admin-home .content .modes .data select:hover,
-.admin-home .content .modes .data select:focus-visible {
+.admin-home .content .data input:focus-visible,
+.admin-home .content .data input:hover,
+.admin-home .content .data select:hover,
+.admin-home .content .data select:focus-visible {
     border: 1px solid #C6D2D9;
 }
+
+.admin-home .content .btn-submit {
+    background-color: rgb(32, 163, 32);
+    color: white;
+    font-size: 24px;
+    width: 100%;
+    border: none;
+    padding: 18px;
+}
+
+.admin-home .content .btn-submit:hover {
+    background-color: green;
+}
+
