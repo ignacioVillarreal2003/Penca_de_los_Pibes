@@ -74,7 +74,7 @@
 .admin-home #mode-result {
     width: 100%;
     height: 100%;
-    padding: 60px;
+    padding: 40px;
     flex-direction: column;
     background-color: #f2f6f8;
     display: none;
@@ -109,7 +109,7 @@
     width: 100%;
     height: 100%;
     overflow-y: scroll;
-    max-height: 700px;
+    max-height: 600px;
 }
 
 .admin-home .content .option-view,
@@ -124,12 +124,20 @@
     display: flex;
 }
 
-.admin-home .content.option-view ul{
+.admin-home .content .option-view ul{
     list-style: none;
     gap: 20px;
     display: flex;
     flex-direction: column;
     padding: 0;
+}
+
+.admin-home .content .option-view ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(160, 241, 255, 0.775);
+    padding: 10px 40px;
 }
 
 .admin-home .content.option-view ul li {
@@ -150,7 +158,7 @@
 }
 
 .admin-home .content .data label {
-    width: 200px;
+    width: 250px;
     margin-right: 20px;
 }
 
@@ -195,3 +203,20 @@
     background-color: green;
 }
 
+.admin-home .data-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.admin-home .data-space-arround {
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 40px !important;
+    padding: 5px !important;
+}
+
+.admin-home .data-space-arround h2 {
+    font-size: 28px !important;
+}

@@ -21,15 +21,21 @@
                         <ul>
                             <li *ngFor="let championship of championships">
                                 <h2>{{championship.championshipName}}</h2>
-                                <p>{{championship.startDate}}-{{championship.endDate}}</p>
+                                <p>{{FormatDate(championship.startDate)}} - {{FormatDate(championship.endDate)}}</p>
                             </li>
                         </ul>
                     </div>
                     <div class="option-create">
                         <button class="btn-submit" (click)="AddChampionship()">Crear</button>
                         <div class="data"><input type="text" [(ngModel)]="championshipName" placeholder="Nombre campeonato"></div>
-                        <div class="data"><input type="date" [(ngModel)]="championshipStartDate" placeholder="Fecha comienzo"></div>
-                        <div class="data"><input type="date" [(ngModel)]="championshipEndDate" placeholder="Fecha fin"></div>
+                        <div class="data">
+                            <label for="input-start-date">Fecha comienzo</label>
+                            <input id="input-start-date" type="date" [(ngModel)]="championshipStartDate">
+                        </div>
+                        <div class="data">
+                            <label for="input-end-date">Fecha fin</label>
+                            <input id="input-end-date" type="date" [(ngModel)]="championshipEndDate">
+                        </div>
                     </div>
                     <div class="option-modify"></div>
                 </div>
@@ -86,7 +92,10 @@
                         <ul>
                             <li *ngFor="let match of matches">
                                 <h2>{{match.team1}} vs {{match.team2}}</h2>
-                                <p>{{match.location}}</p>
+                                <div class="data-flex">
+                                    <p>{{match.location}}</p>
+                                    <p>{{FormatDate(match.date)}}</p>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -101,7 +110,10 @@
                         <div class="data"><input type="text" [(ngModel)]="matchTeam1" placeholder="Nombre equipo 1"></div>
                         <div class="data"><input type="text" [(ngModel)]="matchTeam2" placeholder="Nombre equipo 2"></div>
                         <div class="data"><input type="text" [(ngModel)]="matchLocation" placeholder="Ubicacion"></div>
-                        <div class="data"><input type="date" [(ngModel)]="matchDate" placeholder="Fecha partido"></div>
+                        <div class="data">
+                            <label for="input-match-date">Fecha partido</label>
+                            <input id="input-match-date" type="date" [(ngModel)]="matchDate">
+                        </div>
                     </div>
                     <div class="option-modify"></div>
                 </div>
@@ -122,8 +134,10 @@
                             </select>
                         </div>
                         <ul>
-                            <li *ngFor="let result of results">
-                                <h2>{{result.team1}} {{result.scoreTeam1}} vs {{result.team2}} {{result.scoreTeam2}}</h2>
+                            <li class="data-space-arround" *ngFor="let result of results">
+                                <h2>{{result.team1}} {{result.scoreTeam1}}</h2> 
+                                <p>VS</p>
+                                <h2>{{result.scoreTeam2}} {{result.team2}}</h2>
                             </li>
                         </ul>
                     </div>
@@ -141,8 +155,14 @@
                                 <option value="opcion1" *ngFor="let match of matches">{{match.team1}} vs {{match.team2}}</option>
                             </select>
                         </div>
-                        <div class="data"><input type="number" [(ngModel)]="resultScoreTeam1" placeholder="Goles equipo 1"></div>
-                        <div class="data"><input type="number" [(ngModel)]="resultScoreTeam2" placeholder="Goles equipo 2"></div>
+                        <div class="data">
+                            <label for="input-score-team-1">Goles equipo 1</label>
+                            <input id="input-score-team-1" type="number" [(ngModel)]="resultScoreTeam1">
+                        </div>
+                        <div class="data">
+                            <label for="input-score-team-2">Goles equipo 2</label>
+                            <input id="input-score-team-2" type="number" [(ngModel)]="resultScoreTeam2">
+                        </div>
                     </div>
                     <div class="option-modify"></div>
                 </div>

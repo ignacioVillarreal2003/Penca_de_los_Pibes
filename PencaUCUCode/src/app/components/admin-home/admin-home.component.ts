@@ -312,6 +312,13 @@ export class AdminHomeComponent {
     });
   }
 
+  FormatDate(date: Date){
+    const dia = date.getDate();
+    const mes = date.getMonth() + 1;
+    const anio = date.getFullYear();
+    return `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${anio}`;
+  }
+
   ErrorMessage(message: string) {
     Swal.fire({
       title: 'Error!',
