@@ -6,6 +6,6 @@ const sessionController = require('../controllers/sessionController');
 
 router.post('/registerUser', sessionController.registerUser);
 router.post('/loginUser', sessionController.loginUser);
-router.post('/changePassword', sessionController.changePassword);
+router.post('/loginAdmin', sessionController.loginAdmin);
 
 module.exports = router

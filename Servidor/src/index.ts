@@ -1,9 +1,12 @@
-import mysql from "mysql2/promise";
 require('dotenv').config();
+const mysql = require('mysql');
+import cors from 'cors';
+
+const sessionRoutes = require('./routes/sessionRoutes');
+const gameRoutes = require('./routes/gameRoutes');
 
 const express = require('express');
 const app = express();
-import cors from 'cors';
 
 const corsOptions = {
     origin: '*',
@@ -15,22 +18,23 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
+app.use('/session', sessionRoutes);
+app.use('/game', gameRoutes);
+
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-// Conexión con la base de datos
-const pool = mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASS,
-    database: process.env.NAME
-})
+export const connection = mysql.createConnection({
+  host: 'localhost',
+  database: process.env.NAME,
+  port: process.env.PORT,
+  user: process.env.USER,
+  password: process.env.PASS
+});
 
-async function queryDatabase() {
-    const result = await pool.query("SELECT * FROM Usuario");
-    console.log(result);
-}
-
-queryDatabase();
+connection.connect((err: any) => {
+  if (err) throw err;
+  console.log('Conectado a la base de datos.');
+});

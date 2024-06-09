@@ -3,33 +3,36 @@ const sessionServices = require('../services/sessionServices');
 const registerUser = async (req: any, res: any) => {
     try {
         const { body } = req;        
-        if (!body.username || !body.password) {
-            return res.status(500).send({ message: "Error processing the request." });
+        if (!body.ci || !body.password || !body.username || !body.champion || !body.subChampion) {
+            return res.status(500).send({ message: "Error procesando los datos." });
         } else {                        
-            const result = await sessionServices.registerUser(body.username, body.password);
+            const result = await sessionServices.registerUser(body.ci, body.password, body.username, body.champion, body.subChampion);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
-            } else {
+            } else if (result.token) {
                 res.status(result.status).send({ token: result.token })
+            } else {
+                res.status(500).send({ message: "Error procesando los datos." });
             }
         }
     } catch (error) {
-        console.log(error);
-        res.status(500).send({ message: "Error processing the request." });
+        res.status(500).send({ message: "Error procesando los datos." });
     }
 }
 
 const loginUser = async (req: any, res: any) => {
     try {
         const { body } = req;
-        if (!body.username || !body.password) {
+        if (!body.ci || !body.password) {
             res.status(500).send({ message: "Error processing the request." });
         } else {
-            const result = await sessionServices.loginUser(body.username, body.password);
+            const result = await sessionServices.loginUser(body.ci, body.password);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
-            } else {
+            } else if (result.token) {
                 res.status(result.status).send({ token: result.token })
+            } else {
+                res.status(500).send({ message: "Error procesando los datos." });
             }
         }
     } catch (error) {
@@ -38,15 +41,19 @@ const loginUser = async (req: any, res: any) => {
     }
 }
 
-const changePassword = async (req: any, res: any) => {
+const loginAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
-        if (!body.username || !body.password || !body.newPassword) {
+        if (!body.ci || !body.password) {
             res.status(500).send({ message: "Error processing the request." });
         } else {
-            const result = await sessionServices.changePassword(body.username, body.password, body.newPassword);
+            const result = await sessionServices.changePassword(body.ci, body.password);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
+            } else if (result.token) {
+                res.status(result.status).send({ token: result.token })
+            } else {
+                res.status(500).send({ message: "Error procesando los datos." });
             }
         }
     } catch (error) {
@@ -58,5 +65,5 @@ const changePassword = async (req: any, res: any) => {
 module.exports = {
     loginUser,
     registerUser,
-    changePassword
+    loginAdmin
 }
