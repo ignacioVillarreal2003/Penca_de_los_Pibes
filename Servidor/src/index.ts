@@ -1,5 +1,5 @@
 require('dotenv').config();
-const mysql = require('mysql');
+const mysql = require('mysql2');
 import cors from 'cors';
 
 const sessionRoutes = require('./routes/sessionRoutes');
@@ -21,7 +21,7 @@ app.use(cors(corsOptions));
 app.use('/session', sessionRoutes);
 app.use('/game', gameRoutes);
 
-const PORT = 3000;
+const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
