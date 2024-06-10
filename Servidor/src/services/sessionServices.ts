@@ -1,68 +1,67 @@
 import { IUser } from "../types";
 
-const usuarios = require('../database/users');
+const users = require('../database/users');
 const jwt = require('jsonwebtoken');
-const moment = require('moment-timezone');
 
-function generateAccessToken(username: string) {
-    return jwt.sign({ username: username }, process.env.SECRET, { expiresIn: '1h' });
+function generateAccessToken(ci: string) {
+    return jwt.sign({ ci: ci }, process.env.SECRET, { expiresIn: '1h' });
 }
 
-const registerUser = async (username: string, password: string) => {
+const registerUser = async (ci: string, password: string, username: string, champion: string, subChampion: string) => {
     try {     
-        const existingUser: IUser = await usuarios.getUser(username); 
+        const existingUser: IUser = await users.getUserByCi(ci);         
         if (existingUser) {
-            return { status: 400, message: "The user is already registered." };
-        } else {     
-            const uruguayTime = moment().tz('America/Montevideo').format("YYYY-MM-DDTHH:mm:ss.SSSZ");            
-            await usuarios.postUser(username, password, uruguayTime, uruguayTime);
-            const token = generateAccessToken(username);
+            return { status: 400, message: "El usuario ya ha sido registrado." };
+        } else {    
+            await users.postUser(ci, password, username);
+            await users.postChampion(ci, champion);
+            await users.postSubChamion(ci, subChampion);
+            const token = generateAccessToken(ci);
             return { status: 200, token: token };
         }
-    } catch (error) {
-        throw new Error("Error in the service when processing the request.");
+    } catch (error) {        
+        throw new Error("Error procesando los datos.");
     }
 }
 
-const loginUser = async (username: string, password: string) => {
+const loginUser = async (ci: string, password: string) => {
     try {
-        const existingUser: IUser = await usuarios.getUser(username);
+        const existingUser: IUser = await users.getUserByCi(ci); 
         if (!existingUser) {
-            return { status: 400, message: "The user is not registered." };
+            return { status: 400, message: "El usuario no esta registrado." };
         } else {
             if (existingUser.password != password) {
-                return { status: 400, message: "Incorrect password." };
+                return { status: 400, message: "Contraseña incorrecta." };
             } else {
-                const token = generateAccessToken(username);
+                const token = generateAccessToken(ci);
                 return { status: 200, token: token };
             }
         }
     } catch (error) {
-        throw new Error("Error in the service when processing the request.");
+        throw new Error("Error procesando los datos.");
     }
 }
 
-const changePassword = async (username: string, password: string, newPassword: string) => {
+const loginAdmin = async (ci: string, password: string) => {
     try {
-        const existingUser: IUser = await usuarios.getUser(username);
+        const existingUser: IUser = await users.getAdminByCi(ci); 
         if (!existingUser) {
-            return { status: 400, message: "Incorrect username." };
+            return { status: 400, message: "El admin no esta registrado." };
         } else {
             if (existingUser.password != password) {
-                return { status: 400, message: "Incorrect password." };
+                return { status: 400, message: "Contraseña incorrecta." };
             } else {
-                const uruguayTime = moment().tz('America/Montevideo').format("YYYY-MM-DDTHH:mm:ss.SSSZ");            
-                await usuarios.changePassword(username, newPassword, uruguayTime);
-                return { status: 200, message: "The password was changed." };
+                const token = generateAccessToken(ci);
+                return { status: 200, token: token };
             }
         }
     } catch (error) {
-        throw new Error("Error in the service when processing the request.");
+        throw new Error("Error procesando los datos.");
     }
 }
 
 module.exports = {
     registerUser,
     loginUser,
-    changePassword
+    loginAdmin
 }

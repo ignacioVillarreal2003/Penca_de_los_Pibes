@@ -12,6 +12,11 @@ export interface ILogin{
     password: string
 }
 
+export interface ITeam{
+    championshipName: string,
+    teamName: string
+}
+
 export interface IMatch{
     team1: string,
     team2: string,
@@ -21,8 +26,14 @@ export interface IMatch{
     group: string,
     stage: string,
     location: string,
-    hour: string,
     championshipName: string
+}
+
+export interface IResult{
+    team1: string,
+    team2: string,
+    scoreTeam1: number,
+    scoreTeam2: number
 }
 
 export interface IRanking {
@@ -36,18 +47,7 @@ export interface IChampionship{
     endDate: Date
 }
 
-export interface ITeam{
-    championshipName: string,
-    teamName: string
-}
 
-export interface IResult {
-    team1: string,
-    team2: string,
-    scoreTeam1: number,
-    scoreTeam2: number,
-    championshipName: string
-}
 
 
 
