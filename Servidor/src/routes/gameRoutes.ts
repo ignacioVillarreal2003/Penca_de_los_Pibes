@@ -1,11 +1,9 @@
 import express from "express";
-import { authenticate } from "../middlewares/authenticate";
 
 const router = express.Router();
+import { GameController } from '../controllers/gameController';
 
-const gameController = require('../controllers/gameController');
+router.get('', GameController.getMatches);
+router.post('', GameController.postMatchResult);
 
-router.get('/getMatches', gameController.getMatches);
-router.post('/postMatchResult', authenticate, gameController.postMatchResult);
-
-module.exports = router;
+export default router;

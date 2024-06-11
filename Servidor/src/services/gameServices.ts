@@ -1,41 +1,50 @@
-import { IUser } from "../types";
+import { Match } from "../database/match"
+import { connection } from "../index";
 
-const users = require('../database/users');
-const matches = require('../database/matches');
-
-const errorMessage = "Error in the service when processing the request.";
-
-const getMatches = async () => {
-    try {
-        const result = await matches.getMatches();
-        if (result) {
-            return { status: 200, matches: result };
-        } else {
-            return { status: 400, message: "The room code is incorrect." };
-        }
-    } catch (error) {
-        throw new Error(errorMessage);
+export class GameService {
+    //funca
+    static getMatches() {
+        return new Promise((resolve, reject) => {
+            connection.query("SELECT * FROM Juegan_Partido", (err, res) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(res as Match[]);
+            });
+        });
     }
-}
 
-const postMatchResult = async (username: string) => {
-    try {
-        const existingUser: IUser = await users.getUser(username);
-        if (!existingUser) {
-            return { status: 400, message: "The user does not exist." };
-        } else {
-            const result = await matches.postMatchResult(username);
-            if (result) {
-                return { status: 200, message: "The room has been published." };
-            }
-            return { status: 500, message: errorMessage };
-        }
-    } catch (error) {
-        throw new Error(errorMessage);
+    //funca
+    static getMatchByPk(fecha_partido: Date, eq1: string, eq2: string, campeonato: string) {
+        return new Promise<Match[]>((resolve, reject) => {
+            connection.query("SELECT * FROM Juegan_Partido WHERE fecha_partido = ? AND nombre_equipo_1 = ? AND nombre_equipo_2 = ? AND nombre_campeonato1 = ? AND nombre_campeonato2 = ?",
+                [fecha_partido, eq1, eq2, campeonato, campeonato], (err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve(res as unknown as Match[]);
+                });
+        });
     }
-}
 
-module.exports = {
-    getMatches,
-    postMatchResult
+    //funca
+    static async postMatchResult(match: Match, goles_equipo_1: number, goles_equipo_2: number): Promise<boolean> {
+        try {
+            console.log(match);
+            return await new Promise<boolean>((resolve, reject) => {
+                connection.query("UPDATE Juegan_Partido SET goles_equipo1 = ?, goles_equipo2 = ? WHERE nombre_equipo_1 = ? AND  nombre_equipo_2 = ? AND fecha_partido = ? AND nombre_campeonato1 = ? AND nombre_campeonato2 = ?",
+                    [goles_equipo_1, goles_equipo_2, match.nombre_equipo_1, match.nombre_equipo_2, match.fecha_partido, match.nombre_campeonato1, match.nombre_campeonato2], (err) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(true);
+                        }
+                    });
+            });
+        } catch (error) {
+            return false;
+        }
+    }
+
+
 }

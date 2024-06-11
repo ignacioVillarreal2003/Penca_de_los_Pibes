@@ -1,39 +1,50 @@
-const gameServices = require('../services/gameServices');
+import {Request, Response} from 'express';
+import {GameService} from '../services/gameServices'
 
-const errorMessage = "Error processing the request.";
+export class GameController {
 
-const getMatches = async (res: any) => {
-    try {
-        const result = await gameServices.getMatches();
-        if (result) {
-            res.status(result.status).send({ matches: result.matches })
-        } else {
-            res.status(500).send({ message: errorMessage })
-        }
-    } catch (error) {
-        res.status(500).send({ message: errorMessage });
-    }
-}
-
-const postMatchResult = async (req: any, res: any) => {
-    try {
-        const { body } = req;
-        if (!body.username) {
-            res.status(500).send({ message: errorMessage });
-        } else {
-            const result = await gameServices.postMatchResult(body.username);
+    static async getMatches(_req: Request, res: Response) {
+        try {
+            const result = await GameService.getMatches();
             if (result) {
-                res.status(result.status).send({ message: result.message })
+                res.status(200).send({ matches: result });
             } else {
-                res.status(500).send({ message: errorMessage })
+                res.status(400).send({ message: "The room code is incorrect." });
             }
+        } catch (error) {
+            res.status(500).send({ message: error });
         }
-    } catch (error) {
-        res.status(500).send({ message: errorMessage });
     }
-}
 
-module.exports = {
-    getMatches,
-    postMatchResult
+    static async postMatchResult(req: Request, res: Response): Promise<void> {
+        try {
+            const ci = req.body.ci;
+            if (!ci) {
+                res.status(400).send({ message: "Ci is required." });
+                return; // Return here to exit the function after sending the response
+            }
+
+            const fecha = req.body.fecha;
+            const eq1 = req.body.eq1;
+            const eq2 = req.body.eq2;
+            const campeonato = req.body.campeonato;
+
+            if (fecha == null || eq1 == null || eq2 == null || campeonato == null) {
+                res.status(400).send({ message: "Match data is required" });
+                return; // Return here to exit the function after sending the response
+            }
+            const result = await GameService.getMatchByPk(fecha, eq1, eq2, campeonato);
+            if (result) {
+                await GameService.postMatchResult(result[0], req.body.goles_equipo_1, req.body.goles_equipo_2);
+            } else {
+                res.status(404).send({ message: "No match found" });
+            }
+
+        } catch (error) {
+            res.status(500).send({ message: error });
+            return; // Return here to exit the function after sending the response
+        }
+    }
+
+
 }

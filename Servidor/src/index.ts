@@ -1,11 +1,11 @@
-require('dotenv').config();
-const mysql = require('mysql2');
+import express from 'express';
 import cors from 'cors';
+import gameRoutes from './routes/gameRoutes';
+import sessionRoutes from './routes/sessionRoutes';
+import championshipRoutes from './routes/championshipRoutes';
+import mysql from 'mysql2';
+import 'dotenv/config';
 
-const sessionRoutes = require('./routes/sessionRoutes');
-const gameRoutes = require('./routes/gameRoutes');
-
-const express = require('express');
 const app = express();
 
 const corsOptions = {
@@ -20,6 +20,7 @@ app.use(cors(corsOptions));
 
 app.use('/session', sessionRoutes);
 app.use('/game', gameRoutes);
+app.use('/championship', championshipRoutes);
 
 const PORT = 3001;
 app.listen(PORT, () => {
@@ -27,14 +28,14 @@ app.listen(PORT, () => {
 });
 
 export const connection = mysql.createConnection({
-  host: 'localhost',
-  database: process.env.NAME,
-  port: process.env.PORT,
-  user: process.env.USER,
-  password: process.env.PASS
+    host: 'localhost',
+    database: process.env.NAME,
+    port: parseInt(process.env.PORT || '3306', 10),
+    user: process.env.USER,
+    password: process.env.PASS
 });
 
 connection.connect((err: any) => {
-  if (err) throw err;
-  console.log('Conectado a la base de datos.');
+    if (err) throw err;
+    console.log('Connected to the database.');
 });
