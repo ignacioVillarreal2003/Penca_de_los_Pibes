@@ -9,11 +9,12 @@ function generateAccessToken(ci: string) {
 
 const registerUser = async (ci: string, password: string, username: string, champion: string, subChampion: string) => {
     try {     
-        const existingUser: IUser = await users.getUserByCi(ci);         
+        const existingUser: IUser = await users.getUserByCi(ci);                 
         if (existingUser) {
             return { status: 400, message: "El usuario ya ha sido registrado." };
         } else {    
-            await users.postUser(ci, password, username);
+            await users.postUser(ci, password); // problema, si falla en una no se borran los datos ya puestos.
+            await users.postParticipant(ci, username);
             await users.postChampion(ci, champion);
             await users.postSubChamion(ci, subChampion);
             const token = generateAccessToken(ci);

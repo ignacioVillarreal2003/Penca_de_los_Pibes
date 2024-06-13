@@ -1,0 +1,184 @@
+import { Championship } from "../database/championship";
+import { connection } from "../index";
+
+export class ChampionshipService {
+
+    //funca
+    static getChampionships(): Promise<Championship[]> {
+        return new Promise((resolve, reject) => {
+            connection.query("SELECT * FROM Campeonato", (err, res) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(res as Championship[]);
+            });
+        });
+    }
+}
+
+import { Match } from "../database/match"
+import { connection } from "../index";
+
+export class GameService {
+    //funca
+    static getMatches() {
+        return new Promise((resolve, reject) => {
+            connection.query("SELECT * FROM Juegan_Partido", (err, res) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(res as Match[]);
+            });
+        });
+    }
+
+    //funca
+    static getMatchByPk(fecha_partido: Date, eq1: string, eq2: string, campeonato: string) {
+        return new Promise<Match[]>((resolve, reject) => {
+            connection.query("SELECT * FROM Juegan_Partido WHERE fecha_partido = ? AND nombre_equipo_1 = ? AND nombre_equipo_2 = ? AND nombre_campeonato1 = ? AND nombre_campeonato2 = ?",
+                [fecha_partido, eq1, eq2, campeonato, campeonato], (err, res) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve(res as unknown as Match[]);
+                });
+        });
+    }
+
+    //funca
+    static async postMatchResult(match: Match, goles_equipo_1: number, goles_equipo_2: number): Promise<boolean> {
+        try {
+            console.log(match);
+            return await new Promise<boolean>((resolve, reject) => {
+                connection.query("UPDATE Juegan_Partido SET goles_equipo1 = ?, goles_equipo2 = ? WHERE nombre_equipo_1 = ? AND  nombre_equipo_2 = ? AND fecha_partido = ? AND nombre_campeonato1 = ? AND nombre_campeonato2 = ?",
+                    [goles_equipo_1, goles_equipo_2, match.nombre_equipo_1, match.nombre_equipo_2, match.fecha_partido, match.nombre_campeonato1, match.nombre_campeonato2], (err) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(true);
+                        }
+                    });
+            });
+        } catch (error) {
+            return false;
+        }
+    }
+
+
+}
+
+import { connection } from '../index';
+
+export class UserService {
+
+    static getUserById(ci: number) {
+        const query = `
+        SELECT * FROM Usuario U 
+        JOIN Participante as P on U.cedula = P.cedula 
+        WHERE P.cedula = ?;`;
+
+        return new Promise((resolve, reject) => {
+            connection.query(query, [ci], (error: any, results: any) => {
+                if (error) {
+                    console.error(error);
+                    return reject(error);
+                }
+                if (results.length > 0) {
+                    resolve(results);
+                } else {
+                    resolve(undefined);
+                }
+            });
+        });
+    }
+
+    //funca
+    static getAdminByCi(ci: number) {
+        const query = `
+        SELECT * FROM Administrador A 
+        JOIN Participante as P on A.cedula = P.cedula 
+        WHERE P.cedula = ?;`;
+
+        return new Promise((resolve, reject) => {
+            connection.query(query, [ci], (error: any, results: any) => {
+                if (error) {
+                    console.error(error);
+                    return reject(error);
+                }
+                if (results.length > 0) {
+                    resolve(results);
+                } else {
+                    resolve(undefined);
+                }
+            });
+        });
+    }
+
+}
+
+import { ChampionshipService } from "../services/championshipService";
+import { Championship } from "../database/championship";
+import { Request, Response } from "express"; // Import Request and Response
+
+export class ChampionshipController {
+    static async getChampionships(_req: Request, res: Response) {
+        try {
+            const championships: Championship[] = await ChampionshipService.getChampionships();
+            res.json(championships);
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
+}
+
+
+import {Request, Response} from 'express';
+import {GameService} from '../services/gameServices'
+
+export class GameController {
+
+    static async getMatches(_req: Request, res: Response) {
+        try {
+            const result = await GameService.getMatches();
+            if (result) {
+                res.status(200).send({ matches: result });
+            } else {
+                res.status(400).send({ message: "The room code is incorrect." });
+            }
+        } catch (error) {
+            res.status(500).send({ message: error });
+        }
+    }
+
+    static async postMatchResult(req: Request, res: Response): Promise<void> {
+        try {
+            const ci = req.body.ci;
+            if (!ci) {
+                res.status(400).send({ message: "Ci is required." });
+                return; // Return here to exit the function after sending the response
+            }
+
+            const fecha = req.body.fecha;
+            const eq1 = req.body.eq1;
+            const eq2 = req.body.eq2;
+            const campeonato = req.body.campeonato;
+
+            if (fecha == null || eq1 == null || eq2 == null || campeonato == null) {
+                res.status(400).send({ message: "Match data is required" });
+                return; // Return here to exit the function after sending the response
+            }
+            const result = await GameService.getMatchByPk(fecha, eq1, eq2, campeonato);
+            if (result) {
+                await GameService.postMatchResult(result[0], req.body.goles_equipo_1, req.body.goles_equipo_2);
+            } else {
+                res.status(404).send({ message: "No match found" });
+            }
+
+        } catch (error) {
+            res.status(500).send({ message: error });
+            return; // Return here to exit the function after sending the response
+        }
+    }
+
+
+}
