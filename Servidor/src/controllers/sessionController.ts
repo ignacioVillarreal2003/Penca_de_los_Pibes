@@ -2,7 +2,7 @@ const sessionServices = require('../services/sessionServices');
 
 const registerUser = async (req: any, res: any) => {
     try {
-        const { body } = req;        
+        const { body } = req;                
         if (!body.ci || !body.password || !body.username || !body.champion || !body.subChampion) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {                        

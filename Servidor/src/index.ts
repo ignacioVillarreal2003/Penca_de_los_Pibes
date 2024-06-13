@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import gameRoutes from './routes/gameRoutes';
-import sessionRoutes from './routes/sessionRoutes';
-import championshipRoutes from './routes/championshipRoutes';
 import mysql from 'mysql2';
 import 'dotenv/config';
+
+import sessionRoutes from './routes/sessionRoutes';
+import adminRoutes from './routes/adminRoutes';
 
 const app = express();
 
@@ -19,8 +19,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use('/session', sessionRoutes);
-app.use('/game', gameRoutes);
-app.use('/championship', championshipRoutes);
+app.use('/admin', adminRoutes);
 
 const PORT = 3001;
 app.listen(PORT, () => {

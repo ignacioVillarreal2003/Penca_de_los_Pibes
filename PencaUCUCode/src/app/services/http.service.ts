@@ -82,7 +82,7 @@ export class HttpService {
       startDate: championshipStartDate, 
       endDate: championshipEndDate
     }
-    return this.http.post<any>('http://localhost:3001/game/postChampionshipAdmin', requestBody, this.httpOptions).pipe(
+    return this.http.post<any>('http://localhost:3001/admin/postChampionshipAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -92,7 +92,7 @@ export class HttpService {
       championshipName: teamSelectedChampionship.championshipName, 
       teamName: teamName
     }
-    return this.http.post<any>('http://localhost:3001/game/postTeamAdmin', requestBody, this.httpOptions).pipe(
+    return this.http.post<any>('http://localhost:3001/admin/postTeamAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -107,7 +107,7 @@ export class HttpService {
       stage: matchStage,
       location: matchLocation
     }
-    return this.http.post<any>('http://localhost:3001/game/postMatchAdmin', requestBody, this.httpOptions).pipe(
+    return this.http.post<any>('http://localhost:3001/admin/postMatchAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -120,13 +120,13 @@ export class HttpService {
       scoreTeam1: resultScoreTeam1,
       scoreTeam2: resultScoreTeam2
     }
-    return this.http.post<any>('http://localhost:3001/game/postResultAdmin', requestBody, this.httpOptions).pipe(
+    return this.http.post<any>('http://localhost:3001/admin/postResultAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   GetChampionshipsAdmin(): Observable<any> {
-    return this.http.get<any>('http://localhost:3001/game/getChampionshipsAdmin', this.httpOptions).pipe(
+    return this.http.get<any>('http://localhost:3001/admin/getChampionshipsAdmin', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.championships) {
@@ -139,7 +139,7 @@ export class HttpService {
   }
 
   GetTeamsAdmin(championshipName: string): Observable<any> {
-    return this.http.get<any>(`http://localhost:3001/game/getTeamsAdmin/${championshipName}`, this.httpOptions).pipe(
+    return this.http.get<any>(`http://localhost:3001/admin/getTeamsAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.teams) {
@@ -152,7 +152,7 @@ export class HttpService {
   }
 
   GetMatchesAdmin(championshipName: string): Observable<any> {
-    return this.http.get<any>(`http://localhost:3001/game/getMatchesAdmin/${championshipName}`, this.httpOptions).pipe(
+    return this.http.get<any>(`http://localhost:3001/admin/getMatchesAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.matches) {
@@ -165,7 +165,7 @@ export class HttpService {
   }
 
   GetResultsAdmin(championshipName: string): Observable<any> {
-    return this.http.get<any>(`http://localhost:3001/game/getResultsAdmin/${championshipName}`, this.httpOptions).pipe(
+    return this.http.get<any>(`http://localhost:3001/admin/getResultsAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.results) {
@@ -179,7 +179,7 @@ export class HttpService {
 
   /* Usuario end points */
   GetChampionshipTeams(): Observable<any> {
-    return this.http.get<any>('http://localhost:3001/game/getChampionshipTeams', this.httpOptions).pipe(
+    return this.http.get<any>('http://localhost:3001/championship/getChampionshipTeams', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.teams) {
@@ -192,7 +192,7 @@ export class HttpService {
   }
 
   GetChampionshipMatches(): Observable<any> {
-    return this.http.get<any>('http://localhost:3001/game/getChampionshipMatches', this.httpOptions).pipe(
+    return this.http.get<any>('http://localhost:3001/championship/getChampionshipMatches', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.matches) {
@@ -211,13 +211,13 @@ export class HttpService {
       scoreTeam1: match.scoreTeam1,
       scoreTeam2: match.scoreTeam2
     }
-    return this.http.post<any>('http://localhost:3001/game/postMatchPrediction', requestBody, this.httpOptions).pipe(
+    return this.http.post<any>('http://localhost:3001/championship/postMatchPrediction', requestBody, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   GetRanking(): Observable<any> {
-    return this.http.get<any>('http://localhost:3001/game/getRanking', this.httpOptions).pipe(
+    return this.http.get<any>('http://localhost:3001/championship/getRanking', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.ranking) {
