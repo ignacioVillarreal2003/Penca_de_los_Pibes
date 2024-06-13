@@ -4,6 +4,7 @@ const router = express.Router();
 const adminController = require('../controllers/adminController');
 
 router.post('/postChampionshipAdmin', adminController.postChampionshipAdmin);
+router.post('/postCountryAdmin', adminController.postCountryAdmin);
 router.post('/postTeamAdmin', adminController.postTeamAdmin);
 router.post('/postMatchAdmin', adminController.postMatchAdmin);
 router.post('/postResultAdmin', adminController.postResultAdmin);

@@ -15,12 +15,12 @@ async function postChampionshipAdmin(championshipName: string, startDate: Date, 
     });
 }
 
-async function postTeamAdmin(championshipName: string, teamName: Date): Promise<any> {
+async function postCountry(teamName: string): Promise<any> {
     const query = `
-        INSERT INTO Equipos(nombre_equipo, país, grupo) VALUES (?, ?, ?)`;
+        INSERT INTO Equipos(nombre_equipo) VALUES (?, ?, ?)`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [championshipName, teamName, null], (error: any, results: any) => {
+        connection.query(query, [teamName], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -30,10 +30,24 @@ async function postTeamAdmin(championshipName: string, teamName: Date): Promise<
     });
 }
 
-async function postMatchAdmin(championshipName: string, team1: string, team2: string, date: Date, group: string, stage: string, location: string): Promise<any> {
+async function postTeamAdmin(championshipName: string, teamName: string, group: string): Promise<any> {
+    const query = `
+        INSERT INTO Participan(nombre_campeonato, nombre_equipo, grupo) VALUES (?, ?, ?)`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [championshipName, teamName, group], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            resolve(results);
+        });
+    });
+}
+
+async function postMatchAdmin(championshipName: string, team1: string, team2: string, date: Date, stage: string, location: string): Promise<any> {
     const query = `
         INSERT INTO Juegan_partido(fecha_partido, nombre_equipo_1, nombre_equipo_2, nombre_campeonato, ubicación, goles_equipo_1, goles_equipo_2, etapa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    console.log(group);
     return new Promise((resolve, reject) => {
         connection.query(query, [date, team1, team2, championshipName, location, 0, 0, stage], (error: any, results: any) => {
             if (error) {
@@ -141,4 +155,4 @@ async function getResultsAdmin(championshipName: string): Promise<any> {
     });
 }
 
-export { postChampionshipAdmin, postTeamAdmin, postMatchAdmin, postResultAdmin, getChampionshipsAdmin, getTeamsAdmin, getMatchesAdmin, getResultsAdmin };
+export { postChampionshipAdmin, postCountry, postTeamAdmin, postMatchAdmin, postResultAdmin, getChampionshipsAdmin, getTeamsAdmin, getMatchesAdmin, getResultsAdmin };

@@ -18,13 +18,31 @@ const postChampionshipAdmin = async (req: any, res: any) => {
     }
 }
 
+const postCountryAdmin = async (req: any, res: any) => {
+    try {
+        const { body } = req;
+        if (!body.teamName) {
+            return res.status(500).send({ message: "Error procesando los datos." });
+        } else {
+            const result = await adminServices.postTeamAdmin(body.teamName);
+            if (result.message) {
+                res.status(result.status).send({ message: result.message })
+            } else {
+                res.status(500).send({ message: "Error procesando los datos." });
+            }
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
 const postTeamAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
-        if (!body.championshipName || !body.teamName) {
+        if (!body.championshipName || !body.teamName || !body.group) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
-            const result = await adminServices.postTeamAdmin(body.championshipName, body.teamName);
+            const result = await adminServices.postTeamAdmin(body.championshipName, body.teamName, body.group);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else {
@@ -141,6 +159,7 @@ const getResultsAdmin = async (req: any, res: any) => {
 
 module.exports = {
     postChampionshipAdmin,
+    postCountryAdmin,
     postTeamAdmin,
     postMatchAdmin,
     postResultAdmin,

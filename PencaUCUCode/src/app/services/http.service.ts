@@ -179,7 +179,7 @@ export class HttpService {
 
   /* Usuario end points */
   GetChampionshipTeams(): Observable<any> {
-    return this.http.get<any>('http://localhost:3001/championship/getChampionshipTeams', this.httpOptions).pipe(
+    return this.http.get<any>('http://localhost:3001/user/getChampionshipTeams', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.teams) {
@@ -192,7 +192,7 @@ export class HttpService {
   }
 
   GetChampionshipMatches(): Observable<any> {
-    return this.http.get<any>('http://localhost:3001/championship/getChampionshipMatches', this.httpOptions).pipe(
+    return this.http.get<any>('http://localhost:3001/user/getChampionshipMatches', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.matches) {
@@ -211,13 +211,13 @@ export class HttpService {
       scoreTeam1: match.scoreTeam1,
       scoreTeam2: match.scoreTeam2
     }
-    return this.http.post<any>('http://localhost:3001/championship/postMatchPrediction', requestBody, this.httpOptions).pipe(
+    return this.http.post<any>('http://localhost:3001/user/postMatchPrediction', requestBody, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   GetRanking(): Observable<any> {
-    return this.http.get<any>('http://localhost:3001/championship/getRanking', this.httpOptions).pipe(
+    return this.http.get<any>('http://localhost:3001/user/getRanking', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.ranking) {

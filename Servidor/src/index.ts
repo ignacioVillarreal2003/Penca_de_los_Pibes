@@ -5,6 +5,7 @@ import 'dotenv/config';
 
 import sessionRoutes from './routes/sessionRoutes';
 import adminRoutes from './routes/adminRoutes';
+import userRoutes from './routes/userRoutes';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(cors(corsOptions));
 
 app.use('/session', sessionRoutes);
 app.use('/admin', adminRoutes);
+app.use('/user', userRoutes);
 
 const PORT = 3001;
 app.listen(PORT, () => {

@@ -1,6 +1,6 @@
 import { IUser } from "../types";
 
-const users = require('../database/users');
+const session = require('../database/session');
 const jwt = require('jsonwebtoken');
 
 function generateAccessToken(ci: string) {
@@ -9,16 +9,22 @@ function generateAccessToken(ci: string) {
 
 const registerUser = async (ci: string, password: string, username: string, champion: string, subChampion: string) => {
     try {     
-        const existingUser: IUser = await users.getUserByCi(ci);                 
+        const existingUser: IUser = await session.getUserByCi(ci);                 
         if (existingUser) {
             return { status: 400, message: "El usuario ya ha sido registrado." };
         } else {    
-            await users.postUser(ci, password); // problema, si falla en una no se borran los datos ya puestos.
-            await users.postParticipant(ci, username);
-            await users.postChampion(ci, champion);
-            await users.postSubChamion(ci, subChampion);
-            const token = generateAccessToken(ci);
-            return { status: 200, token: token };
+            try {
+                await session.postUser(ci, password);
+                await session.postParticipant(ci, username);
+                await session.postForecast(ci, champion, subChampion);
+                const token = generateAccessToken(ci);
+                return { status: 200, token: token };
+            } catch (error) {
+                await session.deleteUser(ci);
+                await session.deleteParticipant(ci);
+                await session.deleteForecast(ci);
+                return { status: 400, message: "Error procesando los datos." };
+            }
         }
     } catch (error) {        
         throw new Error("Error procesando los datos.");
@@ -27,7 +33,7 @@ const registerUser = async (ci: string, password: string, username: string, cham
 
 const loginUser = async (ci: string, password: string) => {
     try {
-        const existingUser: IUser = await users.getUserByCi(ci); 
+        const existingUser: IUser = await session.getUserByCi(ci); 
         if (!existingUser) {
             return { status: 400, message: "El usuario no esta registrado." };
         } else {
@@ -45,7 +51,7 @@ const loginUser = async (ci: string, password: string) => {
 
 const loginAdmin = async (ci: string, password: string) => {
     try {
-        const existingUser: IUser = await users.getAdminByCi(ci); 
+        const existingUser: IUser = await session.getAdminByCi(ci); 
         if (!existingUser) {
             return { status: 400, message: "El admin no esta registrado." };
         } else {

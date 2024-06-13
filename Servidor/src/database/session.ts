@@ -63,13 +63,10 @@ async function postUser(ci: string, password: string): Promise<any> {
 
 async function postParticipant(ci: string, username: string): Promise<any> {
     const query = `
-        INSERT INTO Participante(cedula, mail, puntaje, nombre) VALUES (?, ?, ?, ?);`;
-
-    const mail = "algo@gmail.com";
-    const puntaje = 0;
+        INSERT INTO Participante(cedula, puntaje, nombre) VALUES (?, ?, ?, ?);`;
     
     return new Promise((resolve, reject) => {
-        connection.query(query, [ci, mail, puntaje, username], (error: any, results: any) => {
+        connection.query(query, [ci, 0, username], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -83,12 +80,12 @@ async function postParticipant(ci: string, username: string): Promise<any> {
     });
 }
 
-async function postChampion(ci: string, champion: string): Promise<any> {
+async function postForecast(ci: string, championshipName: string, champion: string, subChampion: string): Promise<any> {
     const query = `
-        INSERT INTO Pronostican_campeon(cedula, nombre_campeonato, nombre_equipo_campeon) VALUES (?, ?, ?);`;
+        INSERT INTO Pronostico_inicial(cedula, nombre_campeonato, nombre_equipo_campeon, nombre_equipo_subcampeon) VALUES (?, ?, ?);`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [ci, "Copa América 2024", champion], (error: any, results: any) => {
+        connection.query(query, [ci, championshipName, champion, subChampion], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -102,12 +99,13 @@ async function postChampion(ci: string, champion: string): Promise<any> {
     });
 }
 
-async function postSubChamion(ci: string, subChampion: string): Promise<any> {
+async function deleteUser(ci: string): Promise<any> {
     const query = `
-        INSERT INTO Pronostican_subcampeon(cedula, nombre_campeonato, nombre_equipo_subcampeon) VALUES (?, ?, ?);`;
+        DELETE FROM Usuario U
+        WHERE U.cedula = ?;`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [ci, "Copa América 2024", subChampion], (error: any, results: any) => {
+        connection.query(query, [ci], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -121,4 +119,44 @@ async function postSubChamion(ci: string, subChampion: string): Promise<any> {
     });
 }
 
-export { getUserByCi, getAdminByCi, postUser, postChampion, postSubChamion, postParticipant };
+async function deleteParticipant(ci: string): Promise<any> {
+    const query = `
+        DELETE FROM Participante P
+        WHERE P.cedula = ?;`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
+async function deleteForecast(ci: string): Promise<any> {
+    const query = `
+        DELETE FROM Pronostico_inicial P
+        WHERE P.cedula = ?;`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
+export { getUserByCi, getAdminByCi, postUser, postForecast, postParticipant, deleteUser, deleteParticipant, deleteForecast };
