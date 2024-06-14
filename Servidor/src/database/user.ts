@@ -19,12 +19,12 @@ async function getCareers(): Promise<any> {
     });
 }
 
-async function postCareer(ci: string, carrer: string): Promise<any> {
+async function postCareer(ci: string, career: string): Promise<any> {
     const query = `
         INSERT INTO Pertenecen(cedula_participante, nombre_carrera) VALUES (?, ?);`;
     
     return new Promise((resolve, reject) => {
-        connection.query(query, [ci, carrer], (error: any, results: any) => {
+        connection.query(query, [ci, career], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
