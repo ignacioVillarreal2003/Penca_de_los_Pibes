@@ -1,6 +1,6 @@
 import { connection } from '../index';
 
-async function getCarrers(): Promise<any> {
+async function getCareers(): Promise<any> {
     const query = `
         SELECT * FROM Carrera`;
 
@@ -40,7 +40,7 @@ async function postCareer(ci: string, carrer: string): Promise<any> {
 
 async function getChampionshipTeams(championshipName: string): Promise<any> {
     const query = `
-        SELECT * FROM Equipos
+        SELECT * FROM Participan
         WHERE nombre_campeonato = ?`;
 
     return new Promise((resolve, reject) => {
@@ -61,10 +61,10 @@ async function getChampionshipTeams(championshipName: string): Promise<any> {
 async function getChampionshipMatches(championshipName: string): Promise<any> {
     const query = `
         SELECT * FROM Juegan_partido
-        WHERE nombre_campeonato = ?`;
+        WHERE nombre_campeonato1 = ? AND nombre_campeonato2 = ?`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [championshipName], (error: any, results: any) => {
+        connection.query(query, [championshipName, championshipName], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -78,13 +78,13 @@ async function getChampionshipMatches(championshipName: string): Promise<any> {
     });
 }
 
-async function postMatchPrediction(ci: string, dateMatch: Date, championshipName: string, team1: string, team2: string, scoreTeam1: number, scoreTeam2: number, datePrediction: Date): Promise<any> {
+async function postMatchPrediction(ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number): Promise<any> {
     const query = `
-        INSERT INTO Predicen(cedula_participante, fecha_partido, nombre_equipo_1, nombre_equipo_2, nombre_campeonato, fecha_prediccion, predicción_goles_equipo_1, predicción_goles_equipo_2) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+        INSERT INTO Predicen(cedula_participante, fecha_partido, nombre_equipo_1, nombre_equipo_2, nombre_campeonato1, nombre_campeonato2, fecha_prediccion, prediccion_goles_equipo_1, prediccion_goles_equipo_2) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [ci, dateMatch, team1, team2, championshipName, datePrediction, scoreTeam1, scoreTeam2], (error: any, results: any) => {
+        connection.query(query, [ci, dateMatch, team1, team2, championshipName, championshipName, datePrediction, scoreTeam1, scoreTeam2], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -112,4 +112,4 @@ async function getRanking(): Promise<any> {
 }
 
 
-export { postCareer, getCarrers, getChampionshipTeams, getChampionshipMatches, postMatchPrediction, getRanking };
+export { postCareer, getCareers, getChampionshipTeams, getChampionshipMatches, postMatchPrediction, getRanking };

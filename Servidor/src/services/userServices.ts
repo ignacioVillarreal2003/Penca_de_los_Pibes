@@ -1,10 +1,10 @@
 const user = require('../database/user');
 
 export const getChampionshipTeams = async () => {
-    try {
-        const teams: any = await user.getChampionshipTeams("Copa america 1"); // ver parametro
-        if (teams) {
-            return { status: 400, teams: teams };
+    try {        
+        const teams: any = await user.getChampionshipTeams("Copa América 2024"); // ver parametro        
+        if (teams) {            
+            return { status: 200, teams: teams };
         } else {
             throw new Error("Error procesando los datos.");
         }
@@ -15,7 +15,7 @@ export const getChampionshipTeams = async () => {
 
 const getChampionshipMatches = async () => {
     try {
-        const matches: any[] = await user.getChampionshipMatches("Copa america 1");
+        const matches: any[] = await user.getChampionshipMatches("Copa América 2024");        
         if (matches) {
             return { status: 200, matches: matches };
         } else {
@@ -26,10 +26,10 @@ const getChampionshipMatches = async () => {
     }
 }
 
-const postMatchPrediction = async (championshipName: string, team1: string, team2: string, scoreTeam1: number, scoreTeam2: number) => {
-    try {
-        await user.postMatchPrediction(championshipName, team1, team2, scoreTeam1, scoreTeam2);
-        return { status: 200, message: "bien" };
+const postMatchPrediction = async (ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number) => {
+    try {        
+        await user.postMatchPrediction(ci, dateMatch, team1, team2, championshipName, datePrediction, scoreTeam1, scoreTeam2);
+        return { status: 200, message: "Predicción realizada con éxito" };
     } catch (error) {
         throw new Error("Error procesando los datos.");
     }
@@ -48,9 +48,9 @@ const getRanking = async () => {
     }
 }
 
-const postCareer = async (ci: string, carrer: string) => {
+const postCareer = async (ci: string, career: string) => {
     try {
-        await user.postCareer(ci, carrer);
+        await user.postCareer(ci, career);
         return { status: 200, message: "bien" };
     } catch (error) {
         throw new Error("Error procesando los datos.");

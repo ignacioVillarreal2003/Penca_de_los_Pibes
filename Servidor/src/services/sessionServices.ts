@@ -7,7 +7,7 @@ function generateAccessToken(ci: string) {
 
 export const registerUser = async (ci: string, password: string, username: string, champion: string, subChampion: string) => {
     try {     
-        const existingUser = await session.getUserByCi(ci);   
+        const existingUser = await session.getUserByCi(ci);           
         if (existingUser) {
             return { status: 400, message: "El usuario ya ha sido registrado." };
         } else {    
