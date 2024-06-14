@@ -36,8 +36,8 @@ const postMatchPrediction = async (ci: string, dateMatch: Date, team1: string, t
 }
 
 const getRanking = async () => {
-    try {
-        const ranking: any[] = await user.getRanking();
+    try {        
+        const ranking: any[] = await user.getRanking();        
         if (ranking) {
             return { status: 200, ranking: ranking };
         } else {

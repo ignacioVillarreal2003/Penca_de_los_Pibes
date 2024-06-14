@@ -49,8 +49,8 @@ const postMatchPrediction = async (req: any, res: any) => {
 const getRanking = async (_req: any, res: any) => {
     try {
         const result = await userServices.getRanking();
-        if (result.message) {
-            res.status(result.status).send({ message: result.message })
+        if (result.ranking) {
+            res.status(result.status).send({ ranking: result.ranking })
         } else {
             res.status(500).send({ message: "Error procesando los datos." });
         }

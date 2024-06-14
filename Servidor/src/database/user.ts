@@ -98,15 +98,18 @@ async function getRanking(): Promise<any> {
     const query = `
         SELECT * FROM Participante P
         ORDER BY P.puntaje DESC
-        LIMIT 20;`;
-
+        LIMIT 20;`;    
     return new Promise((resolve, reject) => {
         connection.query(query, [], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
             }
-            resolve(results);
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
         });
     });
 }
