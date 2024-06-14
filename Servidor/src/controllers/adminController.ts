@@ -93,8 +93,8 @@ const postResultAdmin = async (req: any, res: any) => {
 const getChampionshipsAdmin = async (_req: any, res: any) => {
     try {
         const result = await adminServices.getChampionshipsAdmin();
-        if (result.message) {
-            res.status(result.status).send({ message: result.message })
+        if (result.championships) {
+            res.status(result.status).send({ championships: result.championships })
         } else {
             res.status(500).send({ message: "Error procesando los datos." });
         }
@@ -106,12 +106,12 @@ const getChampionshipsAdmin = async (_req: any, res: any) => {
 const getTeamsAdmin = async (req: any, res: any) => {
     try {
         const championshipName = req.params.championshipName;
-        if (!championshipName) {
+        if (!championshipName) {  
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
             const result = await adminServices.getTeamsAdmin(championshipName);
-            if (result.message) {
-                res.status(result.status).send({ message: result.message })
+            if (result.teams) {
+                res.status(result.status).send({ teams: result.teams })
             } else {
                 res.status(500).send({ message: "Error procesando los datos." });
             }
@@ -128,8 +128,8 @@ const getMatchesAdmin = async (req: any, res: any) => {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
             const result = await adminServices.getMatchesAdmin(championshipName);
-            if (result.message) {
-                res.status(result.status).send({ message: result.message })
+            if (result.matches) {
+                res.status(result.status).send({ matches: result.matches })
             } else {
                 res.status(500).send({ message: "Error procesando los datos." });
             }
@@ -146,8 +146,8 @@ const getResultsAdmin = async (req: any, res: any) => {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
             const result = await adminServices.getResultsAdmin(championshipName);
-            if (result.message) {
-                res.status(result.status).send({ message: result.message })
+            if (result.results) {
+                res.status(result.status).send({ results: result.results })
             } else {
                 res.status(500).send({ message: "Error procesando los datos." });
             }

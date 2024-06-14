@@ -97,7 +97,7 @@ async function getChampionshipsAdmin(): Promise<any> {
 
 async function getTeamsAdmin(championshipName: string): Promise<any> {
     const query = `
-        SELECT * FROM Equipos
+        SELECT * FROM Participan
         WHERE nombre_campeonato = ?`;
 
     return new Promise((resolve, reject) => {
@@ -118,10 +118,10 @@ async function getTeamsAdmin(championshipName: string): Promise<any> {
 async function getMatchesAdmin(championshipName: string): Promise<any> {
     const query = `
         SELECT * FROM Juegan_partido
-        WHERE nombre_campeonato = ?`;
+        WHERE nombre_campeonato1 = ? AND nombre_campeonato2 = ?`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [championshipName], (error: any, results: any) => {
+        connection.query(query, [championshipName, championshipName], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -138,10 +138,10 @@ async function getMatchesAdmin(championshipName: string): Promise<any> {
 async function getResultsAdmin(championshipName: string): Promise<any> {
     const query = `
         SELECT * FROM Juegan_partido
-        WHERE nombre_campeonato = ?`;
+        WHERE nombre_campeonato1 = ? AND nombre_campeonato2 = ?`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [championshipName], (error: any, results: any) => {
+        connection.query(query, [championshipName, championshipName], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
