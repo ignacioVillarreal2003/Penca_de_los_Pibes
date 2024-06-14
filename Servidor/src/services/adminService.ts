@@ -60,9 +60,9 @@ const getChampionshipsAdmin = async () => {
 
 const getTeamsAdmin = async (championshipName: string) => {
     try {
-        const championship: any = await admin.getTeamsAdmin(championshipName);
-        if (championship) {
-            return { status: 400, championship: championship };
+        const teams: any = await admin.getTeamsAdmin(championshipName);
+        if (teams) {
+            return { status: 400, teams: teams };
         } else {
             throw new Error("Error procesando los datos.");
         }
@@ -73,9 +73,9 @@ const getTeamsAdmin = async (championshipName: string) => {
 
 const getMatchesAdmin = async (championshipName: string) => {
     try {
-        const championship: any = await admin.getMatchesAdmin(championshipName);
-        if (championship) {
-            return { status: 400, championship: championship };
+        const matches: any = await admin.getMatchesAdmin(championshipName);
+        if (matches) {
+            return { status: 400, championship: matches };
         } else {
             throw new Error("Error procesando los datos.");
         }
@@ -86,9 +86,9 @@ const getMatchesAdmin = async (championshipName: string) => {
 
 const getResultsAdmin = async (championshipName: string) => {
     try {
-        const championship: any = await admin.getResultsAdmin(championshipName);
-        if (championship) {
-            return { status: 400, championship: championship };
+        const results: any = await admin.getResultsAdmin(championshipName);
+        if (results) {
+            return { status: 400, results: results };
         } else {
             throw new Error("Error procesando los datos.");
         }

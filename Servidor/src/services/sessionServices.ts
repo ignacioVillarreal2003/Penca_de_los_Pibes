@@ -1,5 +1,3 @@
-import { IUser } from "../types";
-
 const session = require('../database/session');
 const jwt = require('jsonwebtoken');
 
@@ -7,9 +5,9 @@ function generateAccessToken(ci: string) {
     return jwt.sign({ ci: ci }, process.env.SECRET, { expiresIn: '1h' });
 }
 
-const registerUser = async (ci: string, password: string, username: string, champion: string, subChampion: string) => {
+export const registerUser = async (ci: string, password: string, username: string, champion: string, subChampion: string) => {
     try {     
-        const existingUser: IUser = await session.getUserByCi(ci);                 
+        const existingUser = await session.getUserByCi(ci);   
         if (existingUser) {
             return { status: 400, message: "El usuario ya ha sido registrado." };
         } else {    
@@ -20,24 +18,26 @@ const registerUser = async (ci: string, password: string, username: string, cham
                 const token = generateAccessToken(ci);
                 return { status: 200, token: token };
             } catch (error) {
-                await session.deleteUser(ci);
-                await session.deleteParticipant(ci);
+                console.log(error);
                 await session.deleteForecast(ci);
+                await session.deleteParticipant(ci);
+                await session.deleteUser(ci);
                 return { status: 400, message: "Error procesando los datos." };
             }
         }
-    } catch (error) {        
+    } catch (error) {  
+        console.log(error);      
         throw new Error("Error procesando los datos.");
     }
 }
 
 const loginUser = async (ci: string, password: string) => {
     try {
-        const existingUser: IUser = await session.getUserByCi(ci); 
+        const existingUser = await session.getUserByCi(ci); 
         if (!existingUser) {
             return { status: 400, message: "El usuario no esta registrado." };
         } else {
-            if (existingUser.password != password) {
+            if (existingUser[0].contrasena != password) {
                 return { status: 400, message: "Contraseña incorrecta." };
             } else {
                 const token = generateAccessToken(ci);
@@ -45,17 +45,18 @@ const loginUser = async (ci: string, password: string) => {
             }
         }
     } catch (error) {
+        console.log(error);
         throw new Error("Error procesando los datos.");
     }
 }
 
 const loginAdmin = async (ci: string, password: string) => {
     try {
-        const existingUser: IUser = await session.getAdminByCi(ci); 
+        const existingUser = await session.getAdminByCi(ci);         
         if (!existingUser) {
-            return { status: 400, message: "El admin no esta registrado." };
+            return { status: 400, message: "El administrador no esta registrado." };
         } else {
-            if (existingUser.password != password) {
+            if (existingUser[0].contrasena != password) {
                 return { status: 400, message: "Contraseña incorrecta." };
             } else {
                 const token = generateAccessToken(ci);
@@ -63,12 +64,9 @@ const loginAdmin = async (ci: string, password: string) => {
             }
         }
     } catch (error) {
+        console.log(error);
         throw new Error("Error procesando los datos.");
     }
 }
 
-module.exports = {
-    registerUser,
-    loginUser,
-    loginAdmin
-}
+module.exports = { registerUser, loginUser, loginAdmin }

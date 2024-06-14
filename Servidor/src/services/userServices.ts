@@ -2,9 +2,9 @@ const user = require('../database/user');
 
 export const getChampionshipTeams = async () => {
     try {
-        const teams: any[] = await user.getChampionshipTeams();
+        const teams: any = await user.getChampionshipTeams("Copa america 1"); // ver parametro
         if (teams) {
-            return { status: 200, teams: teams };
+            return { status: 400, teams: teams };
         } else {
             throw new Error("Error procesando los datos.");
         }
@@ -15,7 +15,7 @@ export const getChampionshipTeams = async () => {
 
 const getChampionshipMatches = async () => {
     try {
-        const matches: any[] = await user.getChampionshipMatches();
+        const matches: any[] = await user.getChampionshipMatches("Copa america 1");
         if (matches) {
             return { status: 200, matches: matches };
         } else {

@@ -63,7 +63,7 @@ async function postUser(ci: string, password: string): Promise<any> {
 
 async function postParticipant(ci: string, username: string): Promise<any> {
     const query = `
-        INSERT INTO Participante(cedula, puntaje, nombre) VALUES (?, ?, ?, ?);`;
+        INSERT INTO Participante(cedula, puntaje, nombre) VALUES (?, ?, ?);`;
     
     return new Promise((resolve, reject) => {
         connection.query(query, [ci, 0, username], (error: any, results: any) => {
@@ -80,12 +80,12 @@ async function postParticipant(ci: string, username: string): Promise<any> {
     });
 }
 
-async function postForecast(ci: string, championshipName: string, champion: string, subChampion: string): Promise<any> {
+async function postForecast(ci: string, champion: string, subChampion: string): Promise<any> {
     const query = `
-        INSERT INTO Pronostico_inicial(cedula, nombre_campeonato, nombre_equipo_campeon, nombre_equipo_subcampeon) VALUES (?, ?, ?);`;
+        INSERT INTO Pronostico_inicial(cedula, nombre_campeonato, nombre_equipo_campeon, nombre_equipo_subcampeon) VALUES (?, ?, ?, ?);`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [ci, championshipName, champion, subChampion], (error: any, results: any) => {
+        connection.query(query, [ci, "Copa América 2024", champion, subChampion], (error: any, results: any) => { // VER LO DE EL CAMPEONATO
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -101,8 +101,7 @@ async function postForecast(ci: string, championshipName: string, champion: stri
 
 async function deleteUser(ci: string): Promise<any> {
     const query = `
-        DELETE FROM Usuario U
-        WHERE U.cedula = ?;`;
+        DELETE FROM Usuario WHERE cedula = ?;`;
 
     return new Promise((resolve, reject) => {
         connection.query(query, [ci], (error: any, results: any) => {
@@ -121,8 +120,7 @@ async function deleteUser(ci: string): Promise<any> {
 
 async function deleteParticipant(ci: string): Promise<any> {
     const query = `
-        DELETE FROM Participante P
-        WHERE P.cedula = ?;`;
+        DELETE FROM Participante WHERE cedula = ?;`;
 
     return new Promise((resolve, reject) => {
         connection.query(query, [ci], (error: any, results: any) => {
@@ -141,8 +139,7 @@ async function deleteParticipant(ci: string): Promise<any> {
 
 async function deleteForecast(ci: string): Promise<any> {
     const query = `
-        DELETE FROM Pronostico_inicial P
-        WHERE P.cedula = ?;`;
+        DELETE FROM Pronostico_inicial WHERE cedula = ?;`;
 
     return new Promise((resolve, reject) => {
         connection.query(query, [ci], (error: any, results: any) => {

@@ -16,6 +16,7 @@ const registerUser = async (req: any, res: any) => {
             }
         }
     } catch (error) {
+        console.log(error);
         res.status(500).send({ message: "Error procesando los datos." });
     }
 }
@@ -47,7 +48,7 @@ const loginAdmin = async (req: any, res: any) => {
         if (!body.ci || !body.password) {
             res.status(500).send({ message: "Error processing the request." });
         } else {
-            const result = await sessionServices.changePassword(body.ci, body.password);
+            const result = await sessionServices.loginAdmin(body.ci, body.password);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else if (result.token) {
@@ -62,8 +63,4 @@ const loginAdmin = async (req: any, res: any) => {
     }
 }
 
-module.exports = {
-    loginUser,
-    registerUser,
-    loginAdmin
-}
+module.exports = { loginUser, registerUser, loginAdmin }
