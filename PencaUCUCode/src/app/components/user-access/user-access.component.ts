@@ -3,7 +3,6 @@ import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpService } from '../../services/http.service';
-import { IChampionship, ITeam } from '../../types';
 
 @Component({
   selector: 'app-user-access',
@@ -15,29 +14,30 @@ export class UserAccessComponent {
   ci: string = "";
   password: string = "";
   username: string = "";
-  teams: ITeam[] = [];
+  teams: any[] = [];
 
   constructor(private router: Router, private userService: UserService, private httpService: HttpService){}
 
   ngOnInit(){
-    /*this.httpService.GetChampionshipTeams().subscribe(
+    this.httpService.GetChampionshipTeams().subscribe(
       (response: any) => {
         this.teams = response;
       },
       (error: any) => {
         this.ErrorMessage(error);
       }
-    );*/
+    );
   }
 
   UserLogin(){
     if (this.CheckUserDataLogin()){
-      this.httpService.LoginUser(this.username, this.password).subscribe(
+      this.httpService.LoginUser(this.ci, this.password).subscribe(
         (response: any) => {
           localStorage.setItem('token', response);
           this.router.navigate(["/userhome"])
           this.userService.username = this.username;  
           this.userService.avatar = "avatar-1.png";  
+          this.userService.ci = this.ci;  
         },
         (error: any) => {
           this.ErrorMessage(error);
@@ -46,21 +46,26 @@ export class UserAccessComponent {
     }
   }
 
-  async UserRegistration(){
-    if (this.CheckUserDataRegister()){
-      const championshipData = await this.EnterChampionshipData()
-      if (championshipData != undefined){
-        this.httpService.RegisterUser(this.ci, this.password, this.username, championshipData[0], championshipData[1]).subscribe(
-          (response: any) => {
-            localStorage.setItem('token', response);
-            this.router.navigate(["/userhome"])
-            this.userService.username = this.username;  
-            this.userService.avatar = "avatar-1.png";  
-          },
-          (error: any) => {
-            this.ErrorMessage(error);
-          }
-        );
+  async UserRegistration() {
+    if (this.CheckUserDataRegister()) {
+      try {
+        const championshipData = await this.EnterChampionshipData();
+        if (championshipData != undefined) {
+          this.httpService.RegisterUser(this.ci, this.password, this.username, championshipData[0], championshipData[1]).subscribe(
+            (response: any) => {
+              localStorage.setItem('token', response);
+              this.router.navigate(["/userhome"]);
+              this.userService.username = this.username;
+              this.userService.avatar = "avatar-1.png";
+              this.userService.ci = this.ci;  
+            },
+            (error: any) => {
+              this.ErrorMessage(error);
+            }
+          );
+        }
+      } catch (error) {
+        console.error('Error getting teams:', error);
       }
     }
   }
@@ -68,7 +73,7 @@ export class UserAccessComponent {
   async AdminLogin(){
     const adminData = await this.EnterAdminData();
     if (adminData != undefined){
-      this.httpService.LoginUser(this.ci, this.password).subscribe(
+      this.httpService.LoginAdmin(adminData[0], adminData[1]).subscribe(
         (response: any) => {
           localStorage.setItem('token', response);
           this.router.navigate(["/adminHome"]);
@@ -80,12 +85,12 @@ export class UserAccessComponent {
     }
   }
 
-  async EnterChampionshipData(){
+  async EnterChampionshipData(){    
     let dataChampion = `<select id="swal-select-champion" class="swal2-select" name="options">`
     let dataSubChampion = `<select id="swal-select-runner-up" class="swal2-select" name="options">`
-    this.teams.forEach((team: ITeam) => {
-      dataChampion += `<option class="swal2-option" value=${team.teamName}>${team.teamName}</option>`
-      dataSubChampion += `<option class="swal2-option" value=${team.teamName}>${team.teamName}</option>`
+    this.teams.forEach((team: any) => {
+      dataChampion += `<option class="swal2-option" value=${team.nombre_equipo}>${team.nombre_equipo}</option>`
+      dataSubChampion += `<option class="swal2-option" value=${team.nombre_equipo}>${team.nombre_equipo}</option>`
     })
     dataChampion += `</select>`
     dataSubChampion += `</select>`
@@ -123,7 +128,9 @@ export class UserAccessComponent {
       title: "Admin login",
       showCancelButton: true,
       html: `
+        <label id="swal-label-ci-admin" class="swal2-label" for="swal-input-ci-admin">cedula</label>
         <input id="swal-input-ci-admin" class="swal2-input" placeholder="cedula">
+        <label id="swal-label-password-admin" class="swal2-label" for="swal-input-password-admin">password</label>
         <input id="swal-input-password-admin" class="swal2-input" type="password" placeholder="contraseña">
       `,
       focusConfirm: false,
@@ -163,8 +170,8 @@ export class UserAccessComponent {
   }
 
   CheckUserDataLogin(){
-    if (this.ci.length < 8){
-      this.ErrorMessage("La cedula es muy corta.")
+    if (this.ci.length != 8){
+      this.ErrorMessage("La cedula es incorrecta.")
       return false;
     } else if (this.password.length < 8){
       this.ErrorMessage("La contraseña es muy corta.")
@@ -174,8 +181,8 @@ export class UserAccessComponent {
   }
 
   CheckUserDataRegister(){
-    if (this.ci.length < 8){
-      this.ErrorMessage("La cedula es muy corta.")
+    if (this.ci.length != 8){
+      this.ErrorMessage("La cedula es incorrecta.")
       return false;
     } else if (this.password.length < 8){
       this.ErrorMessage("La contraseña es muy corta.")

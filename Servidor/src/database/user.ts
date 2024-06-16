@@ -60,8 +60,19 @@ async function getChampionshipTeams(championshipName: string): Promise<any> {
 
 async function getChampionshipMatches(championshipName: string): Promise<any> {
     const query = `
-        SELECT * FROM Juegan_partido
-        WHERE nombre_campeonato1 = ? AND nombre_campeonato2 = ?`;
+        SELECT
+        jp.*,
+        p1.grupo AS grupo_equipo_1,
+        p2.grupo AS grupo_equipo_2
+        FROM
+            Juegan_partido jp
+        JOIN
+            Participan p1 ON jp.nombre_equipo_1 = p1.nombre_equipo AND jp.nombre_campeonato1 = p1.nombre_campeonato
+        JOIN
+            Participan p2 ON jp.nombre_equipo_2 = p2.nombre_equipo AND jp.nombre_campeonato2 = p2.nombre_campeonato
+        WHERE
+            jp.nombre_campeonato1 = ?
+            AND jp.nombre_campeonato2 = ?;`;
 
     return new Promise((resolve, reject) => {
         connection.query(query, [championshipName, championshipName], (error: any, results: any) => {

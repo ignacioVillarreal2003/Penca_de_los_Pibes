@@ -12,17 +12,17 @@ export class UserRankingComponent {
 
   constructor(private httpService: HttpService) { }
 
-  ranking: IRanking[] | undefined = undefined;
+  ranking: any[] | undefined = undefined;
 
   ngOnInit() {
-    /*this.httpService.GetRanking().subscribe(
-      (response: any) => {
+    this.httpService.GetRanking().subscribe(
+      (response: any) => {        
         this.ranking = response
       },
       (error: any) => {
         this.ErrorMessage(error);
       }
-    );*/
+    );
   }
 
   ErrorMessage(message: string){

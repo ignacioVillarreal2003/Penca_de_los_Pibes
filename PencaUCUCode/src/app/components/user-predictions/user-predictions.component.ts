@@ -9,28 +9,30 @@ import { IMatch } from '../../types';
   styleUrl: './user-predictions.component.css'
 })
 export class UserPredictionsComponent {
-  modeFilter: string = "Grupo A";
-  matches: IMatch[] = [];
-  selectedMatches: IMatch[] = []
+  modeFilter: string = "A";
+  matches: any[] = [];
+  selectedMatches: any[] = []
 
   constructor(private httpService: HttpService){}
 
   ngOnInit() {
-    this.FilterGroup(this.modeFilter);
-    /*this.httpService.GetChampionshipMatches().subscribe(
-      (response: any) => {
+    this.httpService.GetChampionshipMatches().subscribe(
+      (response: any) => {        
         this.matches = response;
+        console.log(this.matches);
+        
       },
       (error: any) => {
         this.ErrorMessage(error);
       }
-    );*/
+    );
+    this.FilterGroup(this.modeFilter);
   }
 
   FilterGroup(value: string) {
     this.selectedMatches = [];
-    this.matches.forEach((e: IMatch) => {
-      if (e.group == value) {
+    this.matches.forEach((e: any) => {
+      if (e.grupo_equipo_1 == value && !e.etapa) {
         this.selectedMatches.push(e);
       }
     })
@@ -39,35 +41,30 @@ export class UserPredictionsComponent {
 
   FilterStage(value: string) {
     this.selectedMatches = [];
-    this.matches.forEach((e: IMatch) => {
-      if (e.stage == value) {
+    this.matches.forEach((e: any) => {
+      if (e.etapa == value) {
         this.selectedMatches.push(e);
       }
     })
     this.modeFilter = value;
   }
 
-  ChangeScore(match: IMatch, team: number, n: number) {
-    this.matches.forEach((e: IMatch) => {
-      if (e.team1 == match.team1 && e.team2 == match.team2) {
+  ChangeScore(match: any, team: number, n: number) {
+    this.matches.forEach((e: any) => {
+      if (e.nombre_equipo_1 == match.nombre_equipo_1 && e.nombre_equipo_2 == match.nombre_equipo_2) {
         if (team == 1) {
-          e.scoreTeam1 += n;
-          if (e.scoreTeam1 < 0) {
-            e.scoreTeam1 = 0;
+          e.goles_partido1 += n;
+          if (e.goles_partido1 < 0) {
+            e.goles_partido1 = 0;
           }
         } else if (team == 2) {
-          e.scoreTeam2 += n;
-          if (e.scoreTeam2 < 0) {
-            e.scoreTeam2 = 0;
+          e.goles_partido2 += n;
+          if (e.goles_partido2 < 0) {
+            e.goles_partido2 = 0;
           }
         }
       }
     })
-    if (this.modeFilter.includes("Grupo")){
-      this.FilterGroup(this.modeFilter);
-    } else {
-      this.FilterStage(this.modeFilter);
-    }
   }
 
   HighlightButton(event: any){
@@ -82,8 +79,11 @@ export class UserPredictionsComponent {
     });
   }
 
-  SubmitPrediction(match: IMatch) {
-    if (match.date < new Date){
+  SubmitPrediction(match: any) {
+    console.log(match.fecha_partido > this.formatDate(new Date()));
+    console.log(match.fecha_partido);
+    console.log(this.formatDate(new Date()));
+    if (match.fecha_partido > this.formatDate(new Date())){
       this.httpService.PostMatchPrediction(match).subscribe(
         (response: any) => {
           this.SuccesMessage("Se ha registrado la prediccion.")
@@ -95,6 +95,17 @@ export class UserPredictionsComponent {
     } else {
       this.ErrorMessage("Se acabo el tiempo.")
     }
+  }
+
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = this.padZero(date.getMonth() + 1);
+    const day = this.padZero(date.getDate());
+    return `${year}-${month}-${day}`;
+  }
+
+  private padZero(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
   }
 
   ErrorMessage(message: string){

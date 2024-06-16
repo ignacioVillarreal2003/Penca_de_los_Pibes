@@ -1,8 +1,8 @@
 const userServices = require('../services/userServices');
 
 const getChampionshipTeams = async (_req: any, res: any) => {
-    try {        
-        const result = await userServices.getChampionshipTeams();
+    try {                        
+        const result = await userServices.getChampionshipTeams();                
         if (result.teams) {
             res.status(result.status).send({ teams: result.teams })
         } else {
@@ -30,7 +30,9 @@ const getChampionshipMatches = async (_req: any, res: any) => {
 
 const postMatchPrediction = async (req: any, res: any) => {
     try {
-        const { body } = req;              
+        const { body } = req;  
+        console.log(body);
+                    
         if (!body.ci || !body.dateMatch || !body.championshipName || !body.team1 || !body.team2 || !body.datePrediction) {                        
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {                                    

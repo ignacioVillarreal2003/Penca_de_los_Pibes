@@ -3,6 +3,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationInterceptor } from './interceptor/authentication.interceptor';
+import { Location } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,8 +14,6 @@ import { UserHeaderComponent } from './components/user-header/user-header.compon
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { UserPredictionsComponent } from './components/user-predictions/user-predictions.component';
 import { UserRankingComponent } from './components/user-ranking/user-ranking.component';
-
-
 
 @NgModule({
   declarations: [
@@ -33,10 +32,8 @@ import { UserRankingComponent } from './components/user-ranking/user-ranking.com
     FormsModule
   ],
   providers: [
-    provideClientHydration(),
-    [
-      { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
-    ]
+    /*{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+    Location*/
   ],
   bootstrap: [AppComponent]
 })

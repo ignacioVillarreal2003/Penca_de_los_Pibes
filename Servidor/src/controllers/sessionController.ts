@@ -23,11 +23,11 @@ const registerUser = async (req: any, res: any) => {
 
 const loginUser = async (req: any, res: any) => {
     try {
-        const { body } = req;
-        if (!body.ci || !body.password) {
+        const { body } = req;                
+        if (!body.ci || !body.password) {            
             res.status(500).send({ message: "Error processing the request." });
         } else {
-            const result = await sessionServices.loginUser(body.ci, body.password);
+            const result = await sessionServices.loginUser(body.ci, body.password);            
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else if (result.token) {

@@ -47,7 +47,7 @@ export class HttpService {
     const requestBody = {
       ci: ci,
       password: password,
-    }
+    }    
     return this.http.post<any>('http://localhost:3001/session/loginUser', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
@@ -64,6 +64,8 @@ export class HttpService {
       ci: ci,
       password: password,
     }
+    console.log(requestBody);
+    
     return this.http.post<any>('http://localhost:3001/session/loginAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
@@ -178,12 +180,12 @@ export class HttpService {
   }
 
   /* Usuario end points */
-  GetChampionshipTeams(): Observable<any> {
+  GetChampionshipTeams(): Observable<any> {            
     return this.http.get<any>('http://localhost:3001/user/getChampionshipTeams', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.teams) {
-          const teams: ITeam[] = response.teams;
+          const teams: any[] = response.teams;
           return teams;
         }
         return null;
@@ -196,7 +198,7 @@ export class HttpService {
       catchError(this.handleError),
       map(response => {
         if (response && response.matches) {
-          const matches: IMatch[] = response.matches;
+          const matches: any[] = response.matches;
           return matches;
         }
         return null;
@@ -204,28 +206,42 @@ export class HttpService {
     );
   }
 
-  PostMatchPrediction(match: IMatch): Observable<any> {
-    const requestBody: IResult = {
-      team1: match.team1,
-      team2: match.team2,
-      scoreTeam1: match.scoreTeam1,
-      scoreTeam2: match.scoreTeam2
+  PostMatchPrediction(match: any): Observable<any> {
+    const requestBody: any = {
+      ci: "10000003",
+      dateMatch: match.fecha_partido.substring(0, 10),
+      team1: match.nombre_equipo_1,
+      team2: match.nombre_equipo_2,
+      championshipName: match.nombre_campeonato1,
+      datePrediction: this.formatDate(new Date()),
+      scoreTeam1: match.goles_partido1,
+      scoreTeam2: match.goles_partido2
     }
     return this.http.post<any>('http://localhost:3001/user/postMatchPrediction', requestBody, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
-
-  GetRanking(): Observable<any> {
+  GetRanking(): Observable<any> {    
     return this.http.get<any>('http://localhost:3001/user/getRanking', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.ranking) {
+        if (response && response.ranking) {          
           const ranking: IRanking = response.ranking;
           return ranking;
         }
         return null;
       })
     );
+  }
+
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = this.padZero(date.getMonth() + 1);
+    const day = this.padZero(date.getDate());
+    return `${year}-${month}-${day}`;
+  }
+
+  private padZero(value: number): string {
+    return value < 10 ? `0${value}` : `${value}`;
   }
 }

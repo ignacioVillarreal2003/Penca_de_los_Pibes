@@ -3,14 +3,14 @@
 <div class="predictions">
     <div class="selectors">
         <div class="group">
-            <button class="btn-highlight" (click)="FilterGroup('Grupo A')" (click)="HighlightButton($event)">Grupo A</button>
-            <button (click)="FilterGroup('Grupo B')" (click)="HighlightButton($event)">Grupo B</button>
-            <button (click)="FilterGroup('Grupo C')" (click)="HighlightButton($event)">Grupo C</button>
-            <button (click)="FilterGroup('Grupo D')" (click)="HighlightButton($event)">Grupo D</button>
-            <button (click)="FilterGroup('Grupo E')" (click)="HighlightButton($event)">Grupo E</button>
-            <button (click)="FilterGroup('Grupo F')" (click)="HighlightButton($event)">Grupo F</button>
-            <button (click)="FilterGroup('Grupo G')" (click)="HighlightButton($event)">Grupo G</button>
-            <button (click)="FilterGroup('Grupo H')" (click)="HighlightButton($event)">Grupo H</button>
+            <button class="btn-highlight" (click)="FilterGroup('A')" (click)="HighlightButton($event)">Grupo A</button>
+            <button (click)="FilterGroup('B')" (click)="HighlightButton($event)">Grupo B</button>
+            <button (click)="FilterGroup('C')" (click)="HighlightButton($event)">Grupo C</button>
+            <button (click)="FilterGroup('D')" (click)="HighlightButton($event)">Grupo D</button>
+            <button (click)="FilterGroup('E')" (click)="HighlightButton($event)">Grupo E</button>
+            <button (click)="FilterGroup('F')" (click)="HighlightButton($event)">Grupo F</button>
+            <button (click)="FilterGroup('G')" (click)="HighlightButton($event)">Grupo G</button>
+            <button (click)="FilterGroup('H')" (click)="HighlightButton($event)">Grupo H</button>
         </div>
         <div class="stage">
             <button (click)="FilterStage('Octavos')" (click)="HighlightButton($event)">Octavos</button>
@@ -25,27 +25,28 @@
         <ul *ngIf="selectedMatches">
             <li *ngFor="let match of selectedMatches">
                 <div class="title">
-                    <p class="date">{{match.date.toISOString().substring(0, 10)}}</p>
-                    <p class="group">{{match.group}}</p>
+                    <p class="date">{{match.fecha_partido.substring(0, 10)}}</p>
+                    <p *ngIf="match.etapa" class="group">{{match.etapa}}</p>
+                    <p *ngIf="match.grupo_equipo_1 && !match.etapa" class="group">Grupo {{match.grupo_equipo_1}}</p>
                 </div>
                 <div class="content">
                     <div class="team">
                         <img src="../../../assets/barcelona.png" alt="">
-                        <h3>{{match.team1}}</h3>
+                        <h3>{{match.nombre_equipo_1}}</h3>
                     </div>
                     <div class="score">
                         <button (click)="ChangeScore(match,1,1)">+</button>
-                        <p>{{match.scoreTeam1}}</p>
+                        <p>{{match.goles_partido1}}</p>
                         <button (click)="ChangeScore(match,1,-1)">-</button>
                     </div>
                     <div class="score">
                         <button (click)="ChangeScore(match,2,1)">+</button>
-                        <p>{{match.scoreTeam2}}</p>
+                        <p>{{match.goles_partido2}}</p>
                         <button (click)="ChangeScore(match,2,-1)">-</button>
                     </div>
                     <div class="team">
                         <img src="../../../assets/barcelona.png" alt="">
-                        <h3>{{match.team2}}</h3>
+                        <h3>{{match.nombre_equipo_2}}</h3>
                     </div>
                 </div>
                 <div class="submit">
