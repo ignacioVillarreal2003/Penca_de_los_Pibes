@@ -1,50 +1,5 @@
 const admin = require('../database/admin');
 
-export const postChampionshipAdmin = async (championshipName: string, startDate: Date, endDate: Date) => {
-    try {
-        await admin.postChampionshipAdmin(championshipName, startDate, endDate);
-        return { status: 200, message: "Campeonato ingresado con éxito" };
-    } catch (error) {
-        throw new Error("Error procesando los datos.");
-    }
-}
-
-const addTeamAdmin = async (teamName: string) => {    
-    try {
-        await admin.addTeamAdmin(teamName);
-        return { status: 200, message: "Equipo ingresado con éxito" };
-    } catch (error) {
-        throw new Error("Error procesando los datos.");
-    }
-}
-
-const postTeamAdmin = async (championshipName: string, teamName: string, teamGroup: string) => {
-    try {
-        await admin.postTeamAdmin(championshipName, teamName, teamGroup);
-        return { status: 200, message: "Equipo asignado a campeonato con éxito" };
-    } catch (error) {
-        throw new Error("Error procesando los datos.");
-    }
-}
-
-const postMatchAdmin = async (championshipName: string, team1: string, team2: string, date: Date, stage: string, location: string) => {
-    try {
-        await admin.postMatchAdmin(championshipName, team1, team2, date, stage, location);
-        return { status: 200, message: "Partido creado con éxito" };
-    } catch (error) {
-        throw new Error("Error procesando los datos.");
-    }
-}
-
-const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date) => {
-    try {
-        await admin.postResultAdmin(scoreTeam1, scoreTeam2, championshipName, team1, team2, dateMatch);
-        return { status: 200, message: "Resultado atribuído con éxito" };
-    } catch (error) {
-        throw new Error("Error procesando los datos.");
-    }
-}
-
 const getChampionshipsAdmin = async () => {
     try {
         const championships: any[] = await admin.getChampionshipsAdmin();
@@ -53,6 +8,15 @@ const getChampionshipsAdmin = async () => {
         } else {
             throw new Error("Error procesando los datos.");
         }
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
+export const postChampionshipAdmin = async (championshipName: string, startDate: Date, endDate: Date) => {
+    try {
+        await admin.postChampionshipAdmin(championshipName, startDate, endDate);
+        return { status: 200, message: "Campeonato ingresado con éxito" };
     } catch (error) {
         throw new Error("Error procesando los datos.");
     }
@@ -79,6 +43,44 @@ const getAllTeamsAdmin = async () => {
         } else {
             throw new Error("Error procesando los datos.");
         }
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
+const postTeamAdmin = async (championshipName: string, teamName: string, teamGroup: string) => {
+    try {
+        await admin.postTeamAdmin(championshipName, teamName, teamGroup);
+        return { status: 200, message: "Equipo asignado a campeonato con éxito" };
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
+const addTeamAdmin = async (teamName: string) => {    
+    try {
+        await admin.addTeamAdmin(teamName);
+        return { status: 200, message: "Equipo ingresado con éxito" };
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
+
+
+const postMatchAdmin = async (championshipName: string, team1: string, team2: string, date: Date, stage: string, location: string) => {
+    try {
+        await admin.postMatchAdmin(championshipName, team1, team2, date, stage, location);
+        return { status: 200, message: "Partido creado con éxito" };
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
+const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date) => {
+    try {
+        await admin.postResultAdmin(scoreTeam1, scoreTeam2, championshipName, team1, team2, dateMatch);
+        return { status: 200, message: "Resultado atribuído con éxito" };
     } catch (error) {
         throw new Error("Error procesando los datos.");
     }

@@ -117,4 +117,11 @@ async function postCareer(ci: string, career: string): Promise<any> {
     });
 }
 
-export { getChampionshipTeams, getRanking, postCareer, postMatchPrediction, getCareers, getChampionshipMatches };
+export { 
+    getChampionshipTeams, 
+    getRanking, 
+    postCareer, 
+    postMatchPrediction, 
+    getCareers, 
+    getChampionshipMatches 
+};

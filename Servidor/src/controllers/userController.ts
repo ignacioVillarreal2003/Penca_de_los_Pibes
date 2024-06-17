@@ -78,4 +78,10 @@ const postCareer = async (req: any, res: any) => {
     }
 }
 
-module.exports = { getChampionshipTeams, getRanking, getChampionshipMatches, postMatchPrediction, postCareer }
+module.exports = { 
+    getChampionshipTeams, 
+    getRanking, 
+    getChampionshipMatches, 
+    postMatchPrediction, 
+    postCareer 
+}

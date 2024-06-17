@@ -46,18 +46,31 @@ const activeChampionship = async (req: any, res: any) => {
     }
 }
 
-const addTeamAdmin = async (req: any, res: any) => {
+const getTeamsAdmin = async (req: any, res: any) => {
     try {
-        const { body } = req;
-        if (!body.teamName) {
+        const championshipName = req.params.championshipName;
+        if (!championshipName) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
-            const result = await adminServices.addTeamAdmin(body.teamName);
-            if (result.message) {
-                res.status(result.status).send({ message: result.message })
+            const result = await adminServices.getTeamsAdmin(championshipName);
+            if (result.teams) {
+                res.status(result.status).send({ teams: result.teams })
             } else {
                 res.status(500).send({ message: "Error procesando los datos." });
             }
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
+const getAllTeamsAdmin = async (_req: any, res: any) => {
+    try {
+        const result = await adminServices.getAllTeamsAdmin();
+        if (result.teams) {
+            res.status(result.status).send({ teams: result.teams })
+        } else {
+            res.status(500).send({ message: "Error procesando los datos." });
         }
     } catch (error) {
         res.status(500).send({ message: "Error procesando los datos." });
@@ -81,6 +94,26 @@ const postTeamAdmin = async (req: any, res: any) => {
         res.status(500).send({ message: "Error procesando los datos." });
     }
 }
+
+const addTeamAdmin = async (req: any, res: any) => {
+    try {
+        const { body } = req;
+        if (!body.teamName) {
+            return res.status(500).send({ message: "Error procesando los datos." });
+        } else {
+            const result = await adminServices.addTeamAdmin(body.teamName);
+            if (result.message) {
+                res.status(result.status).send({ message: result.message })
+            } else {
+                res.status(500).send({ message: "Error procesando los datos." });
+            }
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
+
 
 const postMatchAdmin = async (req: any, res: any) => {
     try {
@@ -113,24 +146,6 @@ const postResultAdmin = async (req: any, res: any) => {
             const result = await adminServices.postResultAdmin(body.scoreTeam1, body.scoreTeam2, body.championshipName, body.team1, body.team2, body.dateMatch);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
-            } else {
-                res.status(500).send({ message: "Error procesando los datos." });
-            }
-        }
-    } catch (error) {
-        res.status(500).send({ message: "Error procesando los datos." });
-    }
-}
-
-const getTeamsAdmin = async (req: any, res: any) => {
-    try {
-        const championshipName = req.params.championshipName;
-        if (!championshipName) {
-            return res.status(500).send({ message: "Error procesando los datos." });
-        } else {
-            const result = await adminServices.getTeamsAdmin(championshipName);
-            if (result.teams) {
-                res.status(result.status).send({ teams: result.teams })
             } else {
                 res.status(500).send({ message: "Error procesando los datos." });
             }
@@ -176,18 +191,7 @@ const getResultsAdmin = async (req: any, res: any) => {
     }
 }
 
-const getAllTeamsAdmin = async (_req: any, res: any) => {
-    try {
-        const result = await adminServices.getAllTeamsAdmin();
-        if (result.teams) {
-            res.status(result.status).send({ teams: result.teams })
-        } else {
-            res.status(500).send({ message: "Error procesando los datos." });
-        }
-    } catch (error) {
-        res.status(500).send({ message: "Error procesando los datos." });
-    }
-}
+
 
 
 module.exports = {

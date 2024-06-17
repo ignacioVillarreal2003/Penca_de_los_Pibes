@@ -57,4 +57,10 @@ const postCareer = async (ci: string, career: string) => {
     }
 }
 
-module.exports = { getChampionshipTeams, getRanking, getChampionshipMatches, postMatchPrediction, postCareer }
+module.exports = { 
+    getChampionshipTeams, 
+    getRanking, 
+    getChampionshipMatches, 
+    postMatchPrediction, 
+    postCareer 
+}
