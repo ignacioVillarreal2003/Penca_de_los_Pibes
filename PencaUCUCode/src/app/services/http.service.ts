@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, Subject, throwError } from 'rxjs';
-import { IRegister, ILogin, ITeam, IRanking, IMatch, IChampionship, ITeamAdmin, IMatchAdmin, IResult } from '../types';
+import { IRegister, ILogin, IRanking, IMatch, IChampionshipAdmin, ITeamAdmin, IMatchAdmin, IResult, ITeamUser } from '../types';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -74,12 +74,15 @@ export class HttpService {
     );
   }
 
+  /* Usuario end points */
   GetChampionshipTeams(): Observable<any> {
     return this.http.get<any>('http://localhost:3001/user/getChampionshipTeams', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
         if (response && response.teams) {
-          const teams: ITeam[] = response.teams;
+          console.log(response.teams);
+          
+          const teams: ITeamUser[] = response.teams;
           return teams;
         }
         return null;
@@ -87,12 +90,11 @@ export class HttpService {
     );
   }
 
-  /* Usuario end points */
   GetRanking(): Observable<any> {
     return this.http.get<any>('http://localhost:3001/user/getRanking', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.ranking) {
+        if (response && response.ranking) {          
           const ranking: IRanking[] = response.ranking;
           return ranking;
         }
@@ -105,7 +107,7 @@ export class HttpService {
     return this.http.get<any>('http://localhost:3001/user/getChampionshipMatches', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.matches) {          
+        if (response && response.matches) {    
           const matches: IMatch[] = response.matches;
           return matches;
         }
@@ -135,8 +137,8 @@ export class HttpService {
     return this.http.get<any>('http://localhost:3001/admin/getChampionshipsAdmin', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.championships) {
-          const championships: IChampionship[] = response.championships;
+        if (response && response.championships) {          
+          const championships: IChampionshipAdmin[] = response.championships;
           return championships;
         }
         return null;
@@ -144,14 +146,37 @@ export class HttpService {
     );
   }
 
-  PostChampionshipAdmin(championshipName: string, startDate: Date, endDate: Date): Observable<any> {
-    const requestBody: IChampionship = {
+  PostChampionshipAdmin(championshipName: string, startDate: string, endDate: string): Observable<any> {
+    const requestBody: IChampionshipAdmin = {
       championshipName: championshipName,
       startDate: startDate,
       endDate: endDate
     }
     return this.http.post<any>('http://localhost:3001/admin/postChampionshipAdmin', requestBody, this.httpOptions).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {          
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
+    );
+  }
+
+  ActiveChampionship(championshipName: string): Observable<any> {
+    const requestBody = {
+      championshipName: championshipName
+    }
+    return this.http.post<any>('http://localhost:3001/admin/activeChampionship', requestBody, this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
     );
   }
 
@@ -159,8 +184,21 @@ export class HttpService {
     return this.http.get<any>(`http://localhost:3001/admin/getTeamsAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.teams) {
+        if (response && response.teams) {          
           const teams: ITeamAdmin[] = response.teams;
+          return teams;
+        }
+        return null;
+      })
+    );
+  }
+
+  GetAllTeamsAdmin(): Observable<any> {
+    return this.http.get<any>(`http://localhost:3001/admin/getAllTeamsAdmin`, this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.teams) {                    
+          const teams: ITeamUser[] = response.teams;
           return teams;
         }
         return null;
@@ -175,9 +213,36 @@ export class HttpService {
       teamGroup: teamGroup
     }
     return this.http.post<any>('http://localhost:3001/admin/postTeamAdmin', requestBody, this.httpOptions).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
     );
   }
+
+  AddTeamAdmin(teamName: string): Observable<any> {
+    const requestBody: ITeamUser = {
+      teamName: teamName
+    }
+    return this.http.post<any>('http://localhost:3001/admin/addTeamAdmin', requestBody, this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
+    );
+  }
+
+
+
+
 
   GetMatchesAdmin(championshipName: string): Observable<any> {
     return this.http.get<any>(`http://localhost:3001/admin/getMatchesAdmin/${championshipName}`, this.httpOptions).pipe(

@@ -15,7 +15,7 @@ async function postChampionshipAdmin(championshipName: string, startDate: Date, 
     });
 }
 
-async function postCountry(teamName: string): Promise<any> {
+async function addTeamAdmin(teamName: string): Promise<any> {
     const query = `
         INSERT INTO Equipo(teamName) VALUES (?)`;
 
@@ -115,6 +115,25 @@ async function getTeamsAdmin(championshipName: string): Promise<any> {
     });
 }
 
+async function getAllTeamsAdmin(): Promise<any> {
+    const query = `
+        SELECT * FROM Equipo`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
 async function getMatchesAdmin(championshipName: string): Promise<any> {
     const query = `
         SELECT * FROM Juegan_partido
@@ -155,4 +174,4 @@ async function getResultsAdmin(championshipName: string): Promise<any> {
     });
 }
 
-export { postChampionshipAdmin, postCountry, postTeamAdmin, postMatchAdmin, postResultAdmin, getChampionshipsAdmin, getTeamsAdmin, getMatchesAdmin, getResultsAdmin };
+export { postChampionshipAdmin, addTeamAdmin, postTeamAdmin, postMatchAdmin, postResultAdmin, getChampionshipsAdmin, getTeamsAdmin, getMatchesAdmin, getResultsAdmin, getAllTeamsAdmin };

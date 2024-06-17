@@ -114,7 +114,9 @@
 
 .admin-home .content .option-view,
 .admin-home .content .option-create,
-.admin-home .content .option-modify {
+.admin-home .content .option-modify,
+.admin-home .content .option-active,
+.admin-home .content .option-add-team {
     display: none;
     flex-direction: column;
     gap: 30px;

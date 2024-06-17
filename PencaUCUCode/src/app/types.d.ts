@@ -1,3 +1,4 @@
+/* Login */
 export interface ILogin{
     ci: string
     password: string
@@ -9,7 +10,8 @@ export interface IRegister extends ILogin{
     subChampion: string
 }
 
-export interface ITeam{
+/* User */
+export interface ITeamUser{
     teamName: string
 }
 
@@ -32,10 +34,11 @@ export interface IMatch{
     dateMatch: string
 }
 
-export interface IChampionship{
+/* Admin */
+export interface IChampionshipAdmin{
     championshipName: string,
-    startDate: Date,
-    endDate: Date
+    startDate: string,
+    endDate: string
 }
 
 export interface ITeamAdmin{

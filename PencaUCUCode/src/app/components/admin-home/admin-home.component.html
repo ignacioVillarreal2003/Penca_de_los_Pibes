@@ -12,21 +12,22 @@
         <div class="modes">
             <div id="mode-championship">
                 <div class="options">
-                    <button (click)="ChooseOptionChampionship(1)" (click)="GetChampionships()">Ver</button>
+                    <button (click)="ChooseOptionChampionship(1)">Ver</button>
                     <button (click)="ChooseOptionChampionship(2)">Crear</button>
                     <button (click)="ChooseOptionChampionship(3)">Modificar</button>
+                    <button (click)="ChooseOptionChampionship(4)">Activar</button>
                 </div>
                 <div class="cont">
                     <div class="option-view">
                         <ul>
                             <li *ngFor="let championship of championships">
                                 <h2>{{championship.championshipName}}</h2>
-                                <p>{{championship.startDate}} - {{championship.endDate}}</p>
+                                <p>{{championship.startDate.slice(0, 10)}} / {{championship.endDate.slice(0, 10)}}</p>
                             </li>
                         </ul>
                     </div>
                     <div class="option-create">
-                        <button class="btn-submit" (click)="AddChampionship()">Crear</button>
+                        <button class="btn-submit" (click)="PostChampionshipAdmin()">Crear</button>
                         <div class="data"><input type="text" [(ngModel)]="championshipName" placeholder="Nombre campeonato"></div>
                         <div class="data">
                             <label for="input-start-date">Fecha comienzo</label>
@@ -38,6 +39,15 @@
                         </div>
                     </div>
                     <div class="option-modify"></div>
+                    <div class="option-active">
+                        <button class="btn-submit" (click)="ActiveChampionship()">Activar campeonato</button>
+                        <div class="data">
+                            <label for="input-selection-championship-2">Selecciona un campeonato</label>
+                            <select id="input-selection-championship-2" [(ngModel)]="championship">
+                                <option [ngValue]="championship" *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -46,6 +56,7 @@
                     <button (click)="ChooseOptionTeam(1)">Ver</button>
                     <button (click)="ChooseOptionTeam(2)">Crear</button>
                     <button (click)="ChooseOptionTeam(3)">Modificar</button>
+                    <button (click)="ChooseOptionTeam(4)">Añadir equipo</button>
                 </div>
                 <div class="cont">
                     <div class="option-view">
@@ -62,17 +73,26 @@
                         </ul>
                     </div>
                     <div class="option-create">
-                        <button class="btn-submit" (click)="AddTeam()">Crear</button>
+                        <button class="btn-submit" (click)="PostTeam()">Crear</button>
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-2" [(ngModel)]="teamSelectedChampionship" (change)="GetTeams()">
+                            <select id="input-selection-championship-2" [(ngModel)]="teamSelectedChampionship">
                                 <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
-                        <div class="data"><input type="text" [(ngModel)]="teamName" placeholder="Nombre equipo"></div>
+                        <div class="data">
+                            <label for="input-selection-championship-2">Selecciona un equipo</label>
+                            <select id="input-selection-championship-2" [(ngModel)]="teamName">
+                                <option [ngValue]="country.teamName" *ngFor="let country of countries">{{country.teamName}}</option>
+                            </select>
+                        </div>
                         <div class="data"><input type="text" [(ngModel)]="teamGroup" placeholder="Nombre grupo"></div>
                     </div>
                     <div class="option-modify"></div>
+                    <div class="option-add-team">
+                        <button class="btn-submit" (click)="AddTeam()">Crear</button>
+                        <div class="data"><input type="text" [(ngModel)]="teamName" placeholder="Nombre equipo"></div>
+                    </div>
                 </div>
             </div>
 

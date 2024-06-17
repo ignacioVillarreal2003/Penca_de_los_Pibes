@@ -2,7 +2,7 @@ const user = require('../database/user');
 
 export const getChampionshipTeams = async () => {
     try {        
-        const teams: any = await user.getChampionshipTeams("Copa América 2024"); // ver parametro        
+        const teams: any = await user.getChampionshipTeams();       
         if (teams) {            
             return { status: 200, teams: teams };
         } else {
@@ -13,9 +13,22 @@ export const getChampionshipTeams = async () => {
     }
 }
 
+const getRanking = async () => {
+    try {        
+        const ranking: any[] = await user.getRanking();        
+        if (ranking) {
+            return { status: 200, ranking: ranking };
+        } else {
+            throw new Error("Error procesando los datos.");
+        }
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
 const getChampionshipMatches = async () => {
     try {
-        const matches: any[] = await user.getChampionshipMatches("Copa América 2024");        
+        const matches: any[] = await user.getChampionshipMatches();                
         if (matches) {
             return { status: 200, matches: matches };
         } else {
@@ -35,19 +48,6 @@ const postMatchPrediction = async (ci: string, dateMatch: Date, team1: string, t
     }
 }
 
-const getRanking = async () => {
-    try {        
-        const ranking: any[] = await user.getRanking();        
-        if (ranking) {
-            return { status: 200, ranking: ranking };
-        } else {
-            throw new Error("Error procesando los datos.");
-        }
-    } catch (error) {
-        throw new Error("Error procesando los datos.");
-    }
-}
-
 const postCareer = async (ci: string, career: string) => {
     try {
         await user.postCareer(ci, career);
@@ -57,4 +57,4 @@ const postCareer = async (ci: string, career: string) => {
     }
 }
 
-module.exports = { getChampionshipTeams, getChampionshipMatches, postMatchPrediction, getRanking, postCareer }
+module.exports = { getChampionshipTeams, getRanking, getChampionshipMatches, postMatchPrediction, postCareer }

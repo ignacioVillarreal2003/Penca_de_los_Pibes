@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpService } from '../../services/http.service';
-import { ITeam } from '../../types';
+import { ITeamUser } from '../../types';
 
 @Component({
   selector: 'app-user-access',
@@ -15,13 +15,13 @@ export class UserAccessComponent {
   ci: string = "";
   password: string = "";
   username: string = "";
-  teams: ITeam[] = [];
+  teams: ITeamUser[] = [];
 
   constructor(private router: Router, private userService: UserService, private httpService: HttpService) { }
 
   ngOnInit() {
     this.httpService.GetChampionshipTeams().subscribe(
-      (response: ITeam[]) => {
+      (response: ITeamUser[]) => {
         this.teams = response;
       },
       (error: any) => {

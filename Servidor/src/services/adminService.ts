@@ -9,9 +9,9 @@ export const postChampionshipAdmin = async (championshipName: string, startDate:
     }
 }
 
-const postCountryAdmin = async (teamName: string) => {
+const addTeamAdmin = async (teamName: string) => {    
     try {
-        await admin.postCountry(teamName);
+        await admin.addTeamAdmin(teamName);
         return { status: 200, message: "Equipo ingresado con éxito" };
     } catch (error) {
         throw new Error("Error procesando los datos.");
@@ -71,6 +71,19 @@ const getTeamsAdmin = async (championshipName: string) => {
     }
 }
 
+const getAllTeamsAdmin = async () => {
+    try {
+        const teams: any = await admin.getAllTeamsAdmin();
+        if (teams) {
+            return { status: 200, teams: teams };
+        } else {
+            throw new Error("Error procesando los datos.");
+        }
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
 const getMatchesAdmin = async (championshipName: string) => {
     try {
         const matches: any = await admin.getMatchesAdmin(championshipName);        
@@ -99,12 +112,13 @@ const getResultsAdmin = async (championshipName: string) => {
 
 module.exports = {
     postChampionshipAdmin,
-    postCountryAdmin,
+    addTeamAdmin,
     postTeamAdmin,
     postMatchAdmin,
     postResultAdmin,
     getChampionshipsAdmin,
     getTeamsAdmin,
     getMatchesAdmin,
-    getResultsAdmin
+    getResultsAdmin,
+    getAllTeamsAdmin
 }

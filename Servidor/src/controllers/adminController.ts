@@ -1,12 +1,26 @@
 const adminServices = require('../services/adminService');
+const { setChampionship, getChampionship } = require('../variables');
+
+const getChampionshipsAdmin = async (_req: any, res: any) => {
+    try {
+        const result = await adminServices.getChampionshipsAdmin();
+        if (result.championships) {
+            res.status(result.status).send({ championships: result.championships })
+        } else {
+            res.status(500).send({ message: "Error procesando los datos." });
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
 
 const postChampionshipAdmin = async (req: any, res: any) => {
     try {
-        const { body } = req;        
-        if (!body.championshipName || !body.startDate || !body.endDate) {            
+        const { body } = req;
+        if (!body.championshipName || !body.startDate || !body.endDate) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
-            const result = await adminServices.postChampionshipAdmin(body.championshipName, body.startDate, body.endDate);            
+            const result = await adminServices.postChampionshipAdmin(body.championshipName, body.startDate, body.endDate);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else {
@@ -18,14 +32,28 @@ const postChampionshipAdmin = async (req: any, res: any) => {
     }
 }
 
-const postCountryAdmin = async (req: any, res: any) => {
+const activeChampionship = async (req: any, res: any) => {
     try {
         const { body } = req;
-        if (!body.teamName) {            
+        if (!body.championshipName) {
             return res.status(500).send({ message: "Error procesando los datos." });
-        } else {            
-            const result = await adminServices.postCountryAdmin(body.teamName);
-            if (result.message) {                
+        } else {
+            setChampionship(body.championshipName);
+            return res.status(200).send({ message: "Campeonato activado." });
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
+const addTeamAdmin = async (req: any, res: any) => {
+    try {
+        const { body } = req;
+        if (!body.teamName) {
+            return res.status(500).send({ message: "Error procesando los datos." });
+        } else {
+            const result = await adminServices.addTeamAdmin(body.teamName);
+            if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else {
                 res.status(500).send({ message: "Error procesando los datos." });
@@ -38,11 +66,11 @@ const postCountryAdmin = async (req: any, res: any) => {
 
 const postTeamAdmin = async (req: any, res: any) => {
     try {
-        const { body } = req;        
+        const { body } = req;
         if (!body.championshipName || !body.teamName || !body.teamGroup) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
-            const result = await adminServices.postTeamAdmin(body.championshipName, body.teamName, body.teamGroup);                        
+            const result = await adminServices.postTeamAdmin(body.championshipName, body.teamName, body.teamGroup);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else {
@@ -58,11 +86,11 @@ const postMatchAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
         console.log(body);
-        
-        if (!body.championshipName || !body.team1 || !body.team2 || !body.date || !body.stage || !body.location) {                        
+
+        if (!body.championshipName || !body.team1 || !body.team2 || !body.date || !body.stage || !body.location) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
-            const result = await adminServices.postMatchAdmin(body.championshipName, body.team1, body.team2, body.date, body.stage, body.location);            
+            const result = await adminServices.postMatchAdmin(body.championshipName, body.team1, body.team2, body.date, body.stage, body.location);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else {
@@ -78,7 +106,7 @@ const postResultAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
         console.log(body);
-        
+
         if (!body.championshipName || !body.team1 || !body.team2 || !body.scoreTeam1 || !body.scoreTeam2 || !body.dateMatch) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
@@ -94,23 +122,10 @@ const postResultAdmin = async (req: any, res: any) => {
     }
 }
 
-const getChampionshipsAdmin = async (_req: any, res: any) => {
-    try {
-        const result = await adminServices.getChampionshipsAdmin();
-        if (result.championships) {
-            res.status(result.status).send({ championships: result.championships })
-        } else {
-            res.status(500).send({ message: "Error procesando los datos." });
-        }
-    } catch (error) {
-        res.status(500).send({ message: "Error procesando los datos." });
-    }
-}
-
 const getTeamsAdmin = async (req: any, res: any) => {
     try {
         const championshipName = req.params.championshipName;
-        if (!championshipName) {  
+        if (!championshipName) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
             const result = await adminServices.getTeamsAdmin(championshipName);
@@ -161,14 +176,30 @@ const getResultsAdmin = async (req: any, res: any) => {
     }
 }
 
+const getAllTeamsAdmin = async (_req: any, res: any) => {
+    try {
+        const result = await adminServices.getAllTeamsAdmin();
+        if (result.teams) {
+            res.status(result.status).send({ teams: result.teams })
+        } else {
+            res.status(500).send({ message: "Error procesando los datos." });
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
+
 module.exports = {
+    activeChampionship,
     postChampionshipAdmin,
-    postCountryAdmin,
+    addTeamAdmin,
     postTeamAdmin,
     postMatchAdmin,
     postResultAdmin,
     getChampionshipsAdmin,
     getTeamsAdmin,
     getMatchesAdmin,
-    getResultsAdmin
+    getResultsAdmin,
+    getAllTeamsAdmin
 }

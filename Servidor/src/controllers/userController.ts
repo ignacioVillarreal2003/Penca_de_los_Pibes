@@ -14,6 +14,20 @@ const getChampionshipTeams = async (_req: any, res: any) => {
     }
 }
 
+const getRanking = async (_req: any, res: any) => {
+    try {
+        const result = await userServices.getRanking();
+        if (result.ranking) {
+            res.status(result.status).send({ ranking: result.ranking })
+        } else {
+            res.status(500).send({ message: "Error procesando los datos." });
+        }
+
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
 const getChampionshipMatches = async (_req: any, res: any) => {
     try {
         const result = await userServices.getChampionshipMatches();
@@ -46,20 +60,6 @@ const postMatchPrediction = async (req: any, res: any) => {
     }
 }
 
-const getRanking = async (_req: any, res: any) => {
-    try {
-        const result = await userServices.getRanking();
-        if (result.ranking) {
-            res.status(result.status).send({ ranking: result.ranking })
-        } else {
-            res.status(500).send({ message: "Error procesando los datos." });
-        }
-
-    } catch (error) {
-        res.status(500).send({ message: "Error procesando los datos." });
-    }
-}
-
 const postCareer = async (req: any, res: any) => {
     try {
         const { body } = req;                
@@ -78,4 +78,4 @@ const postCareer = async (req: any, res: any) => {
     }
 }
 
-module.exports = { getChampionshipTeams, getChampionshipMatches, postMatchPrediction, getRanking, postCareer }
+module.exports = { getChampionshipTeams, getRanking, getChampionshipMatches, postMatchPrediction, postCareer }
