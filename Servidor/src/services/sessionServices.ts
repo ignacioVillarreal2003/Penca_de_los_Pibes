@@ -37,7 +37,7 @@ const loginUser = async (ci: string, password: string) => {
         if (!existingUser) {
             return { status: 400, message: "El usuario no esta registrado." };
         } else {
-            if (existingUser[0].contrasena != password) {
+            if (existingUser[0].password != password) {
                 return { status: 400, message: "Contraseña incorrecta." };
             } else {
                 const token = generateAccessToken(ci);
@@ -52,11 +52,11 @@ const loginUser = async (ci: string, password: string) => {
 
 const loginAdmin = async (ci: string, password: string) => {
     try {
-        const existingUser = await session.getAdminByCi(ci);         
+        const existingUser = await session.getAdminByCi(ci);                 
         if (!existingUser) {
             return { status: 400, message: "El administrador no esta registrado." };
         } else {
-            if (existingUser[0].contrasena != password) {
+            if (existingUser[0].password != password) {
                 return { status: 400, message: "Contraseña incorrecta." };
             } else {
                 const token = generateAccessToken(ci);

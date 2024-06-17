@@ -11,5 +11,4 @@ export class UserService {
   username: string = ""
   ci: string = ""
   avatar: string = "";
-
 }

@@ -21,32 +21,31 @@
     </div>
 
     <div class="predict">
-        <h2>{{modeFilter}}</h2>
         <ul *ngIf="selectedMatches">
             <li *ngFor="let match of selectedMatches">
                 <div class="title">
-                    <p class="date">{{match.fecha_partido.substring(0, 10)}}</p>
-                    <p *ngIf="match.etapa" class="group">{{match.etapa}}</p>
-                    <p *ngIf="match.grupo_equipo_1 && !match.etapa" class="group">Grupo {{match.grupo_equipo_1}}</p>
+                    <p class="date">{{match.dateMatch}}</p>
+                    <p *ngIf="match.stage" class="group">{{match.stage}}</p>
+                    <p *ngIf="match.teamGroup1 && !match.stage" class="group">Grupo {{match.teamGroup1}}</p>
                 </div>
                 <div class="content">
                     <div class="team">
                         <img src="../../../assets/barcelona.png" alt="">
-                        <h3>{{match.nombre_equipo_1}}</h3>
+                        <h3>{{match.team1}}</h3>
                     </div>
                     <div class="score">
                         <button (click)="ChangeScore(match,1,1)">+</button>
-                        <p>{{match.goles_partido1}}</p>
+                        <p>{{match.scoreTeam1}}</p>
                         <button (click)="ChangeScore(match,1,-1)">-</button>
                     </div>
                     <div class="score">
                         <button (click)="ChangeScore(match,2,1)">+</button>
-                        <p>{{match.goles_partido2}}</p>
+                        <p>{{match.scoreTeam2}}</p>
                         <button (click)="ChangeScore(match,2,-1)">-</button>
                     </div>
                     <div class="team">
                         <img src="../../../assets/barcelona.png" alt="">
-                        <h3>{{match.nombre_equipo_2}}</h3>
+                        <h3>{{match.team2}}</h3>
                     </div>
                 </div>
                 <div class="submit">

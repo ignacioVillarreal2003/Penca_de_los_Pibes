@@ -3,6 +3,7 @@ import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpService } from '../../services/http.service';
+import { ITeam } from '../../types';
 
 @Component({
   selector: 'app-user-access',
@@ -14,13 +15,13 @@ export class UserAccessComponent {
   ci: string = "";
   password: string = "";
   username: string = "";
-  teams: any[] = [];
+  teams: ITeam[] = [];
 
-  constructor(private router: Router, private userService: UserService, private httpService: HttpService){}
+  constructor(private router: Router, private userService: UserService, private httpService: HttpService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.httpService.GetChampionshipTeams().subscribe(
-      (response: any) => {
+      (response: ITeam[]) => {
         this.teams = response;
       },
       (error: any) => {
@@ -29,15 +30,15 @@ export class UserAccessComponent {
     );
   }
 
-  UserLogin(){
-    if (this.CheckUserDataLogin()){
+  UserLogin() {
+    if (this.CheckUserDataLogin()) {
       this.httpService.LoginUser(this.ci, this.password).subscribe(
         (response: any) => {
           localStorage.setItem('token', response);
           this.router.navigate(["/userhome"])
-          this.userService.username = this.username;  
-          this.userService.avatar = "avatar-1.png";  
-          this.userService.ci = this.ci;  
+          this.userService.username = this.username;
+          this.userService.avatar = "avatar-1.png";
+          this.userService.ci = this.ci;
         },
         (error: any) => {
           this.ErrorMessage(error);
@@ -48,31 +49,27 @@ export class UserAccessComponent {
 
   async UserRegistration() {
     if (this.CheckUserDataRegister()) {
-      try {
-        const championshipData = await this.EnterChampionshipData();
-        if (championshipData != undefined) {
-          this.httpService.RegisterUser(this.ci, this.password, this.username, championshipData[0], championshipData[1]).subscribe(
-            (response: any) => {
-              localStorage.setItem('token', response);
-              this.router.navigate(["/userhome"]);
-              this.userService.username = this.username;
-              this.userService.avatar = "avatar-1.png";
-              this.userService.ci = this.ci;  
-            },
-            (error: any) => {
-              this.ErrorMessage(error);
-            }
-          );
-        }
-      } catch (error) {
-        console.error('Error getting teams:', error);
+      const championshipData = await this.EnterChampionshipData();
+      if (championshipData != undefined) {
+        this.httpService.RegisterUser(this.ci, this.password, this.username, championshipData[0], championshipData[1]).subscribe(
+          (response: any) => {            
+            localStorage.setItem('token', response);
+            this.router.navigate(["/userhome"]);
+            this.userService.username = this.username;
+            this.userService.avatar = "avatar-1.png";
+            this.userService.ci = this.ci;
+          },
+          (error: any) => {
+            this.ErrorMessage(error);
+          }
+        );
       }
     }
   }
 
-  async AdminLogin(){
+  async AdminLogin() {
     const adminData = await this.EnterAdminData();
-    if (adminData != undefined){
+    if (adminData != undefined) {
       this.httpService.LoginAdmin(adminData[0], adminData[1]).subscribe(
         (response: any) => {
           localStorage.setItem('token', response);
@@ -81,16 +78,16 @@ export class UserAccessComponent {
         (error: any) => {
           this.ErrorMessage(error);
         }
-      );   
+      );
     }
   }
 
-  async EnterChampionshipData(){    
+  async EnterChampionshipData() {
     let dataChampion = `<select id="swal-select-champion" class="swal2-select" name="options">`
-    let dataSubChampion = `<select id="swal-select-runner-up" class="swal2-select" name="options">`
+    let dataSubChampion = `<select id="swal-select-subchampion" class="swal2-select" name="options">`
     this.teams.forEach((team: any) => {
-      dataChampion += `<option class="swal2-option" value=${team.nombre_equipo}>${team.nombre_equipo}</option>`
-      dataSubChampion += `<option class="swal2-option" value=${team.nombre_equipo}>${team.nombre_equipo}</option>`
+      dataChampion += `<option class="swal2-option" value=${team.teamName}>${team.teamName}</option>`
+      dataSubChampion += `<option class="swal2-option" value=${team.teamName}>${team.teamName}</option>`
     })
     dataChampion += `</select>`
     dataSubChampion += `</select>`
@@ -101,10 +98,10 @@ export class UserAccessComponent {
       focusConfirm: false,
       preConfirm: () => {
         const champion = document.getElementById("swal-select-champion") as HTMLInputElement;
-        const runnerUp = document.getElementById("swal-select-runner-up") as HTMLInputElement;
+        const subchampion = document.getElementById("swal-select-subchampion") as HTMLInputElement;
         return [
           champion.value,
-          runnerUp.value
+          subchampion.value
         ];
       }
     });
@@ -123,7 +120,7 @@ export class UserAccessComponent {
     }
   }
 
-  async EnterAdminData(){
+  async EnterAdminData() {
     const { value: formValues } = await Swal.fire({
       title: "Admin login",
       showCancelButton: true,
@@ -157,7 +154,7 @@ export class UserAccessComponent {
     }
   }
 
-  ChangeMode(mode: string){    
+  ChangeMode(mode: string) {
     const modeLogin = document.querySelector('.user-access #mode-login') as HTMLElement;
     const modeRegister = document.querySelector('.user-access #mode-register') as HTMLElement;
     if (mode == "login") {
@@ -169,32 +166,32 @@ export class UserAccessComponent {
     }
   }
 
-  CheckUserDataLogin(){
-    if (this.ci.length != 8){
+  CheckUserDataLogin() {
+    if (this.ci.length != 8) {
       this.ErrorMessage("La cedula es incorrecta.")
       return false;
-    } else if (this.password.length < 8){
+    } else if (this.password.length < 8) {
       this.ErrorMessage("La contraseña es muy corta.")
       return false;
     }
     return true;
   }
 
-  CheckUserDataRegister(){
-    if (this.ci.length != 8){
+  CheckUserDataRegister() {
+    if (this.ci.length != 8) {
       this.ErrorMessage("La cedula es incorrecta.")
       return false;
-    } else if (this.password.length < 8){
+    } else if (this.password.length < 8) {
       this.ErrorMessage("La contraseña es muy corta.")
       return false;
-    } else if (this.username.length == 0){
+    } else if (this.username.length == 0) {
       this.ErrorMessage("El usuario es incorrecto.")
       return false;
     }
     return true;
   }
 
-  ErrorMessage(message: string){
+  ErrorMessage(message: string) {
     Swal.fire({
       title: 'Error!',
       text: message,

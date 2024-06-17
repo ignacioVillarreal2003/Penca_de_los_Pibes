@@ -21,7 +21,7 @@ async function getCareers(): Promise<any> {
 
 async function postCareer(ci: string, career: string): Promise<any> {
     const query = `
-        INSERT INTO Pertenecen(cedula_participante, nombre_carrera) VALUES (?, ?);`;
+        INSERT INTO Pertenecen(ci, career) VALUES (?, ?);`;
     
     return new Promise((resolve, reject) => {
         connection.query(query, [ci, career], (error: any, results: any) => {
@@ -41,7 +41,7 @@ async function postCareer(ci: string, career: string): Promise<any> {
 async function getChampionshipTeams(championshipName: string): Promise<any> {
     const query = `
         SELECT * FROM Participan
-        WHERE nombre_campeonato = ?`;
+        WHERE championshipName = ?`;
 
     return new Promise((resolve, reject) => {
         connection.query(query, [championshipName], (error: any, results: any) => {
@@ -59,20 +59,11 @@ async function getChampionshipTeams(championshipName: string): Promise<any> {
 }
 
 async function getChampionshipMatches(championshipName: string): Promise<any> {
-    const query = `
-        SELECT
-        jp.*,
-        p1.grupo AS grupo_equipo_1,
-        p2.grupo AS grupo_equipo_2
-        FROM
-            Juegan_partido jp
-        JOIN
-            Participan p1 ON jp.nombre_equipo_1 = p1.nombre_equipo AND jp.nombre_campeonato1 = p1.nombre_campeonato
-        JOIN
-            Participan p2 ON jp.nombre_equipo_2 = p2.nombre_equipo AND jp.nombre_campeonato2 = p2.nombre_campeonato
-        WHERE
-            jp.nombre_campeonato1 = ?
-            AND jp.nombre_campeonato2 = ?;`;
+    const query = ` 
+        SELECT jp.*, p1.teamGroup AS teamGroup1, p2.teamGroup AS teamGroup2 FROM Juegan_partido jp
+        JOIN Participan p1 ON jp.team1 = p1.teamName AND jp.championshipName1 = p1.championshipName
+        JOIN Participan p2 ON jp.team2 = p2.teamName AND jp.championshipName2 = p2.championshipName
+        WHERE jp.championshipName1 = ? AND jp.championshipName2 = ?;`;
 
     return new Promise((resolve, reject) => {
         connection.query(query, [championshipName, championshipName], (error: any, results: any) => {
@@ -91,7 +82,7 @@ async function getChampionshipMatches(championshipName: string): Promise<any> {
 
 async function postMatchPrediction(ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number): Promise<any> {
     const query = `
-        INSERT INTO Predicen(cedula_participante, fecha_partido, nombre_equipo_1, nombre_equipo_2, nombre_campeonato1, nombre_campeonato2, fecha_prediccion, prediccion_goles_equipo_1, prediccion_goles_equipo_2) 
+        INSERT INTO Predicen(ci, dateMatch, team1, team2, championshipName1, championshipName2, datePrediction, scoreTeam1, scoreTeam2) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     return new Promise((resolve, reject) => {
@@ -108,7 +99,7 @@ async function postMatchPrediction(ci: string, dateMatch: Date, team1: string, t
 async function getRanking(): Promise<any> {
     const query = `
         SELECT * FROM Participante P
-        ORDER BY P.puntaje DESC
+        ORDER BY P.score DESC
         LIMIT 20;`;    
     return new Promise((resolve, reject) => {
         connection.query(query, [], (error: any, results: any) => {
@@ -124,6 +115,5 @@ async function getRanking(): Promise<any> {
         });
     });
 }
-
 
 export { postCareer, getCareers, getChampionshipTeams, getChampionshipMatches, postMatchPrediction, getRanking };

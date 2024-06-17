@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { IRanking } from '../../types';
 import Swal from 'sweetalert2';
+import { IRanking } from '../../types';
 
 @Component({
   selector: 'app-user-ranking',
@@ -12,11 +12,11 @@ export class UserRankingComponent {
 
   constructor(private httpService: HttpService) { }
 
-  ranking: any[] | undefined = undefined;
+  ranking: IRanking[] | undefined = undefined;
 
   ngOnInit() {
     this.httpService.GetRanking().subscribe(
-      (response: any) => {        
+      (response: IRanking[]) => {        
         this.ranking = response
       },
       (error: any) => {

@@ -18,9 +18,9 @@ const postCountryAdmin = async (teamName: string) => {
     }
 }
 
-const postTeamAdmin = async (championshipName: string, teamName: string, group: string) => {
+const postTeamAdmin = async (championshipName: string, teamName: string, teamGroup: string) => {
     try {
-        await admin.postTeamAdmin(championshipName, teamName, group);
+        await admin.postTeamAdmin(championshipName, teamName, teamGroup);
         return { status: 200, message: "Equipo asignado a campeonato con éxito" };
     } catch (error) {
         throw new Error("Error procesando los datos.");

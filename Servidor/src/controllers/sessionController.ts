@@ -44,11 +44,11 @@ const loginUser = async (req: any, res: any) => {
 
 const loginAdmin = async (req: any, res: any) => {
     try {
-        const { body } = req;
+        const { body } = req;        
         if (!body.ci || !body.password) {
             res.status(500).send({ message: "Error processing the request." });
         } else {
-            const result = await sessionServices.loginAdmin(body.ci, body.password);
+            const result = await sessionServices.loginAdmin(body.ci, body.password);            
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else if (result.token) {

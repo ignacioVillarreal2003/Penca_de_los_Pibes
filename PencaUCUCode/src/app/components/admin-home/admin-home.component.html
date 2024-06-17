@@ -12,7 +12,7 @@
         <div class="modes">
             <div id="mode-championship">
                 <div class="options">
-                    <button (click)="ChooseOptionChampionship(1)">Ver</button>
+                    <button (click)="ChooseOptionChampionship(1)" (click)="GetChampionships()">Ver</button>
                     <button (click)="ChooseOptionChampionship(2)">Crear</button>
                     <button (click)="ChooseOptionChampionship(3)">Modificar</button>
                 </div>
@@ -21,7 +21,7 @@
                         <ul>
                             <li *ngFor="let championship of championships">
                                 <h2>{{championship.championshipName}}</h2>
-                                <p>{{FormatDate(championship.startDate)}} - {{FormatDate(championship.endDate)}}</p>
+                                <p>{{championship.startDate}} - {{championship.endDate}}</p>
                             </li>
                         </ul>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="option-view">
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-2">
+                            <select id="input-selection-championship-2" [(ngModel)]="teamSelectedChampionship" (change)="GetTeams()">
                                 <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
@@ -65,11 +65,12 @@
                         <button class="btn-submit" (click)="AddTeam()">Crear</button>
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-2" [(ngModel)]="teamSelectedChampionship">
+                            <select id="input-selection-championship-2" [(ngModel)]="teamSelectedChampionship" (change)="GetTeams()">
                                 <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
                         <div class="data"><input type="text" [(ngModel)]="teamName" placeholder="Nombre equipo"></div>
+                        <div class="data"><input type="text" [(ngModel)]="teamGroup" placeholder="Nombre grupo"></div>
                     </div>
                     <div class="option-modify"></div>
                 </div>
@@ -85,7 +86,7 @@
                     <div class="option-view">
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-2">
+                            <select id="input-selection-championship-2" [(ngModel)]="matchSelectedChampionship" (change)="GetMatches()">
                                 <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
@@ -94,7 +95,7 @@
                                 <h2>{{match.team1}} vs {{match.team2}}</h2>
                                 <div class="data-flex">
                                     <p>{{match.location}}</p>
-                                    <p>{{FormatDate(match.date)}}</p>
+                                    <p>{{match.dateMatch}}</p>
                                 </div>
                             </li>
                         </ul>
@@ -103,13 +104,14 @@
                         <button class="btn-submit" (click)="AddMatch()">Crear</button>
                         <div class="data">
                             <label for="input-selection-championship-3">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-3" [(ngModel)]="matchSelectedChampionship">
+                            <select id="input-selection-championship-3" [(ngModel)]="matchSelectedChampionship" (change)="GetMatches()">
                                 <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
                         <div class="data"><input type="text" [(ngModel)]="matchTeam1" placeholder="Nombre equipo 1"></div>
                         <div class="data"><input type="text" [(ngModel)]="matchTeam2" placeholder="Nombre equipo 2"></div>
                         <div class="data"><input type="text" [(ngModel)]="matchLocation" placeholder="Ubicacion"></div>
+                        <div class="data"><input type="text" [(ngModel)]="matchStage" placeholder="Etapa"></div>
                         <div class="data">
                             <label for="input-match-date">Fecha partido</label>
                             <input id="input-match-date" type="date" [(ngModel)]="matchDate">
@@ -129,7 +131,7 @@
                     <div class="option-view">
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-2">
+                            <select id="input-selection-championship-2" [(ngModel)]="resultSelectedChampionship" (change)="GetResults()">
                                 <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
@@ -145,14 +147,14 @@
                         <button class="btn-submit" (click)="AddResult()">Crear</button>
                         <div class="data">
                             <label for="input-selection-championship-4">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-4" [(ngModel)]="resultSelectedChampionship">
-                                <option value="opcion1" *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                            <select id="input-selection-championship-4" [(ngModel)]="resultSelectedChampionship" (change)="GetResults()">
+                                <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
                         <div class="data">
                             <label for="input-selection-match">Selecciona un partido</label>
                             <select id="input-selection-match" [(ngModel)]="resultSelectedMatch">
-                                <option value="opcion1" *ngFor="let match of matches">{{match.team1}} vs {{match.team2}}</option>
+                                <option [ngValue]="result" *ngFor="let result of results">{{result.team1}} vs {{result.team2}}</option>
                             </select>
                         </div>
                         <div class="data">

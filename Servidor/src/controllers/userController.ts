@@ -30,9 +30,7 @@ const getChampionshipMatches = async (_req: any, res: any) => {
 
 const postMatchPrediction = async (req: any, res: any) => {
     try {
-        const { body } = req;  
-        console.log(body);
-                    
+        const { body } = req;                              
         if (!body.ci || !body.dateMatch || !body.championshipName || !body.team1 || !body.team2 || !body.datePrediction) {                        
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {                                    
@@ -80,10 +78,4 @@ const postCareer = async (req: any, res: any) => {
     }
 }
 
-module.exports = {
-    getChampionshipTeams,
-    getChampionshipMatches,
-    postMatchPrediction,
-    getRanking,
-    postCareer
-}
+module.exports = { getChampionshipTeams, getChampionshipMatches, postMatchPrediction, getRanking, postCareer }

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import Swal from 'sweetalert2'
-import { IChampionship, IChampionshipAdmin, IMatch, IMatchAdmin, IResult, IResultAdmin, ITeam, ITeamAdmin } from '../../types';
-import { Time } from '@angular/common';
+import { IChampionship, IMatchAdmin, IResult, ITeamAdmin } from '../../types';
 
 @Component({
   selector: 'app-admin-home',
@@ -12,10 +11,10 @@ import { Time } from '@angular/common';
 export class AdminHomeComponent {
 
   /* Datos iniciales */
-  championships: IChampionshipAdmin[] = []
+  championships: IChampionship[] = []
   teams: ITeamAdmin[] = []
   matches: IMatchAdmin[] = []
-  results: IResultAdmin[] = []
+  results: IResult[] = []
 
   /* Datos championships */
   championshipName: string | undefined = undefined;
@@ -23,75 +22,28 @@ export class AdminHomeComponent {
   championshipEndDate: Date | undefined = undefined;
 
   /* Datos team */
-  teamSelectedChampionship: IChampionship | undefined = undefined;
+  teamSelectedChampionship: string | undefined = undefined;
   teamName: string | undefined = undefined;
+  teamGroup: string | undefined = undefined;
 
   /* Datos match */
-  matchSelectedChampionship: IChampionship | undefined = undefined;
+  matchSelectedChampionship: string | undefined = undefined;
   matchTeam1: string | undefined = undefined;
   matchTeam2: string | undefined = undefined;
   matchDate: Date | undefined = undefined;
-  matchGroup: string | undefined = undefined;
   matchStage: string | undefined = undefined;
   matchLocation: string | undefined = undefined;
 
   /* Datos result */
-  resultSelectedChampionship: IChampionship | undefined = undefined;
-  resultSelectedMatch: IMatch | undefined = undefined;
+  resultSelectedChampionship: string | undefined = undefined;
+  resultSelectedMatch: IResult | undefined = undefined;
   resultScoreTeam1: number = 0;
   resultScoreTeam2: number = 0;
 
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.championships.push({
-      championshipName: "barcelona no vis",
-      startDate: new Date(),
-      endDate: new Date()
-    }, {
-      championshipName: "barcelona no vis",
-      startDate: new Date(),
-      endDate: new Date()
-    })
-    this.teams.push({
-      teamName: "paco"
-    }, {
-      teamName: "loco"
-    })
-    this.matches.push({
-      team1: "paco",
-      team2: "loco",
-      date: new Date(),
-      group: "A",
-      stage: "Final",
-      location: "peru",
-    }, {
-      team1: "paco",
-      team2: "loco",
-      date: new Date(),
-      group: "A",
-      stage: "Final",
-      location: "peru",
-    })
-    this.results.push({
-      team1: "paco",
-      team2: "loco",
-      scoreTeam1: 0,
-      scoreTeam2: 0,
-    }, {
-      team1: "paco1",
-      team2: "loco1",
-      scoreTeam1: 2,
-      scoreTeam2: 1,
-    })
-    /*this.httpService.GetChampionshipsAdmin().subscribe(
-      (response: any) => {
-        this.championships = response
-      },
-      (error: any) => {
-        this.ErrorMessage(error);
-      }
-    );*/
+    this.GetChampionships()
   }
 
   AddChampionship() {
@@ -108,8 +60,8 @@ export class AdminHomeComponent {
   }
 
   AddTeam() {
-    if (this.teamSelectedChampionship && this.teamName) {
-      this.httpService.PostTeamAdmin(this.teamSelectedChampionship, this.teamName).subscribe(
+    if (this.teamSelectedChampionship && this.teamName && this.teamGroup) {      
+      this.httpService.PostTeamAdmin(this.teamSelectedChampionship, this.teamName, this.teamGroup).subscribe(
         (response: any) => {
           this.SuccesMessage("Equipo creado.")
         },
@@ -120,9 +72,9 @@ export class AdminHomeComponent {
     }
   }
 
-  AddMatch() {
-    if (this.matchSelectedChampionship && this.matchTeam1 && this.matchTeam2 && this.matchDate && this.matchGroup && this.matchStage && this.matchLocation) {
-      this.httpService.PostMatchAdmin(this.matchSelectedChampionship, this.matchTeam1, this.matchTeam2, this.matchDate, this.matchGroup, this.matchStage, this.matchLocation).subscribe(
+  AddMatch() {    
+    if (this.matchSelectedChampionship && this.matchTeam1 && this.matchTeam2 && this.matchDate && this.matchStage && this.matchLocation) {
+      this.httpService.PostMatchAdmin(this.matchSelectedChampionship, this.matchTeam1, this.matchTeam2, this.matchDate, this.matchStage, this.matchLocation).subscribe(
         (response: any) => {
           this.SuccesMessage("Partido creado.")
         },
@@ -134,7 +86,7 @@ export class AdminHomeComponent {
   }
 
   AddResult() {
-    if (this.resultSelectedChampionship && this.resultSelectedMatch && this.resultScoreTeam1 && this.resultScoreTeam2) {
+    if (this.resultSelectedChampionship && this.resultSelectedMatch && this.resultScoreTeam1 && this.resultScoreTeam2) {      
       this.httpService.PostResultAdmin(this.resultSelectedChampionship, this.resultSelectedMatch, this.resultScoreTeam1, this.resultScoreTeam2).subscribe(
         (response: any) => {
           this.SuccesMessage("Equipo creado.")
@@ -148,8 +100,8 @@ export class AdminHomeComponent {
 
   GetChampionships() {
     this.httpService.GetChampionshipsAdmin().subscribe(
-      (response: any) => {
-        this.championships = response;
+      (response: IChampionship[]) => {
+        this.championships = response
       },
       (error: any) => {
         this.ErrorMessage(error);
@@ -157,10 +109,10 @@ export class AdminHomeComponent {
     );
   }
 
-  GetTeams() {
-    if (this.teamSelectedChampionship) {
-      this.httpService.GetTeamsAdmin(this.teamSelectedChampionship.championshipName).subscribe(
-        (response: any) => {
+  GetTeams() {    
+    if (this.teamSelectedChampionship) {      
+      this.httpService.GetTeamsAdmin(this.teamSelectedChampionship).subscribe(
+        (response: ITeamAdmin[]) => {
           this.teams = response;
         },
         (error: any) => {
@@ -170,10 +122,10 @@ export class AdminHomeComponent {
     }
   }
 
-  GetMatches() {
+  GetMatches() {        
     if (this.matchSelectedChampionship) {
-      this.httpService.GetMatchesAdmin(this.matchSelectedChampionship.championshipName).subscribe(
-        (response: any) => {
+      this.httpService.GetMatchesAdmin(this.matchSelectedChampionship).subscribe(
+        (response: IMatchAdmin[]) => {          
           this.matches = response;
         },
         (error: any) => {
@@ -184,10 +136,10 @@ export class AdminHomeComponent {
   }
 
   GetResults() {
-    if (this.resultSelectedChampionship) {
-      this.httpService.GetResultsAdmin(this.resultSelectedChampionship.championshipName).subscribe(
-        (response: any) => {
-          this.teams = response;
+    if (this.resultSelectedChampionship) {      
+      this.httpService.GetResultsAdmin(this.resultSelectedChampionship).subscribe(
+        (response: IResult[]) => {          
+          this.results = response;
         },
         (error: any) => {
           this.ErrorMessage(error);
@@ -312,7 +264,7 @@ export class AdminHomeComponent {
     });
   }
 
-  FormatDate(date: Date){
+  FormatDate(date: Date) {
     const dia = date.getDate();
     const mes = date.getMonth() + 1;
     const anio = date.getFullYear();
