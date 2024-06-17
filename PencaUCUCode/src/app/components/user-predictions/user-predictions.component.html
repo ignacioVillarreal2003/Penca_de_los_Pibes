@@ -13,8 +13,8 @@
             <button (click)="FilterGroup('H')" (click)="HighlightButton($event)">Grupo H</button>
         </div>
         <div class="stage">
-            <button (click)="FilterStage('Octavos')" (click)="HighlightButton($event)">Octavos</button>
-            <button (click)="FilterStage('Cuartos')" (click)="HighlightButton($event)">Cuartos</button>
+            <button (click)="FilterStage('Octavos de Final')" (click)="HighlightButton($event)">Octavos</button>
+            <button (click)="FilterStage('Cuartos de Final')" (click)="HighlightButton($event)">Cuartos</button>
             <button (click)="FilterStage('Semifinal')" (click)="HighlightButton($event)">Semifinal</button>
             <button (click)="FilterStage('Final')" (click)="HighlightButton($event)">Final</button>
         </div>
@@ -24,9 +24,9 @@
         <ul *ngIf="selectedMatches">
             <li *ngFor="let match of selectedMatches">
                 <div class="title">
-                    <p class="date">{{match.dateMatch}}</p>
-                    <p *ngIf="match.stage" class="group">{{match.stage}}</p>
-                    <p *ngIf="match.teamGroup1 && !match.stage" class="group">Grupo {{match.teamGroup1}}</p>
+                    <p class="date">{{match.dateMatch.slice(0,10)}}</p>
+                    <p *ngIf="match.stage != 'Grupos'" class="group">{{match.stage}}</p>
+                    <p *ngIf="match.stage == 'Grupos'" class="group">Grupo {{match.teamGroup1}}</p>
                 </div>
                 <div class="content">
                     <div class="team">

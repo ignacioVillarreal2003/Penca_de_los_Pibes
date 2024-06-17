@@ -18,6 +18,8 @@ export class UserPredictionsComponent {
     this.httpService.GetChampionshipMatches().subscribe(
       (response: IMatch[]) => {        
         this.matches = response;  
+        console.log(this.matches);
+                
         this.FilterGroup("A");          
       },
       (error: any) => {
@@ -29,7 +31,7 @@ export class UserPredictionsComponent {
   FilterGroup(value: string) {    
     this.selectedMatches = [];
     this.matches.forEach((e: IMatch) => {      
-      if (e.teamGroup1 == value && !e.stage) {
+      if (e.teamGroup1 == value && e.stage == "Grupos") {
         this.selectedMatches.push(e);        
       }
     })    

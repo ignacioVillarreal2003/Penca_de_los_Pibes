@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import Swal from 'sweetalert2'
 import { UserService } from '../../services/user.service';
+import { ICareerUser } from '../../types';
 
 @Component({
   selector: 'app-user-header',
@@ -14,6 +15,8 @@ export class UserHeaderComponent {
   previousScrollPosition = 0;
   oldPassword: string = "";
   newPassword: string = "";
+  career: string | undefined = undefined;
+  careers: ICareerUser[] = []
 
   constructor(private userService: UserService) {
     this.username = userService.username;

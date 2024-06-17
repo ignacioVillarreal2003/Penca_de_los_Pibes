@@ -10,10 +10,10 @@ router.get('/getTeamsAdmin/:championshipName', adminController.getTeamsAdmin);
 router.get('/getAllTeamsAdmin', adminController.getAllTeamsAdmin);
 router.post('/postTeamAdmin', adminController.postTeamAdmin);
 router.post('/addTeamAdmin', adminController.addTeamAdmin);
-
-router.post('/postMatchAdmin', adminController.postMatchAdmin);
-router.post('/postResultAdmin', adminController.postResultAdmin);
 router.get('/getMatchesAdmin/:championshipName', adminController.getMatchesAdmin);
+router.post('/postMatchAdmin', adminController.postMatchAdmin);
 router.get('/getResultsAdmin/:championshipName', adminController.getResultsAdmin);
+router.post('/postResultAdmin', adminController.postResultAdmin);
+router.post('/scoreReset', adminController.scoreReset);
 
 export default router;

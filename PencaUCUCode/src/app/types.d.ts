@@ -15,6 +15,10 @@ export interface ITeamUser{
     teamName: string
 }
 
+export interface ICareerUser{
+    carrer: string
+}
+
 export interface IRanking{
     username: string,
     score: number
@@ -58,7 +62,7 @@ export interface IMatchAdmin{
     championshipName2: string,
     teamGroup1: string,
     teamGroup2: string,
-    dateMatch: Date
+    dateMatch: string
 }
 
 export interface IResult{
@@ -71,5 +75,4 @@ export interface IResult{
     dateMatch: string,
     location: string,
     stage: string,
-
 }

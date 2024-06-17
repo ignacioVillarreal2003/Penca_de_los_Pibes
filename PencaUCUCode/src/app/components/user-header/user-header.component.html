@@ -2,33 +2,56 @@
     <header>
         <nav>
             <ul>
-                <li><a routerLink="/userhome"><p>Inicio</p><div class="shape"></div></a></li>
-                <li><a routerLink="/userPredictions"><p>Predicciones</p><div class="shape"></div></a></li>
-                <li><a routerLink="/userRanking"><p>Ranking</p><div class="shape"></div></a></li>
+                <li><a routerLink="/userhome">
+                        <p>Inicio</p>
+                        <div class="shape"></div>
+                    </a></li>
+                <li><a routerLink="/userPredictions">
+                        <p>Predicciones</p>
+                        <div class="shape"></div>
+                    </a></li>
+                <li><a routerLink="/userRanking">
+                        <p>Ranking</p>
+                        <div class="shape"></div>
+                    </a></li>
             </ul>
         </nav>
         <div class="configuration">
             <p>{{username}}</p>
-            <button class="avatar" (click)="OpenConfigurations()"><img src="../../../assets/avatar/{{avatar}}" alt=""></button>
+            <button class="avatar" (click)="OpenConfigurations()"><img src="../../../assets/avatar/{{avatar}}"
+                    alt=""></button>
         </div>
     </header>
-        
+
     <div class="background"></div>
 
     <div class="configuration-section">
         <div class="content">
             <ul class="options">
                 <ul>
-                    <li><button (click)="ChangeOption(1)"><p>Contraseña</p><div class="shape"></div></button></li>
-                    <li><button (click)="ChangeOption(2)"><p>Avatar</p><div class="shape"></div></button></li>
-                    <li><button (click)="CloseConfigurations()"><p>Cerrar</p><div class="shape-red"></div></button></li>
+                    <li><button (click)="ChangeOption(1)">
+                            <p>Contraseña</p>
+                            <div class="shape"></div>
+                        </button></li>
+                    <li><button (click)="ChangeOption(2)">
+                            <p>Avatar</p>
+                            <div class="shape"></div>
+                        </button></li>
+                    <li><button (click)="ChangeOption(3)">
+                            <p>Carrera</p>
+                            <div class="shape"></div>
+                        </button></li>
+                    <li><button (click)="CloseConfigurations()">
+                            <p>Cerrar</p>
+                            <div class="shape-red"></div>
+                        </button></li>
                 </ul>
                 <div class="toggle-mode">
                     <label class="switch-label">
                         <input type="checkbox" class="input-mode" (change)="ChangeDarkColor()">
                         <span class="slider"></span>
                     </label>
-                </div>  
+                </div>
             </ul>
             <div class="option">
                 <div class="option-password">
@@ -37,8 +60,17 @@
                     <button (click)="ChangePassword()">Subir</button>
                 </div>
                 <ul class="option-avatar">
-                    <li *ngFor="let avatar of avatars"><button (click)="SetAvatar(avatar)"><img src="../../../assets/avatar/{{avatar}}"></button></li>
+                    <li *ngFor="let avatar of avatars"><button (click)="SetAvatar(avatar)"><img
+                                src="../../../assets/avatar/{{avatar}}"></button></li>
                 </ul>
+                <div class="option-career">
+                    <label for="input-selection-career">Nombre equipo 2</label>
+                    <select id="input-selection-career" [(ngModel)]="career">
+                        <option [ngValue]="career.carrer" *ngFor="let career of careers">{{career.career}}
+                        </option>
+                    </select>
+                    <button (click)="ChangeCareer()">Subir</button>
+                </div>
             </div>
         </div>
     </div>

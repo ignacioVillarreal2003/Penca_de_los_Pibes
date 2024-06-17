@@ -71,7 +71,8 @@
 .admin-home #mode-championship,
 .admin-home #mode-team,
 .admin-home #mode-match,
-.admin-home #mode-result {
+.admin-home #mode-result,
+.admin-home #mode-more-options {
     width: 100%;
     height: 100%;
     padding: 40px;

@@ -7,6 +7,7 @@
                 <li><button (click)="ChooseMode(2)" (click)="HighlightOption($event)">Equipo</button></li>
                 <li><button (click)="ChooseMode(3)" (click)="HighlightOption($event)">Partidos</button></li>
                 <li><button (click)="ChooseMode(4)" (click)="HighlightOption($event)">Resultado</button></li>
+                <li><button (click)="ChooseMode(5)" (click)="HighlightOption($event)">Mas opciones</button></li>
             </ul>
         </aside>
         <div class="modes">
@@ -63,7 +64,7 @@
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
                             <select id="input-selection-championship-2" [(ngModel)]="teamSelectedChampionship" (change)="GetTeams()">
-                                <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                                <option [ngValue]="championship.championshipName" *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
                         <ul>
@@ -107,7 +108,7 @@
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
                             <select id="input-selection-championship-2" [(ngModel)]="matchSelectedChampionship" (change)="GetMatches()">
-                                <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                                <option [ngValue]="championship.championshipName" *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
                         <ul>
@@ -115,23 +116,42 @@
                                 <h2>{{match.team1}} vs {{match.team2}}</h2>
                                 <div class="data-flex">
                                     <p>{{match.location}}</p>
-                                    <p>{{match.dateMatch}}</p>
+                                    <p>{{match.dateMatch.slice(0,10)}}</p>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     <div class="option-create">
-                        <button class="btn-submit" (click)="AddMatch()">Crear</button>
+                        <button class="btn-submit" (click)="PostMatch()">Crear</button>
                         <div class="data">
                             <label for="input-selection-championship-3">Selecciona un campeonato</label>
                             <select id="input-selection-championship-3" [(ngModel)]="matchSelectedChampionship" (change)="GetMatches()">
-                                <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                                <option [ngValue]="championship.championshipName" *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
-                        <div class="data"><input type="text" [(ngModel)]="matchTeam1" placeholder="Nombre equipo 1"></div>
-                        <div class="data"><input type="text" [(ngModel)]="matchTeam2" placeholder="Nombre equipo 2"></div>
+                        <div class="data">
+                            <label for="input-selection-championship-2">Nombre equipo 1</label>
+                            <select id="input-selection-championship-2" [(ngModel)]="matchTeam1">
+                                <option [ngValue]="country.teamName" *ngFor="let country of countries">{{country.teamName}}</option>
+                            </select>
+                        </div>
+                        <div class="data">
+                            <label for="input-selection-championship-2">Nombre equipo 2</label>
+                            <select id="input-selection-championship-2" [(ngModel)]="matchTeam2">
+                                <option [ngValue]="country.teamName" *ngFor="let country of countries">{{country.teamName}}</option>
+                            </select>
+                        </div>
                         <div class="data"><input type="text" [(ngModel)]="matchLocation" placeholder="Ubicacion"></div>
-                        <div class="data"><input type="text" [(ngModel)]="matchStage" placeholder="Etapa"></div>
+                        <div class="data">
+                            <label for="input-selection-championship-2">Etapa</label>
+                            <select id="input-selection-championship-2" [(ngModel)]="matchStage">
+                                <option value="Final">Final</option>
+                                <option value="Semifinal">Semifinal</option>
+                                <option value="Cuartos de Final">Cuartos de Final</option>
+                                <option value="Octavos de Final">Octavos de Final</option>
+                                <option value="Grupos">Grupos</option>
+                            </select>
+                        </div>
                         <div class="data">
                             <label for="input-match-date">Fecha partido</label>
                             <input id="input-match-date" type="date" [(ngModel)]="matchDate">
@@ -152,11 +172,11 @@
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
                             <select id="input-selection-championship-2" [(ngModel)]="resultSelectedChampionship" (change)="GetResults()">
-                                <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                                <option [ngValue]="championship.championshipName" *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
                         <ul>
-                            <li class="data-space-arround" *ngFor="let result of results">
+                            <li class="data-space-arround" *ngFor="let result of resultsBefore">
                                 <h2>{{result.team1}} {{result.scoreTeam1}}</h2> 
                                 <p>VS</p>
                                 <h2>{{result.scoreTeam2}} {{result.team2}}</h2>
@@ -164,17 +184,17 @@
                         </ul>
                     </div>
                     <div class="option-create">
-                        <button class="btn-submit" (click)="AddResult()">Crear</button>
+                        <button class="btn-submit" (click)="PostResult()">Crear</button>
                         <div class="data">
                             <label for="input-selection-championship-4">Selecciona un campeonato</label>
                             <select id="input-selection-championship-4" [(ngModel)]="resultSelectedChampionship" (change)="GetResults()">
-                                <option *ngFor="let championship of championships">{{championship.championshipName}}</option>
+                                <option [ngValue]="championship.championshipName" *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
                         <div class="data">
                             <label for="input-selection-match">Selecciona un partido</label>
                             <select id="input-selection-match" [(ngModel)]="resultSelectedMatch">
-                                <option [ngValue]="result" *ngFor="let result of results">{{result.team1}} vs {{result.team2}}</option>
+                                <option [ngValue]="result" *ngFor="let result of resultsAfter">{{result.team1}} vs {{result.team2}}</option>
                             </select>
                         </div>
                         <div class="data">
@@ -187,6 +207,14 @@
                         </div>
                     </div>
                     <div class="option-modify"></div>
+                </div>
+            </div>
+
+            <div id="mode-more-options">
+                <div class="cont">
+                    <div class="option-view">
+                        <button class="btn-submit" (click)="ScoreReset()">Limpiar puntuaciones</button>
+                    </div>
                 </div>
             </div>
         </div>

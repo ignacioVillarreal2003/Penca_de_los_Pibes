@@ -103,39 +103,6 @@ async function addTeamAdmin(teamName: string): Promise<any> {
     });
 }
 
-
-
-async function postMatchAdmin(championshipName: string, team1: string, team2: string, date: Date, stage: string, location: string): Promise<any> {
-    const query = `
-        INSERT INTO Juegan_partido(dateMatch, team1, team2, championshipName1, championshipName2, location, scoreTeam1, scoreTeam2, stage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    return new Promise((resolve, reject) => {
-        connection.query(query, [date, team1, team2, championshipName, championshipName, location, 0, 0, stage], (error: any, results: any) => {
-            if (error) {
-                console.error(error);
-                return reject(error);
-            }
-            resolve(results);
-        });
-    });
-}
-
-async function postResultAdmin(scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date): Promise<any> {
-    const query = `
-        UPDATE Juegan_partido
-        SET scoreTeam1 = ?, scoreTeam2 = ?
-        WHERE championshipName1 = ? AND team1 = ? AND team2 = ? AND dateMatch = ?;`;
-
-    return new Promise((resolve, reject) => {
-        connection.query(query, [scoreTeam1, scoreTeam2, championshipName, team1, team2, dateMatch], (error: any, results: any) => {
-            if (error) {
-                console.error(error);
-                return reject(error);
-            }
-            resolve(results);
-        });
-    });
-}
-
 async function getMatchesAdmin(championshipName: string): Promise<any> {
     const query = `
         SELECT * FROM Juegan_partido
@@ -152,6 +119,20 @@ async function getMatchesAdmin(championshipName: string): Promise<any> {
             } else {
                 resolve(undefined);
             }
+        });
+    });
+}
+
+async function postMatchAdmin(championshipName: string, team1: string, team2: string, date: Date, stage: string, location: string): Promise<any> {
+    const query = `
+        INSERT INTO Juegan_partido(dateMatch, team1, team2, championshipName1, championshipName2, location, scoreTeam1, scoreTeam2, stage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    return new Promise((resolve, reject) => {
+        connection.query(query, [date, team1, team2, championshipName, championshipName, location, 0, 0, stage], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            resolve(results);
         });
     });
 }
@@ -176,4 +157,51 @@ async function getResultsAdmin(championshipName: string): Promise<any> {
     });
 }
 
-export { postChampionshipAdmin, addTeamAdmin, postTeamAdmin, postMatchAdmin, postResultAdmin, getChampionshipsAdmin, getTeamsAdmin, getMatchesAdmin, getResultsAdmin, getAllTeamsAdmin };
+async function postResultAdmin(scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date): Promise<any> {
+    const query = `
+        UPDATE Juegan_partido
+        SET scoreTeam1 = ?, scoreTeam2 = ?
+        WHERE championshipName1 = ? AND team1 = ? AND team2 = ? AND dateMatch = ?;`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [scoreTeam1, scoreTeam2, championshipName, team1, team2, dateMatch], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            resolve(results);
+        });
+    });
+}
+
+async function scoreReset(): Promise<any> {
+    const query = `
+        UPDATE Participante
+        SET score = 0;`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            resolve(results);
+        });
+    });
+}
+
+
+
+export { 
+    postChampionshipAdmin, 
+    addTeamAdmin, 
+    postTeamAdmin, 
+    postMatchAdmin, 
+    postResultAdmin, 
+    getChampionshipsAdmin, 
+    getTeamsAdmin, 
+    getMatchesAdmin, 
+    getResultsAdmin, 
+    getAllTeamsAdmin,
+    scoreReset
+};

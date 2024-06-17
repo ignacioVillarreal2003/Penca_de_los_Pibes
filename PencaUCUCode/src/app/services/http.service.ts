@@ -240,15 +240,11 @@ export class HttpService {
     );
   }
 
-
-
-
-
   GetMatchesAdmin(championshipName: string): Observable<any> {
     return this.http.get<any>(`http://localhost:3001/admin/getMatchesAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.matches) {
+        if (response && response.matches) {          
           const matches: IMatchAdmin[] = response.matches;
           return matches;
         }
@@ -257,7 +253,7 @@ export class HttpService {
     );
   }
 
-  PostMatchAdmin(matchSelectedChampionship: string, matchTeam1: string, matchTeam2: string, matchDate: Date, matchStage: string, matchLocation: string): Observable<any> {
+  PostMatchAdmin(matchSelectedChampionship: string, matchTeam1: string, matchTeam2: string, matchDate: string, matchStage: string, matchLocation: string): Observable<any> {
     const requestBody: any = {
       championshipName: matchSelectedChampionship,
       team1: matchTeam1,
@@ -265,9 +261,16 @@ export class HttpService {
       date: matchDate,
       stage: matchStage,
       location: matchLocation
-    }    
+    }        
     return this.http.post<any>('http://localhost:3001/admin/postMatchAdmin', requestBody, this.httpOptions).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
     );
   }
 
@@ -275,7 +278,7 @@ export class HttpService {
     return this.http.get<any>(`http://localhost:3001/admin/getResultsAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.results) {          
+        if (response && response.results) { 
           const results: IResult[] = response.results;
           return results;
         }
@@ -294,8 +297,27 @@ export class HttpService {
       dateMatch: new Date(resultSelectedMatch.dateMatch).toISOString().slice(0, 10)
     }
     return this.http.post<any>('http://localhost:3001/admin/postResultAdmin', requestBody, this.httpOptions).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
     );
   }
 
+  ScoreReset(): Observable<any> {
+    return this.http.post<any>('http://localhost:3001/admin/scoreReset', this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
+    );
+  }
 }
