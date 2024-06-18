@@ -64,9 +64,9 @@
                                 src="../../../assets/avatar/{{avatar}}"></button></li>
                 </ul>
                 <div class="option-career">
-                    <label for="input-selection-career">Nombre equipo 2</label>
+                    <label for="input-selection-career">Seleccione su carrera</label>
                     <select id="input-selection-career" [(ngModel)]="career">
-                        <option [ngValue]="career.carrer" *ngFor="let career of careers">{{career.career}}
+                        <option [ngValue]="career.career" *ngFor="let career of careers">{{career.career}}
                         </option>
                     </select>
                     <button (click)="ChangeCareer()">Subir</button>

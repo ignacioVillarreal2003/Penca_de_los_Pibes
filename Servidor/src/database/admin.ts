@@ -190,8 +190,6 @@ async function scoreReset(): Promise<any> {
     });
 }
 
-
-
 export { 
     postChampionshipAdmin, 
     addTeamAdmin, 

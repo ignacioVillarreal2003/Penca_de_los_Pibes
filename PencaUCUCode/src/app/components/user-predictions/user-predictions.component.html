@@ -22,7 +22,7 @@
 
     <div class="predict">
         <ul *ngIf="selectedMatches">
-            <li *ngFor="let match of selectedMatches">
+            <li id="match{{match.team1}}{{match.team2}}" *ngFor="let match of selectedMatches">
                 <div class="title">
                     <p class="date">{{match.dateMatch.slice(0,10)}}</p>
                     <p *ngIf="match.stage != 'Grupos'" class="group">{{match.stage}}</p>

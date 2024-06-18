@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import Swal from 'sweetalert2'
 import { UserService } from '../../services/user.service';
 import { ICareerUser } from '../../types';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-user-header',
@@ -18,10 +19,49 @@ export class UserHeaderComponent {
   career: string | undefined = undefined;
   careers: ICareerUser[] = []
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private httpService: HttpService) {
     this.username = userService.username;
     this.avatar = userService.avatar;
     this.avatars = userService.avatars;
+  }
+
+  ngOnInit(){
+    this.httpService.GetCareers().subscribe(
+      (response: ICareerUser[]) => {
+        this.careers = response;
+      },
+      (error: any) => {
+        this.ErrorMessage(error);
+      }
+    );
+  }
+
+  ChangeCareer(){
+    if (this.career){
+      this.httpService.ChangeCareer(this.career).subscribe(
+        (response: any) => {
+          this.SuccesMessage(response);
+        },
+        (error: any) => {
+          this.ErrorMessage(error);
+        }
+      );
+    }
+  }
+
+  ChangePassword(){
+    if (this.oldPassword.length < 8 || this.newPassword.length < 8){
+      this.ErrorMessage("Error en los datos ingresados.");
+    } else {
+      this.httpService.ChangePassword(this.oldPassword, this.newPassword).subscribe(
+        (response: any) => {
+          this.SuccesMessage(response);
+        },
+        (error: any) => {
+          this.ErrorMessage(error);
+        }
+      );
+    }
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -63,12 +103,19 @@ export class UserHeaderComponent {
   ChangeOption(n: Number){    
     const mod1 = document.querySelector('.user-header .option-password') as HTMLElement;
     const mod2 = document.querySelector('.user-header .option-avatar') as HTMLElement;
+    const mod3 = document.querySelector('.user-header .option-career') as HTMLElement;
     if (n == 1){
       mod1.style.display = "flex";
       mod2.style.display = "none";
+      mod3.style.display = "none";
     } else if (n == 2){
       mod1.style.display = "none";
       mod2.style.display = "flex";
+      mod3.style.display = "none";
+    } else if (n == 3){
+      mod1.style.display = "none";
+      mod2.style.display = "none";
+      mod3.style.display = "flex";
     }
   }
 
@@ -87,14 +134,6 @@ export class UserHeaderComponent {
     } else {
       body.classList.remove("dark-mode");
       body.classList.add("light-mode");
-    }
-  }
-
-  ChangePassword(){
-    if (this.oldPassword.length == 0 || this.newPassword.length == 0){
-      this.ErrorMessage("Error en los datos ingresados.");
-    } else {
-      this.SuccesMessage("Contraseña cambiada con exito.")
     }
   }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, Subject, throwError } from 'rxjs';
-import { IRegister, ILogin, IRanking, IMatch, IChampionshipAdmin, ITeamAdmin, IMatchAdmin, IResult, ITeamUser } from '../types';
+import { IRegister, ILogin, IRanking, IMatch, IChampionshipAdmin, ITeamAdmin, IMatchAdmin, IResult, ITeamUser, ICareerUser } from '../types';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -128,7 +128,75 @@ export class HttpService {
       scoreTeam2: match.scoreTeam2
     }
     return this.http.post<any>('http://localhost:3001/user/postMatchPrediction', requestBody, this.httpOptions).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {          
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
+    );
+  }
+
+  GetCareers(): Observable<any> {    
+    return this.http.get<any>('http://localhost:3001/user/getCareers', this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.careers) {              
+          const careers: ICareerUser[] = response.careers;
+          return careers;
+        }
+        return null;
+      })
+    );
+  }
+
+  ChangeCareer(career: string): Observable<any> {
+    const requestBody: any = {
+      ci: this.user.ci,
+      career: career
+    }
+    return this.http.post<any>('http://localhost:3001/user/changeCareer', requestBody, this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {          
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
+    );
+  }
+
+  ChangePassword(oldPassword: string, newPassword: string): Observable<any> {
+    const requestBody: any = {
+      ci: this.user.ci,
+      oldPassword: oldPassword, 
+      newPassword: newPassword
+    }    
+    return this.http.post<any>('http://localhost:3001/user/changePassword', requestBody, this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {          
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
+    );
+  }
+
+  GetUserMatches(): Observable<any> {        
+    return this.http.get<any>(`http://localhost:3001/user/getUserMatches/${this.user.ci}`, this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.matches) {              
+          const matches: IMatch[] = response.matches;
+          return matches;
+        }
+        return null;
+      })
     );
   }
 

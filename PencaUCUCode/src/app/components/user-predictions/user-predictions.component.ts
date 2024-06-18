@@ -10,17 +10,21 @@ import { IMatch } from '../../types';
 })
 export class UserPredictionsComponent {
   matches: IMatch[] = [];
-  selectedMatches: IMatch[] = []
+  selectedMatches: IMatch[] = [];
+  userMatches: IMatch[] = [];
+  filter: string = "A"
 
-  constructor(private httpService: HttpService){}
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.httpService.GetChampionshipMatches().subscribe(
-      (response: IMatch[]) => {        
-        this.matches = response;  
-        console.log(this.matches);
-                
-        this.FilterGroup("A");          
+    this.GetUserMatches();
+    this.GetChampionshipMatches();
+  }
+
+  GetUserMatches() {
+    this.httpService.GetUserMatches().subscribe(
+      (response: IMatch[]) => {
+        this.userMatches = response;
       },
       (error: any) => {
         this.ErrorMessage(error);
@@ -28,16 +32,41 @@ export class UserPredictionsComponent {
     );
   }
 
-  FilterGroup(value: string) {    
-    this.selectedMatches = [];
-    this.matches.forEach((e: IMatch) => {      
-      if (e.teamGroup1 == value && e.stage == "Grupos") {
-        this.selectedMatches.push(e);        
+  GetChampionshipMatches() {
+    this.httpService.GetChampionshipMatches().subscribe(
+      (response: IMatch[]) => {
+        this.matches = response;
+        this.FilterGroup("A");
+        this.BlockPredictions()
+      },
+      (error: any) => {
+        this.ErrorMessage(error);
       }
-    })    
+    );
   }
 
-  FilterStage(value: string) {
+  BlockPredictions() {
+    this.userMatches.forEach((um: IMatch) => {
+      this.matches.forEach((m: IMatch) => {
+        if (um.championshipName1 == m.championshipName1 && um.dateMatch == m.dateMatch && um.team1 == m.team1 && um.team2 == m.team2) {
+          m.scoreTeam1 = um.scoreTeam1;
+          m.scoreTeam2 = um.scoreTeam2;
+        }
+      });
+    });
+  }
+
+  FilterGroup(value: string) {
+    this.selectedMatches = [];
+    this.matches.forEach((e: IMatch) => {
+      if (e.teamGroup1 == value && e.stage == "Grupos") {
+        this.selectedMatches.push(e);
+      }
+    })
+    this.filter = value;
+  }
+
+  FilterStage(value: string) {        
     this.selectedMatches = [];
     this.matches.forEach((e: IMatch) => {
       if (e.stage == value) {
@@ -64,8 +93,8 @@ export class UserPredictionsComponent {
     })
   }
 
-  HighlightButton(event: any){
-    const target = event.target as HTMLElement;    
+  HighlightButton(event: any) {
+    const target = event.target as HTMLElement;
     const buttons = document.querySelectorAll('.predictions .selectors button') as NodeListOf<HTMLElement>;
     buttons.forEach((button: HTMLElement) => {
       if (button === target) {
@@ -83,18 +112,27 @@ export class UserPredictionsComponent {
     if (matchDate > currentDate) {
       this.httpService.PostMatchPrediction(match).subscribe(
         (response: any) => {
-          this.SuccesMessage("Se ha registrado la prediccion.");
+          this.SuccesMessage(response);
+          this.GetUserMatches();
+          this.BlockPredictions();
         },
         (error: any) => {
           this.ErrorMessage(error);
+          this.GetUserMatches();
+          this.BlockPredictions();
+          if (match.stage == "Group"){
+            this.FilterGroup(this.filter);
+          } else {                        
+            this.FilterStage(match.stage);
+          }
         }
       );
     } else {
       this.ErrorMessage("Se acabo el tiempo.");
     }
   }
-  
-  ErrorMessage(message: string){
+
+  ErrorMessage(message: string) {
     Swal.fire({
       title: 'Error!',
       text: message,
@@ -105,7 +143,7 @@ export class UserPredictionsComponent {
     })
   }
 
-  SuccesMessage(message: string){
+  SuccesMessage(message: string) {
     Swal.fire({
       title: 'Bien!',
       text: message,

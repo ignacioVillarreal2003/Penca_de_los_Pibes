@@ -16,7 +16,7 @@ export interface ITeamUser{
 }
 
 export interface ICareerUser{
-    carrer: string
+    career: string
 }
 
 export interface IRanking{

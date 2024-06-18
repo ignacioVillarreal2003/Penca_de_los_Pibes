@@ -1,4 +1,5 @@
 const user = require('../database/user');
+const session = require('../database/session');
 
 export const getChampionshipTeams = async () => {
     try {        
@@ -9,11 +10,12 @@ export const getChampionshipTeams = async () => {
             throw new Error("Error procesando los datos.");
         }
     } catch (error) {
+        console.log(error);
         throw new Error("Error procesando los datos.");
     }
 }
 
-const getRanking = async () => {
+export const getRanking = async () => {
     try {        
         const ranking: any[] = await user.getRanking();        
         if (ranking) {
@@ -22,11 +24,12 @@ const getRanking = async () => {
             throw new Error("Error procesando los datos.");
         }
     } catch (error) {
+        console.log(error);
         throw new Error("Error procesando los datos.");
     }
 }
 
-const getChampionshipMatches = async () => {
+export const getChampionshipMatches = async () => {
     try {
         const matches: any[] = await user.getChampionshipMatches();                
         if (matches) {
@@ -35,32 +38,76 @@ const getChampionshipMatches = async () => {
             throw new Error("Error procesando los datos.");
         }
     } catch (error) {
+        console.log(error);
         throw new Error("Error procesando los datos.");
     }
 }
 
-const postMatchPrediction = async (ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number) => {
+export const postMatchPrediction = async (ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number) => {
     try {        
         await user.postMatchPrediction(ci, dateMatch, team1, team2, championshipName, datePrediction, scoreTeam1, scoreTeam2);
         return { status: 200, message: "Predicción realizada con éxito" };
     } catch (error) {
+        console.log(error);
         throw new Error("Error procesando los datos.");
     }
 }
 
-const postCareer = async (ci: string, career: string) => {
-    try {
-        await user.postCareer(ci, career);
-        return { status: 200, message: "bien" };
+export const getCareers = async () => {
+    try {        
+        const careers: any[] = await user.getCareers();                
+        if (careers) {
+            return { status: 200, careers: careers };
+        } else {
+            throw new Error("Error procesando los datos.");
+        }
     } catch (error) {
+        console.log(error);
         throw new Error("Error procesando los datos.");
     }
 }
 
-module.exports = { 
-    getChampionshipTeams, 
-    getRanking, 
-    getChampionshipMatches, 
-    postMatchPrediction, 
-    postCareer 
+export const changeCareer = async (ci: string, career: string) => {
+    try {
+        const lastCareer = await user.getCareer(ci, career);
+        if (lastCareer){
+            await user.changeCareer(ci, career);
+            return { status: 200, message: "Carrera cambiada con exito." };
+        } else {
+            await user.assignCareer(ci, career);
+            return { status: 200, message: "Carrera asignada con exito." };
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error procesando los datos.");
+    }
+}
+
+export const changePassword = async (ci: string, oldPassword: string, newPassword: string) => {
+    try {
+        const u = await session.getUserByCi(ci); 
+        if (u[0].password == oldPassword){   
+            await user.changePassword(ci, newPassword);
+            return { status: 200, message: "Contraseña cambiada con exito." };
+        } else {
+            return { status: 500, message: "Error procesando los datos." };
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error procesando los datos.");
+    }
+}
+
+export const getUserMatches = async (ci: string) => {
+    try {
+        const matches: any[] = await user.getUserMatches(ci);                
+        if (matches) {
+            return { status: 200, matches: matches };
+        } else {
+            throw new Error("Error procesando los datos.");
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error procesando los datos.");
+    }
 }

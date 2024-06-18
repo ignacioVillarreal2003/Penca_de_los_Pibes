@@ -1,7 +1,7 @@
 import { connection } from '../index';
 const { getChampionship } = require('../variables');
 
-async function getChampionshipTeams(): Promise<any> {
+export async function getChampionshipTeams(): Promise<any> {
     const query = `
         SELECT P.teamName FROM Participan P
         WHERE championshipName = ?`;
@@ -21,7 +21,7 @@ async function getChampionshipTeams(): Promise<any> {
     });
 }
 
-async function getRanking(): Promise<any> {
+export async function getRanking(): Promise<any> {
     const query = `
         SELECT P.username, P.score FROM Participante P
         ORDER BY P.score DESC
@@ -41,7 +41,7 @@ async function getRanking(): Promise<any> {
     });
 }
 
-async function getChampionshipMatches(): Promise<any> {    
+export async function getChampionshipMatches(): Promise<any> {    
     const query = ` 
         SELECT jp.*, p1.teamGroup AS teamGroup1, p2.teamGroup AS teamGroup2 FROM Juegan_partido jp
         JOIN Participan p1 ON jp.team1 = p1.teamName AND jp.championshipName1 = p1.championshipName
@@ -63,7 +63,7 @@ async function getChampionshipMatches(): Promise<any> {
     });
 }
 
-async function postMatchPrediction(ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number): Promise<any> {
+export async function postMatchPrediction(ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number): Promise<any> {
     const query = `
         INSERT INTO Predicen(ci, dateMatch, team1, team2, championshipName1, championshipName2, datePrediction, scoreTeam1, scoreTeam2) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
@@ -79,7 +79,7 @@ async function postMatchPrediction(ci: string, dateMatch: Date, team1: string, t
     });
 }
 
-async function getCareers(): Promise<any> {
+export async function getCareers(): Promise<any> {
     const query = `
         SELECT * FROM Carrera`;
 
@@ -98,7 +98,48 @@ async function getCareers(): Promise<any> {
     });
 }
 
-async function postCareer(ci: string, career: string): Promise<any> {
+export async function getCareer(ci: string): Promise<any> {
+    const query = `
+        SELECT * FROM Pertenecen
+        WHERE ci = ?;`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
+export async function changeCareer(ci: string, career: string): Promise<any> {
+    const query = `
+        UPDATE Pertenecen
+        SET career = ?
+        WHERE ci = ?;`;
+    
+    return new Promise((resolve, reject) => {
+        connection.query(query, [career, ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
+export async function assignCareer(ci: string, career: string): Promise<any> {
     const query = `
         INSERT INTO Pertenecen(ci, career) VALUES (?, ?);`;
     
@@ -117,11 +158,39 @@ async function postCareer(ci: string, career: string): Promise<any> {
     });
 }
 
-export { 
-    getChampionshipTeams, 
-    getRanking, 
-    postCareer, 
-    postMatchPrediction, 
-    getCareers, 
-    getChampionshipMatches 
-};
+export async function changePassword(ci: string, newPassword: string): Promise<any> {
+    const query = `
+        UPDATE Usuario
+        SET password = ?
+        WHERE ci = ?;`;
+    
+    return new Promise((resolve, reject) => {
+        connection.query(query, [newPassword, ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
+export async function getUserMatches(ci: string): Promise<any> {
+    const query = `
+        SELECT * FROM Predicen
+        WHERE ci = ?`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            resolve(results);
+        });
+    });
+}
