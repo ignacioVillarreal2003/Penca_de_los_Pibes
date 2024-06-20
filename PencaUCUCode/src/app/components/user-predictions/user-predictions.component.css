@@ -19,28 +19,7 @@
     padding: 40px 10px;
 }
 
-.predictions .selectors .group {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
-
-.predictions .selectors .group button {
-    width: 140px;
-    height: 44px;
-    font-size: 22px;
-    padding: 5px 10px;
-    border: none;
-    transition: all .2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-    background-color: var(--textColor);
-    color: var(--bgColor);
-}
-
-.predictions .selectors .stage {
+.predictions .selectors .filter {
     width: 100%;
     display: flex;
     align-items: center;
@@ -49,7 +28,7 @@
     flex-wrap: wrap;
 }
 
-.predictions .selectors .stage button {
+.predictions .selectors .filter button {
     width: 280px;
     height: 44px;
     font-size: 22px;
@@ -60,12 +39,12 @@
     color: var(--bgColor);
 }
 
-.predictions .selectors .group button.btn-highlight {
+.predictions .selectors .filter button.btn-highlight {
     background-color: var(--color1);
     color: var(--textColor);
 }
 
-.predictions .selectors .stage button.btn-highlight {
+.predictions .selectors .filter button.btn-highlight {
     background-color: var(--color1);
     color: var(--textColor);
 }

@@ -48,7 +48,7 @@ export class UserPredictionsComponent {
   BlockPredictions() {
     this.userMatches.forEach((um: IMatch) => {
       this.matches.forEach((m: IMatch) => {
-        if (um.championshipName1 == m.championshipName1 && um.dateMatch == m.dateMatch && um.team1 == m.team1 && um.team2 == m.team2) {
+        if (um.championshipName1 == m.championshipName1 && um.dateMatch.slice(0, 10) == m.dateMatch.slice(0, 10) && um.team1 == m.team1 && um.team2 == m.team2) {          
           m.scoreTeam1 = um.scoreTeam1;
           m.scoreTeam2 = um.scoreTeam2;
         }
@@ -109,7 +109,7 @@ export class UserPredictionsComponent {
     const matchDate = new Date(match.dateMatch).toISOString().slice(0, 10);
     const currentDate = new Date().toISOString().slice(0, 10);
     match.dateMatch = matchDate;
-    if (matchDate > currentDate) {
+    if (matchDate >= currentDate) {
       this.httpService.PostMatchPrediction(match).subscribe(
         (response: any) => {
           this.SuccesMessage(response);
@@ -118,9 +118,8 @@ export class UserPredictionsComponent {
         },
         (error: any) => {
           this.ErrorMessage(error);
-          this.GetUserMatches();
           this.BlockPredictions();
-          if (match.stage == "Group"){
+          if (match.stage == "Grupos"){
             this.FilterGroup(this.filter);
           } else {                        
             this.FilterStage(match.stage);
