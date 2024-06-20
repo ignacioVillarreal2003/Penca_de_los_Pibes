@@ -2,7 +2,7 @@
     <div class="content">
         <div class="options">
             <button (click)="ChangeMode('login')">Inicio sesion</button>
-            <button (click)="ChangeMode('register')">Registro</button>
+            <button (click)="ChangeMode('register')" (click)="GetTeams()">Registro</button>
         </div>
         <div class="access-mode" id="mode-login">
             <input type="text" [(ngModel)]="ci" placeholder="cedula">

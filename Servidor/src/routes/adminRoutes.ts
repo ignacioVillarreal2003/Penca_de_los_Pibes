@@ -1,19 +1,20 @@
 import express from "express";
+import { authenticate } from "../middlewares/authenticate";
 
 const router = express.Router();
 const adminController = require('../controllers/adminController');
 
-router.get('/getChampionshipsAdmin', adminController.getChampionshipsAdmin);
-router.post('/postChampionshipAdmin', adminController.postChampionshipAdmin);
-router.post('/activeChampionship', adminController.activeChampionship);
-router.get('/getTeamsAdmin/:championshipName', adminController.getTeamsAdmin);
-router.get('/getAllTeamsAdmin', adminController.getAllTeamsAdmin);
-router.post('/postTeamAdmin', adminController.postTeamAdmin);
-router.post('/addTeamAdmin', adminController.addTeamAdmin);
-router.get('/getMatchesAdmin/:championshipName', adminController.getMatchesAdmin);
-router.post('/postMatchAdmin', adminController.postMatchAdmin);
-router.get('/getResultsAdmin/:championshipName', adminController.getResultsAdmin);
-router.post('/postResultAdmin', adminController.postResultAdmin);
-router.post('/scoreReset', adminController.scoreReset);
+router.get('/getChampionshipsAdmin', authenticate, adminController.getChampionshipsAdmin);
+router.post('/postChampionshipAdmin', authenticate, adminController.postChampionshipAdmin);
+router.post('/activeChampionship', authenticate, adminController.activeChampionship);
+router.get('/getTeamsAdmin/:championshipName', authenticate, adminController.getTeamsAdmin);
+router.get('/getAllTeamsAdmin', authenticate, adminController.getAllTeamsAdmin);
+router.post('/postTeamAdmin', authenticate, adminController.postTeamAdmin);
+router.post('/addTeamAdmin', authenticate, adminController.addTeamAdmin);
+router.get('/getMatchesAdmin/:championshipName', authenticate, adminController.getMatchesAdmin);
+router.post('/postMatchAdmin', authenticate, adminController.postMatchAdmin);
+router.get('/getResultsAdmin/:championshipName', authenticate, adminController.getResultsAdmin);
+router.post('/postResultAdmin', authenticate, adminController.postResultAdmin);
+router.post('/scoreReset', authenticate, adminController.scoreReset);
 
 export default router;

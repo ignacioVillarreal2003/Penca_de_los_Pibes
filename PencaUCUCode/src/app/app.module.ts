@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthenticationInterceptor } from './interceptor/authentication.interceptor';
-import { Location } from '@angular/common';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './interceptor/auth.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,8 +31,9 @@ import { UserRankingComponent } from './components/user-ranking/user-ranking.com
     FormsModule
   ],
   providers: [
-    /*{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
-    Location*/
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    )
   ],
   bootstrap: [AppComponent]
 })

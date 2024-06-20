@@ -20,8 +20,12 @@ export class UserAccessComponent {
   constructor(private router: Router, private userService: UserService, private httpService: HttpService) { }
 
   ngOnInit() {
+    
+  }
+
+  GetTeams(){   // ver donde ponerlo  
     this.httpService.GetChampionshipTeams().subscribe(
-      (response: ITeamUser[]) => {
+      (response: ITeamUser[]) => {        
         this.teams = response;
       },
       (error: any) => {
