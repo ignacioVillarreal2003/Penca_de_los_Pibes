@@ -79,9 +79,7 @@ export class HttpService {
     return this.http.get<any>('http://localhost:3001/user/getChampionshipTeams', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.teams) {
-          console.log(response.teams);
-          
+        if (response && response.teams) {          
           const teams: ITeamUser[] = response.teams;
           return teams;
         }
