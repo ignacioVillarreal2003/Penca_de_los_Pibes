@@ -12,5 +12,7 @@ router.get('/getCareers', authenticate, userController.getCareers);
 router.post('/changeCareer', authenticate, userController.changeCareer);
 router.post('/changePassword', authenticate, userController.changePassword);
 router.get('/getUserMatches/:ci', authenticate, userController.getUserMatches);
+router.get('/getPointsAndCareer', authenticate, userController.getPointsAndCareer);
+
 
 export default router;

@@ -21,6 +21,27 @@ export async function getChampionshipTeams(): Promise<any> {
     });
 }
 
+export async function getPointsAndCareer(ci: string): Promise<any> {
+    const query = `
+        SELECT P.nombre, P.puntaje, P2.nombre_carrera FROM Participante P
+        JOIN Pertenecen P2 on P.cedula = P2.cedula_participante
+        WHERE P.cedula = ?`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
 export async function getRanking(): Promise<any> {
     const query = `
         SELECT P.username, P.score FROM Participante P
