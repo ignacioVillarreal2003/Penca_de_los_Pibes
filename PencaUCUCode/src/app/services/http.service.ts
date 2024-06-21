@@ -30,12 +30,12 @@ export class HttpService {
       username: username,
       champion: champion,
       subChampion: subChampion
-    }
+    }    
     return this.http.post<any>('http://localhost:3001/session/registerUser', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.token) {
-          return response.token;
+        if (response && response.token && response.user) {
+          return [response.token, response.user];
         }
         return null;
       })
@@ -50,8 +50,8 @@ export class HttpService {
     return this.http.post<any>('http://localhost:3001/session/loginUser', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.token) {
-          return response.token;
+        if (response && response.token && response.user) {
+          return [response.token, response.user];
         }
         return null;
       })

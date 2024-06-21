@@ -15,20 +15,6 @@ export const getChampionshipTeams = async () => {
     }
 }
 
-export const getPointsAndCareer = async () => {
-    try {        
-        const points: any[] = await user.getPointsAndCareer();        
-        if (points) {
-            return { status: 200, points: points };
-        } else {
-            throw new Error("Error procesando los datos.");
-        }
-    } catch (error) {
-        console.log(error);
-        throw new Error("Error procesando los datos.");
-    }
-}
-
 export const getRanking = async () => {
     try {        
         const ranking: any[] = await user.getRanking();        

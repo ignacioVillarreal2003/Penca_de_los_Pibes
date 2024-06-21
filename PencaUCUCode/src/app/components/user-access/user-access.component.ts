@@ -19,11 +19,7 @@ export class UserAccessComponent {
 
   constructor(private router: Router, private userService: UserService, private httpService: HttpService) { }
 
-  ngOnInit() {
-    
-  }
-
-  GetTeams(){   // ver donde ponerlo  
+  GetTeams(){
     this.httpService.GetChampionshipTeams().subscribe(
       (response: ITeamUser[]) => {        
         this.teams = response;
@@ -38,11 +34,11 @@ export class UserAccessComponent {
     if (this.CheckUserDataLogin()) {
       this.httpService.LoginUser(this.ci, this.password).subscribe(
         (response: any) => {
-          localStorage.setItem('token', response);
+          localStorage.setItem('token', response[0]);
           this.router.navigate(["/userhome"])
-          this.userService.username = this.username;
-          this.userService.avatar = "avatar-1.png";
-          this.userService.ci = this.ci;
+          this.userService.username = response[1][0].username;
+          this.userService.score = response[1][0].score;
+          this.userService.ci = response[1][0].ci; 
         },
         (error: any) => {
           this.ErrorMessage(error);
@@ -57,11 +53,11 @@ export class UserAccessComponent {
       if (championshipData != undefined) {
         this.httpService.RegisterUser(this.ci, this.password, this.username, championshipData[0], championshipData[1]).subscribe(
           (response: any) => {            
-            localStorage.setItem('token', response);
-            this.router.navigate(["/userhome"]);
-            this.userService.username = this.username;
-            this.userService.avatar = "avatar-1.png";
-            this.userService.ci = this.ci;
+            localStorage.setItem('token', response[0]);
+            this.router.navigate(["/userhome"])
+            this.userService.username = response[1][0].username;
+            this.userService.score = response[1][0].score;
+            this.userService.ci = response[1][0].ci;                                          
           },
           (error: any) => {
             this.ErrorMessage(error);
@@ -89,9 +85,9 @@ export class UserAccessComponent {
   async EnterChampionshipData() {
     let dataChampion = `<select id="swal-select-champion" class="swal2-select" name="options">`
     let dataSubChampion = `<select id="swal-select-subchampion" class="swal2-select" name="options">`
-    this.teams.forEach((team: any) => {
-      dataChampion += `<option class="swal2-option" value=${team.teamName}>${team.teamName}</option>`
-      dataSubChampion += `<option class="swal2-option" value=${team.teamName}>${team.teamName}</option>`
+    this.teams.forEach((team: ITeamUser) => {      
+      dataChampion += `<option class="swal2-option" value="${team.teamName}">${team.teamName}</option>`
+      dataSubChampion += `<option class="swal2-option" value="${team.teamName}">${team.teamName}</option>`
     })
     dataChampion += `</select>`
     dataSubChampion += `</select>`
@@ -103,20 +99,13 @@ export class UserAccessComponent {
       preConfirm: () => {
         const champion = document.getElementById("swal-select-champion") as HTMLInputElement;
         const subchampion = document.getElementById("swal-select-subchampion") as HTMLInputElement;
-        return [
+        return [          
           champion.value,
           subchampion.value
         ];
       }
     });
-    if (formValues) {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your work has been saved",
-        showConfirmButton: false,
-        timer: 1500
-      });
+    if (formValues && formValues[0] != formValues[1]) {
       return formValues;
     } else {
       this.ErrorMessage("No se a podido registrar.")
@@ -145,13 +134,6 @@ export class UserAccessComponent {
       }
     });
     if (formValues) {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your work has been saved",
-        showConfirmButton: false,
-        timer: 1500
-      });
       return formValues
     } else {
       return undefined;

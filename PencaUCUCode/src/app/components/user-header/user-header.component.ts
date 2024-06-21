@@ -10,7 +10,8 @@ import { HttpService } from '../../services/http.service';
   styleUrl: './user-header.component.css'
 })
 export class UserHeaderComponent {
-  username: string = ""
+  username: string = "";
+  score: string = "";
   avatar: string = "";
   avatars: string[] = []
   previousScrollPosition = 0;
@@ -19,13 +20,19 @@ export class UserHeaderComponent {
   career: string | undefined = undefined;
   careers: ICareerUser[] = []
 
-  constructor(private userService: UserService, private httpService: HttpService) {
-    this.username = userService.username;
-    this.avatar = userService.avatar;
-    this.avatars = userService.avatars;
-  }
+  constructor(private userService: UserService, private httpService: HttpService) {}
 
-  ngOnInit(){
+  ngOnInit(){      
+    this.username = this.userService.username;
+    this.score = this.userService.score;
+    this.avatars = this.userService.avatars;
+    const storedData = localStorage.getItem('avatar');    
+    if (storedData != undefined) {      
+      this.avatar = storedData;
+    } else {      
+      this.avatar = this.userService.avatars[Math.floor(Math.random() * this.userService.avatars.length) + 1];
+      localStorage.setItem('avatar', this.avatar);
+    }
     this.httpService.GetCareers().subscribe(
       (response: ICareerUser[]) => {
         this.careers = response;
@@ -121,7 +128,7 @@ export class UserHeaderComponent {
 
   SetAvatar(avatar: string){
     this.avatar = avatar;
-    this.userService.avatar = avatar;
+    localStorage.setItem('avatar', avatar);
     this.CloseConfigurations();
   }
 

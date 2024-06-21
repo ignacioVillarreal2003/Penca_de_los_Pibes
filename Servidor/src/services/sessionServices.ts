@@ -6,7 +6,7 @@ function generateAccessToken(ci: string) {
 }
 
 export const registerUser = async (ci: string, password: string, username: string, champion: string, subChampion: string) => {
-    try {     
+    try {             
         const existingUser = await session.getUserByCi(ci);           
         if (existingUser) {
             return { status: 400, message: "El usuario ya ha sido registrado." };
@@ -15,8 +15,9 @@ export const registerUser = async (ci: string, password: string, username: strin
                 await session.postUser(ci, password);
                 await session.postParticipant(ci, username);
                 await session.postForecast(ci, champion, subChampion);
+                const user = await session.getUserData(ci);                                
                 const token = generateAccessToken(ci);
-                return { status: 200, token: token };
+                return { status: 200, token: token, user: user };
             } catch (error) {
                 console.log(error);
                 await session.deleteForecast(ci);
@@ -31,7 +32,7 @@ export const registerUser = async (ci: string, password: string, username: strin
     }
 }
 
-const loginUser = async (ci: string, password: string) => {
+export const loginUser = async (ci: string, password: string) => {
     try {
         const existingUser = await session.getUserByCi(ci); 
         if (!existingUser) {
@@ -40,8 +41,9 @@ const loginUser = async (ci: string, password: string) => {
             if (existingUser[0].password != password) {
                 return { status: 400, message: "Contraseña incorrecta." };
             } else {
+                const user = await session.getUserData(ci);
                 const token = generateAccessToken(ci);
-                return { status: 200, token: token };
+                return { status: 200, token: token, user: user };
             }
         }
     } catch (error) {
@@ -50,7 +52,7 @@ const loginUser = async (ci: string, password: string) => {
     }
 }
 
-const loginAdmin = async (ci: string, password: string) => {
+export const loginAdmin = async (ci: string, password: string) => {
     try {
         const existingUser = await session.getAdminByCi(ci);                 
         if (!existingUser) {
@@ -68,5 +70,3 @@ const loginAdmin = async (ci: string, password: string) => {
         throw new Error("Error procesando los datos.");
     }
 }
-
-module.exports = { registerUser, loginUser, loginAdmin }
