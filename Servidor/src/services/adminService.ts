@@ -104,6 +104,21 @@ const getResultsAdmin = async (championshipName: string) => {
 const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date) => {
     try {
         await admin.postResultAdmin(scoreTeam1, scoreTeam2, championshipName, team1, team2, dateMatch);
+        const predicciones: any[] = await admin.getPredictions(championshipName, team1, team2, dateMatch);
+        console.log(predicciones);
+        
+        predicciones.forEach((e: any) => {
+            if (scoreTeam1 == e.scoreTeam1 && scoreTeam2 == e.scoreTeam2) {
+                admin.postPoints(e.ci, 4)
+            } else if (scoreTeam1 > scoreTeam2 && e.scoreTeam1 > e.scoreTeam2) {
+                admin.postPoints(e.ci, 2)
+            } else if (scoreTeam2 > scoreTeam1 && e.scoreTeam2 > e.scoreTeam1) {
+                admin.postPoints(e.ci, 2)
+            }
+            // actualizar puntuaciones con if y meter a base de datos
+        })
+        // aca traes todos los tipos que puntuaron y sus predicciones y en base si coinciden con el scoreTeam1, scoreTeam2 les das los puntos
+        // mandarlo a la base (nuevo metodo en admin.ts)
         return { status: 200, message: "Resultado atribuído con éxito" };
     } catch (error) {
         throw new Error("Error procesando los datos.");

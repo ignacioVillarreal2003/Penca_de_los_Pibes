@@ -174,6 +174,46 @@ async function postResultAdmin(scoreTeam1: number, scoreTeam2: number, champions
     });
 }
 
+export async function postPoints(ci: string, points: number): Promise<any> {
+    const query = `
+        UPDATE Participante
+        SET score = score + ?
+        WHERE ci = ?;`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [points, ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            resolve(results);
+        });
+    });
+}
+
+export async function getPredictions(championshipName: string, team1: string, team2: string, dateMatch: Date): Promise<any> {
+    const query = `
+        SELECT * FROM Predicen
+        WHERE championshipName1 = 'Copa América 2024' 
+        AND team1 = 'Paraguay' 
+        AND team2 = 'Costa Rica' 
+        AND dateMatch = '2024-06-24';`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [championshipName, team1, team2, dateMatch], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
 async function scoreReset(): Promise<any> {
     const query = `
         UPDATE Participante
