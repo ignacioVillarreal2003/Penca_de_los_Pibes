@@ -1,6 +1,25 @@
 import { connection } from '../index';
 const { getChampionship } = require('../variables');
 
+export async function getAllUsers(): Promise<any> {
+    const query = `
+        SELECT * FROM Participante`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
 export async function getChampionshipTeams(): Promise<any> {
     const query = `
         SELECT P.teamName FROM Participan P

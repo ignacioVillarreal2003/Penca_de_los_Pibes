@@ -7,6 +7,8 @@ import sessionRoutes from './routes/sessionRoutes';
 import adminRoutes from './routes/adminRoutes';
 import userRoutes from './routes/userRoutes';
 
+const { todosLosDias } = require('mail');
+
 const app = express();
 
 const corsOptions = {
@@ -40,3 +42,6 @@ connection.connect((err: any) => {
     if (err) throw err;
     console.log('Connected to the database.');
 });
+
+const intervaloDias = 24 * 60 * 60 * 1000;
+setInterval(todosLosDias, intervaloDias);
