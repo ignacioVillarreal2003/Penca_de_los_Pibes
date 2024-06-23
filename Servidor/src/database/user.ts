@@ -63,7 +63,23 @@ export async function getChampionshipMatches(): Promise<any> {
     });
 }
 
-export async function postMatchPrediction(ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number): Promise<any> {
+export async function getMatchPrediction(ci: string, dateMatch: string, team1: string, team2: string, championshipName: string): Promise<any> {
+    const query = `
+        SELECT * FROM Predicen
+        WHERE ci = ? AND dateMatch = ? AND team1 = ? AND team2 = ?  AND championshipName1 = ? AND championshipName2 = ?;`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [ci, dateMatch, team1, team2, championshipName, championshipName], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            resolve(results);
+        });
+    });
+}
+
+export async function postMatchPrediction(ci: string, dateMatch: string, team1: string, team2: string, championshipName: string, datePrediction: string, scoreTeam1: number, scoreTeam2: number): Promise<any> {
     const query = `
         INSERT INTO Predicen(ci, dateMatch, team1, team2, championshipName1, championshipName2, datePrediction, scoreTeam1, scoreTeam2) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
@@ -78,6 +94,24 @@ export async function postMatchPrediction(ci: string, dateMatch: Date, team1: st
         });
     });
 }
+
+export async function updateMatchPrediction(ci: string, dateMatch: string, team1: string, team2: string, championshipName: string, datePrediction: string, scoreTeam1: number, scoreTeam2: number): Promise<any> {    
+    const query = `
+        UPDATE Predicen
+        SET scoreTeam1 = ?, scoreTeam2 = ?, datePrediction = ?
+        WHERE ci = ? AND dateMatch = ? AND team1 = ? AND team2 = ? AND championshipName1 = ? AND championshipName2 = ?;`;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [scoreTeam1, scoreTeam2, datePrediction, ci, dateMatch, team1, team2, championshipName, championshipName], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            resolve(results);
+        });
+    });
+}
+
 
 export async function getCareers(): Promise<any> {
     const query = `

@@ -49,8 +49,14 @@ export const postMatchPrediction = async (ci: string, dateMatch: string, team1: 
         datePrediction = dateMatch.replace('T', ' ');
         dateMatch = dateMatch.replace('.000Z', '');
         datePrediction = dateMatch.replace('.000Z', '');
-        await user.postMatchPrediction(ci, dateMatch, team1, team2, championshipName, datePrediction, scoreTeam1, scoreTeam2);
-        return { status: 200, message: "Predicción realizada con éxito" };
+        const prediction = await user.getMatchPrediction(ci, dateMatch, team1, team2, championshipName);   
+        if (prediction.length > 0) {            
+            await user.updateMatchPrediction(ci, dateMatch, team1, team2, championshipName, datePrediction, scoreTeam1, scoreTeam2);
+            return { status: 200, message: "Predicción actualizada con éxito" };
+        } else {            
+            await user.postMatchPrediction(ci, dateMatch, team1, team2, championshipName, datePrediction, scoreTeam1, scoreTeam2);
+            return { status: 200, message: "Predicción realizada con éxito" };
+        }
     } catch (error) {
         console.log(error);
         throw new Error("Error procesando los datos.");
