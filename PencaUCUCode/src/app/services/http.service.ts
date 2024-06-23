@@ -114,17 +114,17 @@ export class HttpService {
     );
   }
 
-  PostMatchPrediction(match: IMatch): Observable<any> {
+  PostMatchPrediction(match: IMatch, datePrediction: string): Observable<any> {
     const requestBody: any = {
       ci: this.user.ci,
       dateMatch: match.dateMatch,
       team1: match.team1,
       team2: match.team2,
       championshipName: match.championshipName1,
-      datePrediction: new Date().toISOString().slice(0, 10),
+      datePrediction: datePrediction,
       scoreTeam1: match.scoreTeam1,
       scoreTeam2: match.scoreTeam2
-    }
+    }    
     return this.http.post<any>('http://localhost:3001/user/postMatchPrediction', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {

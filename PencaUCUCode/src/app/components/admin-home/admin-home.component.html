@@ -23,7 +23,7 @@
                         <ul>
                             <li *ngFor="let championship of championships">
                                 <h2>{{championship.championshipName}}</h2>
-                                <p>{{championship.startDate.slice(0, 10)}} / {{championship.endDate.slice(0, 10)}}</p>
+                                <p>{{championship.startDate.slice(0, 16)}} / {{championship.endDate.slice(0, 16)}}</p>
                             </li>
                         </ul>
                     </div>
@@ -32,11 +32,11 @@
                         <div class="data"><input type="text" [(ngModel)]="championshipName" placeholder="Nombre campeonato"></div>
                         <div class="data">
                             <label for="input-start-date">Fecha comienzo</label>
-                            <input id="input-start-date" type="date" [(ngModel)]="championshipStartDate">
+                            <input id="input-start-date" type="datetime-local" [(ngModel)]="championshipStartDate">
                         </div>
                         <div class="data">
                             <label for="input-end-date">Fecha fin</label>
-                            <input id="input-end-date" type="date" [(ngModel)]="championshipEndDate">
+                            <input id="input-end-date" type="datetime-local" [(ngModel)]="championshipEndDate">
                         </div>
                     </div>
                     <div class="option-modify"></div>
@@ -116,7 +116,7 @@
                                 <h2>{{match.team1}} vs {{match.team2}}</h2>
                                 <div class="data-flex">
                                     <p>{{match.location}}</p>
-                                    <p>{{match.dateMatch.slice(0,10)}}</p>
+                                    <p>{{match.dateMatch.slice(0,16)}}</p>
                                 </div>
                             </li>
                         </ul>
@@ -154,7 +154,7 @@
                         </div>
                         <div class="data">
                             <label for="input-match-date">Fecha partido</label>
-                            <input id="input-match-date" type="date" [(ngModel)]="matchDate">
+                            <input id="input-match-date" type="datetime-local" [(ngModel)]="matchDate">
                         </div>
                     </div>
                     <div class="option-modify"></div>

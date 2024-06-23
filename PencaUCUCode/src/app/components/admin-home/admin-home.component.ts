@@ -41,7 +41,7 @@ export class AdminHomeComponent {
     );
   }
 
-  PostChampionshipAdmin() {
+  PostChampionshipAdmin() {    
     if (this.championshipName && this.championshipStartDate && this.championshipEndDate) {
       this.httpService.PostChampionshipAdmin(this.championshipName, this.championshipStartDate, this.championshipEndDate).subscribe(
         (response: any) => {

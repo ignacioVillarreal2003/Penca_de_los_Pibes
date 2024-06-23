@@ -43,8 +43,12 @@ export const getChampionshipMatches = async () => {
     }
 }
 
-export const postMatchPrediction = async (ci: string, dateMatch: Date, team1: string, team2: string, championshipName: string, datePrediction: Date, scoreTeam1: number, scoreTeam2: number) => {
+export const postMatchPrediction = async (ci: string, dateMatch: string, team1: string, team2: string, championshipName: string, datePrediction: string, scoreTeam1: number, scoreTeam2: number) => {
     try {        
+        dateMatch = dateMatch.replace('T', ' ');
+        datePrediction = dateMatch.replace('T', ' ');
+        dateMatch = dateMatch.replace('.000Z', '');
+        datePrediction = dateMatch.replace('.000Z', '');
         await user.postMatchPrediction(ci, dateMatch, team1, team2, championshipName, datePrediction, scoreTeam1, scoreTeam2);
         return { status: 200, message: "Predicción realizada con éxito" };
     } catch (error) {

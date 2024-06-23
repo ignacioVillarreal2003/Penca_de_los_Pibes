@@ -18,7 +18,7 @@ export class UserPredictionsComponent {
 
   ngOnInit() {
     this.GetUserMatches();
-    this.GetChampionshipMatches();
+    this.GetChampionshipMatches();    
   }
 
   GetUserMatches() {
@@ -35,7 +35,7 @@ export class UserPredictionsComponent {
   GetChampionshipMatches() {
     this.httpService.GetChampionshipMatches().subscribe(
       (response: IMatch[]) => {
-        this.matches = response;
+        this.matches = response;                
         this.FilterGroup("A");
         this.BlockPredictions()
       },
@@ -105,12 +105,12 @@ export class UserPredictionsComponent {
     });
   }
 
-  SubmitPrediction(match: IMatch) {
-    const matchDate = new Date(match.dateMatch).toISOString().slice(0, 10);
-    const currentDate = new Date().toISOString().slice(0, 10);
-    match.dateMatch = matchDate;
+  SubmitPrediction(match: IMatch) {    
+    const matchDate = this.FormatDate(new Date(match.dateMatch));    
+    const currentDate = this.FormatDateH(new Date(), -1);        
     if (matchDate >= currentDate) {
-      this.httpService.PostMatchPrediction(match).subscribe(
+      match.dateMatch = this.FormatDate(new Date(match.dateMatch));      
+      this.httpService.PostMatchPrediction(match, currentDate).subscribe(
         (response: any) => {
           this.SuccesMessage(response);
           this.GetUserMatches();
@@ -129,6 +129,27 @@ export class UserPredictionsComponent {
     } else {
       this.ErrorMessage("Se acabo el tiempo.");
     }
+  }
+
+  FormatDateH(date: Date, n: number){
+    date.setHours(date.getHours() - n);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.000Z`;
+  }
+
+  FormatDate(date: Date){
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2); 
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.000Z`;
   }
 
   ErrorMessage(message: string) {
