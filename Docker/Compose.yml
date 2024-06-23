@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  db:
+    build: .
+    container_name: my_mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: ObligatorioBD2
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+# docker-compose up --build
