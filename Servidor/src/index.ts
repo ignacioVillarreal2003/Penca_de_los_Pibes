@@ -16,7 +16,6 @@ const corsOptions = {
     credentials: true,
 };
 
-/// VER LO DEL CAMPEONATO PARA EL USUARIO --------
 app.use(express.json());
 app.use(cors(corsOptions));
 
