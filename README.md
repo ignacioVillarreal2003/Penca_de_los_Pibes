@@ -50,8 +50,15 @@ Contraseña: 12345678
 Y a continuación presionar el botón con el texto "ingresar como administrador".
 
 ## Crear un archivo en el servidor con el nombre .env y escribir:
->- MAIL = "El email desde donde se van a mandar mensajes"
->- PASSMAIL = "Contraseña de aplicacion (al verificar en dos pasos, en el gmail de origen)"
+```
+PORT="3306"
+USER="root"
+PASS="1234"
+NAME="ObligatorioBD2"
+SECRET="shhhh"
+MAIL="PabloPicasoPicaPiedras" 
+MAILPASS="owuv qahd rapw zkao"
+```
 
 # Integrantes
 - Emiliano Fau
