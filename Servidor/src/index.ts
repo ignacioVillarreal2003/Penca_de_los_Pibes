@@ -43,5 +43,6 @@ connection.connect((err: any) => {
     console.log('Connected to the database.');
 });
 
+
 const intervaloDias = 24 * 60 * 60 * 1000;
 setInterval(todosLosDias, intervaloDias);

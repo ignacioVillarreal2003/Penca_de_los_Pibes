@@ -2,6 +2,27 @@ const admin = require('../database/admin');
 const user = require('../database/user');
 const { getChampionship } = require('variables');
 
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.MAIL, // Email
+    pass: process.env.PASS // Codigo de verificacion(al verificar en dos pasos)
+  }
+});
+// Contra mail: HOLAmundo1
+
+function createMailOptions(from: any, to: any, subject: any, text: any) {
+  const mailOptions = {
+    from: from,
+    to: to,
+    subject: subject,
+    text: text
+  };
+  return mailOptions;
+}
+
 export const todosLosDias = async () => {
     try {
         const matches: any[] = await admin.getMatchesAdmin(getChampionship());  
@@ -14,7 +35,7 @@ export const todosLosDias = async () => {
         })
         users.forEach((user: any) => {
             // enviar mail
-            // user.gmail
+            // user.mail
         })
     } catch (error) {
         throw new Error("Error procesando los datos.");
