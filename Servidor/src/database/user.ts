@@ -211,6 +211,27 @@ export async function assignCareer(ci: string, career: string): Promise<any> {
     });
 }
 
+export async function changeMail(ci: string, mail: string): Promise<any> {
+    const query = `
+        UPDATE Participante
+        SET mail = ?
+        WHERE ci = ?;`;
+    
+    return new Promise((resolve, reject) => {
+        connection.query(query, [mail, ci], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
 export async function changePassword(ci: string, newPassword: string): Promise<any> {
     const query = `
         UPDATE Usuario

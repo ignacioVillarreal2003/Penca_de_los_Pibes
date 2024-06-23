@@ -19,6 +19,7 @@ export class UserHeaderComponent {
   newPassword: string = "";
   career: string | undefined = undefined;
   careers: ICareerUser[] = []
+  mail: string = "";
 
   constructor(private userService: UserService, private httpService: HttpService) {}
 
@@ -46,6 +47,19 @@ export class UserHeaderComponent {
   ChangeCareer(){
     if (this.career){
       this.httpService.ChangeCareer(this.career).subscribe(
+        (response: any) => {
+          this.SuccesMessage(response);
+        },
+        (error: any) => {
+          this.ErrorMessage(error);
+        }
+      );
+    }
+  }
+
+  ChangeMail(){
+    if (this.mail){
+      this.httpService.ChangeMail(this.mail).subscribe(
         (response: any) => {
           this.SuccesMessage(response);
         },
@@ -111,18 +125,27 @@ export class UserHeaderComponent {
     const mod1 = document.querySelector('.user-header .option-password') as HTMLElement;
     const mod2 = document.querySelector('.user-header .option-avatar') as HTMLElement;
     const mod3 = document.querySelector('.user-header .option-career') as HTMLElement;
+    const mod4 = document.querySelector('.user-header .option-mail') as HTMLElement;
     if (n == 1){
       mod1.style.display = "flex";
       mod2.style.display = "none";
       mod3.style.display = "none";
+      mod4.style.display = "none";
     } else if (n == 2){
       mod1.style.display = "none";
       mod2.style.display = "flex";
       mod3.style.display = "none";
+      mod4.style.display = "none";
     } else if (n == 3){
       mod1.style.display = "none";
       mod2.style.display = "none";
       mod3.style.display = "flex";
+      mod4.style.display = "none";
+    } else if (n == 4){
+      mod1.style.display = "none";
+      mod2.style.display = "none";
+      mod3.style.display = "none";
+      mod4.style.display = "flex";
     }
   }
 

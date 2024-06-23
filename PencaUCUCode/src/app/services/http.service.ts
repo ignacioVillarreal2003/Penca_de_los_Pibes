@@ -167,6 +167,23 @@ export class HttpService {
     );
   }
 
+  ChangeMail(mail: string): Observable<any> {
+    const requestBody: any = {
+      ci: this.user.ci,
+      mail: mail
+    }
+    return this.http.post<any>('http://localhost:3001/user/changeMail', requestBody, this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
+    );
+  }
+
   ChangePassword(oldPassword: string, newPassword: string): Observable<any> {
     const requestBody: any = {
       ci: this.user.ci,

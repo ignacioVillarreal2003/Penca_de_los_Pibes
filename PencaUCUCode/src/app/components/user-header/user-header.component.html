@@ -41,6 +41,10 @@
                             <p>Carrera</p>
                             <div class="shape"></div>
                         </button></li>
+                    <li><button (click)="ChangeOption(4)">
+                            <p>Mail</p>
+                            <div class="shape"></div>
+                        </button></li>
                     <li><button (click)="CloseConfigurations()">
                             <p>Cerrar</p>
                             <div class="shape-red"></div>
@@ -70,6 +74,10 @@
                         </option>
                     </select>
                     <button (click)="ChangeCareer()">Subir</button>
+                </div>
+                <div class="option-mail">
+                    <input type="text" placeholder="gmail" [(ngModel)]="mail">
+                    <button (click)="ChangeMail()">Subir</button>
                 </div>
             </div>
         </div>

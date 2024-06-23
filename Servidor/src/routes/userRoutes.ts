@@ -10,6 +10,7 @@ router.get('/getChampionshipMatches', authenticate, userController.getChampionsh
 router.post('/postMatchPrediction', authenticate, userController.postMatchPrediction);
 router.get('/getCareers', authenticate, userController.getCareers);
 router.post('/changeCareer', authenticate, userController.changeCareer);
+router.post('/changeMail', authenticate, userController.changeMail);
 router.post('/changePassword', authenticate, userController.changePassword);
 router.get('/getUserMatches/:ci', authenticate, userController.getUserMatches);
 

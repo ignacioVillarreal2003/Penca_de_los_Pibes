@@ -94,6 +94,25 @@ export const changeCareer = async (req: any, res: any) => {
     }
 }
 
+export const changeMail = async (req: any, res: any) => {
+    try {
+        const { body } = req;
+        if (!body.ci || !body.mail) {
+            return res.status(500).send({ message: "Error procesando los datos." });
+        } else {
+            const result = await userServices.changeMail(body.ci, body.mail);
+            if (result.message) {
+                res.status(result.status).send({ message: result.message })
+            } else {
+                res.status(500).send({ message: "Error procesando los datos." });
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
 export const changePassword = async (req: any, res: any) => {
     try {
         const { body } = req;
