@@ -23,8 +23,8 @@ CREATE TABLE Equipo(
 );
 CREATE TABLE Campeonato(
     championshipName VARCHAR(50) PRIMARY KEY,
-    startDate DATE,
-    endDate DATE
+    startDate DATETIME,
+    endDate DATETIME
 );
 CREATE TABLE Pertenecen(
     ci VARCHAR(8) PRIMARY KEY,
@@ -39,7 +39,7 @@ CREATE TABLE Participan(
     PRIMARY KEY (championshipName, teamName)
 );
 CREATE TABLE Juegan_partido(
-    dateMatch DATE,
+    dateMatch DATETIME,
     team1 VARCHAR(20),
     team2 VARCHAR(20),
     championshipName1 VARCHAR(50),
@@ -57,12 +57,12 @@ CREATE TABLE Juegan_partido(
 );
 CREATE TABLE Predicen(
     ci VARCHAR(8),
-    dateMatch DATE,
+    dateMatch DATETIME,
     team1 VARCHAR(20),
     team2 VARCHAR(20),
     championshipName1 VARCHAR(50),
     championshipName2 VARCHAR(50),
-    datePrediction DATE,
+    datePrediction DATETIME,
     scoreTeam1 INT,
     scoreTeam2 INT,
     PRIMARY KEY (ci, dateMatch, team1, team2, championshipName1, championshipName2),

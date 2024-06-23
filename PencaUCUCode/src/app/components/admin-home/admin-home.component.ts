@@ -379,4 +379,10 @@ export class AdminHomeComponent {
       timerProgressBar: true
     })
   }
+
+  inputChampionshipResult(champion: string, subchampion: string) {
+    this.httpService.postChampionshipResult(champion, subchampion).subscribe((response: any) => {
+      console.log(response);
+    });
+  }
 }

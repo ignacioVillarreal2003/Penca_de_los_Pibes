@@ -177,7 +177,7 @@
                         </div>
                         <ul>
                             <li class="data-space-arround" *ngFor="let result of resultsBefore">
-                                <h2>{{result.team1}} {{result.scoreTeam1}}</h2> 
+                                <h2>{{result.team1}} {{result.scoreTeam1}}</h2>
                                 <p>VS</p>
                                 <h2>{{result.scoreTeam2}} {{result.team2}}</h2>
                             </li>
@@ -214,6 +214,9 @@
                 <div class="cont">
                     <div class="option-view">
                         <button class="btn-submit" (click)="ScoreReset()">Limpiar puntuaciones</button>
+                    </div>
+                    <div class="option-view inputChampion">
+                      <button class="btn-submit">Ingresar campeón y subcampeón</button>
                     </div>
                 </div>
             </div>
