@@ -404,6 +404,19 @@ export class HttpService {
     );
   }
 
+  PostWinners(): Observable<any> {
+    return this.http.post<any>('http://localhost:3001/admin/postWinners', this.httpOptions).pipe(
+      catchError(this.handleError),
+      map(response => {
+        if (response && response.message) {
+          const message: string = response.message;
+          return message;
+        }
+        return null;
+      })
+    );
+  }
+
   postChampionshipResult(champion: string, subchampion: string) {
     const requestBody: any = {
       champion: champion,

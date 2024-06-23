@@ -41,7 +41,7 @@ connection.connect((err: any) => {
     console.log('Connected to the database.');
 });
 
-const { todosLosDias } = require('./mail');
+const { pointsRemainder } = require('./mail');
 
 const intervaloDias = 24 * 60 * 60 * 1000;
-setInterval(todosLosDias, intervaloDias);
+setInterval(pointsRemainder, intervaloDias);

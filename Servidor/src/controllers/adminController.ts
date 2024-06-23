@@ -1,7 +1,7 @@
 const adminServices = require('../services/adminService');
 const { setChampionship, getChampionship } = require('../variables');
 
-const getChampionshipsAdmin = async (_req: any, res: any) => {
+export const getChampionshipsAdmin = async (_req: any, res: any) => {
     try {
         const result = await adminServices.getChampionshipsAdmin();
         if (result.championships) {
@@ -14,7 +14,20 @@ const getChampionshipsAdmin = async (_req: any, res: any) => {
     }
 }
 
-const postChampionshipAdmin = async (req: any, res: any) => {
+export const postWinners = async (_req: any, res: any) => {
+    try {        
+        const result = await adminServices.postWinners();
+        if (result.message) {
+            res.status(result.status).send({ message: result.message })
+        } else {
+            res.status(500).send({ message: "Error procesando los datos." });
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
+export const postChampionshipAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
         if (!body.championshipName || !body.startDate || !body.endDate) {
@@ -32,7 +45,7 @@ const postChampionshipAdmin = async (req: any, res: any) => {
     }
 }
 
-const activeChampionship = async (req: any, res: any) => {
+export const activeChampionship = async (req: any, res: any) => {
     try {
         const { body } = req;
         if (!body.championshipName) {
@@ -46,7 +59,7 @@ const activeChampionship = async (req: any, res: any) => {
     }
 }
 
-const getTeamsAdmin = async (req: any, res: any) => {
+export const getTeamsAdmin = async (req: any, res: any) => {
     try {
         const championshipName = req.params.championshipName;
         if (!championshipName) {
@@ -64,7 +77,7 @@ const getTeamsAdmin = async (req: any, res: any) => {
     }
 }
 
-const getAllTeamsAdmin = async (_req: any, res: any) => {
+export const getAllTeamsAdmin = async (_req: any, res: any) => {
     try {
         const result = await adminServices.getAllTeamsAdmin();
         if (result.teams) {
@@ -77,7 +90,7 @@ const getAllTeamsAdmin = async (_req: any, res: any) => {
     }
 }
 
-const postTeamAdmin = async (req: any, res: any) => {
+export const postTeamAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
         if (!body.championshipName || !body.teamName || !body.teamGroup) {
@@ -95,7 +108,7 @@ const postTeamAdmin = async (req: any, res: any) => {
     }
 }
 
-const addTeamAdmin = async (req: any, res: any) => {
+export const addTeamAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
         if (!body.teamName) {
@@ -113,7 +126,7 @@ const addTeamAdmin = async (req: any, res: any) => {
     }
 }
 
-const getMatchesAdmin = async (req: any, res: any) => {
+export const getMatchesAdmin = async (req: any, res: any) => {
     try {
         const championshipName = req.params.championshipName;
         if (!championshipName) {
@@ -131,7 +144,7 @@ const getMatchesAdmin = async (req: any, res: any) => {
     }
 }
 
-const postMatchAdmin = async (req: any, res: any) => {
+export const postMatchAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
         if (!body.championshipName || !body.team1 || !body.team2 || !body.date || !body.stage || !body.location) {
@@ -149,7 +162,7 @@ const postMatchAdmin = async (req: any, res: any) => {
     }
 }
 
-const getResultsAdmin = async (req: any, res: any) => {
+export const getResultsAdmin = async (req: any, res: any) => {
     try {
         const championshipName = req.params.championshipName;
         if (!championshipName) {
@@ -167,7 +180,7 @@ const getResultsAdmin = async (req: any, res: any) => {
     }
 }
 
-const postResultAdmin = async (req: any, res: any) => {
+export const postResultAdmin = async (req: any, res: any) => {
     try {
         const { body } = req;
         if (!body.championshipName || !body.team1 || !body.team2 || !body.scoreTeam1 || !body.scoreTeam2 || !body.dateMatch) {
@@ -185,7 +198,7 @@ const postResultAdmin = async (req: any, res: any) => {
     }
 }
 
-const postChampionshipEnd = async (req: any, res: any) => {
+export const postChampionshipEnd = async (req: any, res: any) => {
     try {
         const { body } = req;
         if (getChampionship() == null || !body.champion || !body.subchampion) {
@@ -203,7 +216,7 @@ const postChampionshipEnd = async (req: any, res: any) => {
     }
 }
 
-const scoreReset = async (_req: any, res: any) => {
+export const scoreReset = async (_req: any, res: any) => {
     try {
         const result = await adminServices.scoreReset();
         if (result.message) {
@@ -214,20 +227,4 @@ const scoreReset = async (_req: any, res: any) => {
     } catch (error) {
         res.status(500).send({ message: "Error procesando los datos." });
     }
-}
-
-module.exports = {
-    activeChampionship,
-    postChampionshipAdmin,
-    addTeamAdmin,
-    postTeamAdmin,
-    postMatchAdmin,
-    postResultAdmin,
-    getChampionshipsAdmin,
-    getTeamsAdmin,
-    getMatchesAdmin,
-    getResultsAdmin,
-    getAllTeamsAdmin,
-    scoreReset,
-    postChampionshipEnd
 }

@@ -4,6 +4,7 @@ import { authenticate } from "../middlewares/authenticate";
 const router = express.Router();
 const adminController = require('../controllers/adminController');
 
+router.post('/postWinners', adminController.postWinners);
 router.get('/getChampionshipsAdmin', authenticate, adminController.getChampionshipsAdmin);
 router.post('/postChampionshipAdmin', authenticate, adminController.postChampionshipAdmin);
 router.post('/activeChampionship', authenticate, adminController.activeChampionship);

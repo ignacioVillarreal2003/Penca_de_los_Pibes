@@ -4,7 +4,7 @@ const { getChampionship } = require('./variables');
 
 const nodemailer = require('nodemailer');
 
-const transporter = nodemailer.createTransport({
+export const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.MAIL, // Email password: Arbol12345678
@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-function createMailOptions(from: any, to: any, subject: any, text: any) {
+export function createMailOptions(from: any, to: any, subject: any, text: any) {
   const mailOptions = {
     from: from,
     to: to,
@@ -22,7 +22,7 @@ function createMailOptions(from: any, to: any, subject: any, text: any) {
   return mailOptions;
 }
 
-export const todosLosDias = async () => {    
+export const pointsRemainder = async () => {    
     try {
         const matches: any[] = await admin.getMatchesAdmin(getChampionship());          
         const users: any[] = await user.getAllUsers(); 

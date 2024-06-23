@@ -1,6 +1,7 @@
 const admin = require('../database/admin');
+const { transporter, createMailOptions } = require('../mail');
 
-const getChampionshipsAdmin = async () => {
+export const getChampionshipsAdmin = async () => {
     try {
         const championships: any[] = await admin.getChampionshipsAdmin();
         if (championships) {
@@ -8,6 +9,28 @@ const getChampionshipsAdmin = async () => {
         } else {
             throw new Error("Error procesando los datos.");
         }
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
+export const postWinners = async () => {
+    try {
+        const users: any[] = await admin.postWinners(); 
+        let text = `¡Felicidades! Ganaste uno de los premios por participar en la penca.`;
+        users.forEach((user: any) => {
+            if (user.mail){
+                const mailOptions = createMailOptions(process.env.MAIL, user.mail, 'Penca UCU', text);
+                transporter.sendMail(mailOptions, (error: any, info: any) => {
+                if (error) {
+                    console.error(error);
+                } else {
+                    console.log('Correo enviado: ' + info.response);
+                }
+                });
+            }
+        })
+        return { status: 200, message: "Correos enviados con exito." };
     } catch (error) {
         throw new Error("Error procesando los datos.");
     }
@@ -22,7 +45,7 @@ export const postChampionshipAdmin = async (championshipName: string, startDate:
     }
 }
 
-const getTeamsAdmin = async (championshipName: string) => {
+export const getTeamsAdmin = async (championshipName: string) => {
     try {
         const teams: any = await admin.getTeamsAdmin(championshipName);
         if (teams) {
@@ -35,7 +58,7 @@ const getTeamsAdmin = async (championshipName: string) => {
     }
 }
 
-const getAllTeamsAdmin = async () => {
+export const getAllTeamsAdmin = async () => {
     try {
         const teams: any = await admin.getAllTeamsAdmin();
         if (teams) {
@@ -48,7 +71,7 @@ const getAllTeamsAdmin = async () => {
     }
 }
 
-const postTeamAdmin = async (championshipName: string, teamName: string, teamGroup: string) => {
+export const postTeamAdmin = async (championshipName: string, teamName: string, teamGroup: string) => {
     try {
         await admin.postTeamAdmin(championshipName, teamName, teamGroup);
         return { status: 200, message: "Equipo asignado a campeonato con éxito" };
@@ -57,7 +80,7 @@ const postTeamAdmin = async (championshipName: string, teamName: string, teamGro
     }
 }
 
-const addTeamAdmin = async (teamName: string) => {    
+export const addTeamAdmin = async (teamName: string) => {    
     try {
         await admin.addTeamAdmin(teamName);
         return { status: 200, message: "Equipo ingresado con éxito" };
@@ -66,7 +89,7 @@ const addTeamAdmin = async (teamName: string) => {
     }
 }
 
-const getMatchesAdmin = async (championshipName: string) => {
+export const getMatchesAdmin = async (championshipName: string) => {
     try {
         const matches: any = await admin.getMatchesAdmin(championshipName);        
         if (matches) {
@@ -79,7 +102,7 @@ const getMatchesAdmin = async (championshipName: string) => {
     }
 }
 
-const postMatchAdmin = async (championshipName: string, team1: string, team2: string, date: Date, stage: string, location: string) => {
+export const postMatchAdmin = async (championshipName: string, team1: string, team2: string, date: Date, stage: string, location: string) => {
     try {
         await admin.postMatchAdmin(championshipName, team1, team2, date, stage, location);
         return { status: 200, message: "Partido creado con éxito" };
@@ -88,7 +111,7 @@ const postMatchAdmin = async (championshipName: string, team1: string, team2: st
     }
 }
 
-const getResultsAdmin = async (championshipName: string) => {
+export const getResultsAdmin = async (championshipName: string) => {
     try {
         const results: any = await admin.getResultsAdmin(championshipName);
         if (results) {
@@ -101,7 +124,7 @@ const getResultsAdmin = async (championshipName: string) => {
     }
 }
 
-const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date) => {
+export const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date) => {
     try {
         await admin.postResultAdmin(scoreTeam1, scoreTeam2, championshipName, team1, team2, dateMatch);
         const predicciones: any[] = await admin.getPredictions(championshipName, team1, team2, dateMatch);        
@@ -120,7 +143,7 @@ const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, champions
     }
 }
 
-const postChampionSubchampion = async (championship: string, champion: string, subchampion: string) => {
+export const postChampionSubchampion = async (championship: string, champion: string, subchampion: string) => {
     try {
         const predicciones: any[] = await admin.getChampionSubchampion(championship);
         predicciones.forEach((e: any) => {
@@ -137,26 +160,11 @@ const postChampionSubchampion = async (championship: string, champion: string, s
     }
 }
 
-const scoreReset = async () => {
+export const scoreReset = async () => {
     try {
         await admin.scoreReset();
         return { status: 200, message: "Puntuaciones actualizadas" };
     } catch (error) {        
         throw new Error("Error procesando los datos.");
     }
-}
-
-module.exports = {
-    postChampionshipAdmin,
-    addTeamAdmin,
-    postTeamAdmin,
-    postMatchAdmin,
-    postResultAdmin,
-    getChampionshipsAdmin,
-    getTeamsAdmin,
-    getMatchesAdmin,
-    getResultsAdmin,
-    getAllTeamsAdmin,
-    scoreReset,
-    postChampionSubchampion
 }

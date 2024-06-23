@@ -38,6 +38,10 @@ export class UserPredictionsComponent {
     this.httpService.GetChampionshipMatches().subscribe(
       (response: IMatch[]) => {
         this.matches = response;
+        this.matches.forEach((match: IMatch) => {
+          match.scoreTeam1 = 0;
+          match.scoreTeam2 = 0;
+        })
         this.FormatChampionshipMatches()
         this.FilterGroup("A");
         this.BlockPredictions()

@@ -206,6 +206,17 @@ export class AdminHomeComponent {
     );
   }
 
+  PostWinners(){
+    this.httpService.PostWinners().subscribe(
+      (response: any) => {
+        this.SuccesMessage(response)
+      },
+      (error: any) => {
+        this.ErrorMessage(error);
+      }
+    );
+  }
+
   ChooseMode(mode: number) {
     const mode1 = document.querySelector('#mode-championship') as HTMLElement;
     const mode2 = document.querySelector('#mode-team') as HTMLElement;
