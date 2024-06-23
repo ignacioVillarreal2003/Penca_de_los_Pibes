@@ -16,5 +16,6 @@ router.post('/postMatchAdmin', authenticate, adminController.postMatchAdmin);
 router.get('/getResultsAdmin/:championshipName', authenticate, adminController.getResultsAdmin);
 router.post('/postResultAdmin', authenticate, adminController.postResultAdmin);
 router.post('/scoreReset', authenticate, adminController.scoreReset);
+router.post('/championshipEnd', adminController.postChampionshipEnd);
 
 export default router;
