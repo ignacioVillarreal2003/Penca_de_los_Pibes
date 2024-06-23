@@ -20,7 +20,7 @@ Luego de que el contenedor quede corriendo, ingresar en DataGrip y crear un nuev
 
 # Funcionalides
 ## Angular
-Posicionarse en la carpeta /app en la terminal y escribir el comando:
+Posicionarse en la carpeta /PencaUCUCode en la terminal y escribir el comando:
 ```
 npm install
 ```
