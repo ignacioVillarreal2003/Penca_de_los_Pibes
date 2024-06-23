@@ -40,3 +40,24 @@ connection.connect((err: any) => {
     if (err) throw err;
     console.log('Connected to the database.');
 });
+
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.MAIL, // Email
+    pass: process.env.PASS // Codigo de verificacion(al verificar en dos pasos)
+  }
+});
+// Contra mail: HOLAmundo1
+
+function createMailOptions(from: any, to: any, subject: any, text: any) {
+  const mailOptions = {
+    from: from,
+    to: to,
+    subject: subject,
+    text: text
+  };
+  return mailOptions;
+}
