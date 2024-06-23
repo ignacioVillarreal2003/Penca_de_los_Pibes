@@ -30,7 +30,7 @@ export class HttpService {
       username: username,
       champion: champion,
       subChampion: subChampion
-    }    
+    }
     return this.http.post<any>('http://localhost:3001/session/registerUser', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
@@ -79,7 +79,7 @@ export class HttpService {
     return this.http.get<any>('http://localhost:3001/user/getChampionshipTeams', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.teams) {          
+        if (response && response.teams) {
           const teams: ITeamUser[] = response.teams;
           return teams;
         }
@@ -92,7 +92,7 @@ export class HttpService {
     return this.http.get<any>('http://localhost:3001/user/getRanking', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.ranking) {          
+        if (response && response.ranking) {
           const ranking: IRanking[] = response.ranking;
           return ranking;
         }
@@ -105,7 +105,7 @@ export class HttpService {
     return this.http.get<any>('http://localhost:3001/user/getChampionshipMatches', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.matches) {    
+        if (response && response.matches) {
           const matches: IMatch[] = response.matches;
           return matches;
         }
@@ -114,21 +114,21 @@ export class HttpService {
     );
   }
 
-  PostMatchPrediction(match: IMatch): Observable<any> {
+  PostMatchPrediction(match: IMatch, datePrediction: string): Observable<any> {
     const requestBody: any = {
       ci: this.user.ci,
       dateMatch: match.dateMatch,
       team1: match.team1,
       team2: match.team2,
       championshipName: match.championshipName1,
-      datePrediction: new Date().toISOString().slice(0, 10),
+      datePrediction: datePrediction,
       scoreTeam1: match.scoreTeam1,
       scoreTeam2: match.scoreTeam2
-    }
+    }    
     return this.http.post<any>('http://localhost:3001/user/postMatchPrediction', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.message) {          
+        if (response && response.message) {
           const message: string = response.message;
           return message;
         }
@@ -137,11 +137,11 @@ export class HttpService {
     );
   }
 
-  GetCareers(): Observable<any> {    
+  GetCareers(): Observable<any> {
     return this.http.get<any>('http://localhost:3001/user/getCareers', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.careers) {              
+        if (response && response.careers) {
           const careers: ICareerUser[] = response.careers;
           return careers;
         }
@@ -158,7 +158,7 @@ export class HttpService {
     return this.http.post<any>('http://localhost:3001/user/changeCareer', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.message) {          
+        if (response && response.message) {
           const message: string = response.message;
           return message;
         }
@@ -170,13 +170,13 @@ export class HttpService {
   ChangePassword(oldPassword: string, newPassword: string): Observable<any> {
     const requestBody: any = {
       ci: this.user.ci,
-      oldPassword: oldPassword, 
+      oldPassword: oldPassword,
       newPassword: newPassword
-    }    
+    }
     return this.http.post<any>('http://localhost:3001/user/changePassword', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.message) {          
+        if (response && response.message) {
           const message: string = response.message;
           return message;
         }
@@ -185,11 +185,11 @@ export class HttpService {
     );
   }
 
-  GetUserMatches(): Observable<any> {        
+  GetUserMatches(): Observable<any> {
     return this.http.get<any>(`http://localhost:3001/user/getUserMatches/${this.user.ci}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.matches) {              
+        if (response && response.matches) {
           const matches: IMatch[] = response.matches;
           return matches;
         }
@@ -203,7 +203,7 @@ export class HttpService {
     return this.http.get<any>('http://localhost:3001/admin/getChampionshipsAdmin', this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.championships) {          
+        if (response && response.championships) {
           const championships: IChampionshipAdmin[] = response.championships;
           return championships;
         }
@@ -221,7 +221,7 @@ export class HttpService {
     return this.http.post<any>('http://localhost:3001/admin/postChampionshipAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.message) {          
+        if (response && response.message) {
           const message: string = response.message;
           return message;
         }
@@ -250,7 +250,7 @@ export class HttpService {
     return this.http.get<any>(`http://localhost:3001/admin/getTeamsAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.teams) {          
+        if (response && response.teams) {
           const teams: ITeamAdmin[] = response.teams;
           return teams;
         }
@@ -263,7 +263,7 @@ export class HttpService {
     return this.http.get<any>(`http://localhost:3001/admin/getAllTeamsAdmin`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.teams) {                    
+        if (response && response.teams) {
           const teams: ITeamUser[] = response.teams;
           return teams;
         }
@@ -310,7 +310,7 @@ export class HttpService {
     return this.http.get<any>(`http://localhost:3001/admin/getMatchesAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.matches) {          
+        if (response && response.matches) {
           const matches: IMatchAdmin[] = response.matches;
           return matches;
         }
@@ -327,7 +327,7 @@ export class HttpService {
       date: matchDate,
       stage: matchStage,
       location: matchLocation
-    }        
+    }
     return this.http.post<any>('http://localhost:3001/admin/postMatchAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
@@ -344,7 +344,7 @@ export class HttpService {
     return this.http.get<any>(`http://localhost:3001/admin/getResultsAdmin/${championshipName}`, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
-        if (response && response.results) { 
+        if (response && response.results) {
           const results: IResult[] = response.results;
           return results;
         }
@@ -385,5 +385,13 @@ export class HttpService {
         return null;
       })
     );
+  }
+
+  postChampionshipResult(champion: string, subchampion: string) {
+    const requestBody: any = {
+      champion: champion,
+      subchampion: subchampion
+    }
+    return this.http.post('http://localhost:3001/admin/championshipEnd', requestBody)
   }
 }

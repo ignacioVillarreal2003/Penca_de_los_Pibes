@@ -19,6 +19,27 @@ async function getChampionshipsAdmin(): Promise<any> {
     });
 }
 
+async function getChampionSubchampion(championshipName: string): Promise<any> {
+    const query = `
+        SELECT * FROM Pronostico_inicial WHERE championshipName = ?;`;
+
+    console.log(championshipName);
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, [championshipName], (error: any, results: any) => {
+            if (error) {
+                console.error(error);
+                return reject(error);
+            }
+            if (results.length > 0) {
+                resolve(results);
+            } else {
+                resolve(undefined);
+            }
+        });
+    });
+}
+
 async function postChampionshipAdmin(championshipName: string, startDate: Date, endDate: Date): Promise<any> {
     const query = `
         INSERT INTO Campeonato(championshipName, startDate, endDate) VALUES (?, ?, ?)`;
@@ -241,5 +262,6 @@ export {
     getMatchesAdmin, 
     getResultsAdmin, 
     getAllTeamsAdmin,
-    scoreReset
+    scoreReset,
+    getChampionSubchampion,
 };

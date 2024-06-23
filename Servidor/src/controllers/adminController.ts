@@ -185,6 +185,24 @@ const postResultAdmin = async (req: any, res: any) => {
     }
 }
 
+const postChampionshipEnd = async (req: any, res: any) => {
+    try {
+        const { body } = req;
+        if (getChampionship() == null || !body.champion || !body.subchampion) {
+            return res.status(500).send({ message: "Error procesando los datos." });
+        } else {
+            const result = await adminServices.postChampionSubchampion(getChampionship(), body.champion, body.subchampion);
+            if (result.message) {
+                res.status(result.status).send({ message: result.message })
+            } else {
+                res.status(500).send({ message: "Error procesando los datos." });
+            }
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Error procesando los datos." });
+    }
+}
+
 const scoreReset = async (_req: any, res: any) => {
     try {
         const result = await adminServices.scoreReset();
@@ -210,5 +228,6 @@ module.exports = {
     getMatchesAdmin,
     getResultsAdmin,
     getAllTeamsAdmin,
-    scoreReset
+    scoreReset,
+    postChampionshipEnd
 }

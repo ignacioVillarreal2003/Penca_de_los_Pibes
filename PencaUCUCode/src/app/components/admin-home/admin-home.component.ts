@@ -41,7 +41,7 @@ export class AdminHomeComponent {
     );
   }
 
-  PostChampionshipAdmin() {
+  PostChampionshipAdmin() {    
     if (this.championshipName && this.championshipStartDate && this.championshipEndDate) {
       this.httpService.PostChampionshipAdmin(this.championshipName, this.championshipStartDate, this.championshipEndDate).subscribe(
         (response: any) => {
@@ -378,5 +378,11 @@ export class AdminHomeComponent {
       timer: 2000,
       timerProgressBar: true
     })
+  }
+
+  inputChampionshipResult(champion: string, subchampion: string) {
+    this.httpService.postChampionshipResult(champion, subchampion).subscribe((response: any) => {
+      console.log(response);
+    });
   }
 }
