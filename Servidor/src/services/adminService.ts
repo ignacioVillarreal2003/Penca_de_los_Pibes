@@ -120,6 +120,23 @@ const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, champions
     }
 }
 
+const postChampionSubchampion = async (championship: string, champion: string, subchampion: string) => {
+    try {
+        const predicciones: any[] = await admin.getChampionSubchampion(championship);
+        predicciones.forEach((e: any) => {
+            if (e.champion == champion) {
+                admin.postPoints(e.ci, 10)
+            }
+            if (e.subChampion == subchampion) {
+                admin.postPoints(e.ci, 5)
+            }
+        })
+        return { status: 200, message: "Resultado atribuído con éxito" };
+    } catch (error) {
+        throw new Error("Error procesando los datos.");
+    }
+}
+
 const scoreReset = async () => {
     try {
         await admin.scoreReset();
@@ -140,5 +157,6 @@ module.exports = {
     getMatchesAdmin,
     getResultsAdmin,
     getAllTeamsAdmin,
-    scoreReset
+    scoreReset,
+    postChampionSubchampion
 }
