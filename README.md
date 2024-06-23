@@ -49,7 +49,7 @@ Contraseña: 12345678
 ```
 Y a continuación presionar el botón con el texto "ingresar como administrador".
 
-## Crear un archivo en el servidor con el nombre .env y escribir:
+## Crear un archivo en el servidor con el nombre .env en el caso de que no se encuentre y escribir:
 ```
 PORT="3306"
 USER="root"
