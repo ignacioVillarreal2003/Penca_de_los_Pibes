@@ -1,0 +1,105 @@
+.predictions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: hidden;
+}
+
+.predictions .predict {
+    margin: 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    background-color: var(--targetColor);
+    padding: 40px;
+}
+
+.predictions .predict ul {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 400px);
+    gap: 20px;
+    padding: 0;
+    width: 100%;
+}
+
+.predictions .predict li {
+    width: 380px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: var(--cardColor3);
+}
+
+.predictions .predict li .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    padding: 10px 20px;
+    background-color: var(--color1);
+}
+
+.predictions .predict li .title .date {
+    font-size: 20px;
+    color: var(--textColor);
+}
+
+.predictions .predict li .title .group {
+    font-size: 16px;
+    color: var(--textColor);
+    background-color: var(--bgColor);
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+
+.predictions .predict li .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 200px;
+}
+
+.predictions .predict li .content .team {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 35%;
+}
+
+.predictions .predict li .content .team img {
+    width: 50px;
+    height: 50px;
+}
+
+.predictions .predict li .content .team h3 {
+    font-size: 22px;
+    margin: 10px 0 0 0;
+}
+
+.predictions .predict li .content .score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 10%;
+    background-color: rgb(207, 207, 207);
+    border-radius: 8px;
+}
+
+.predictions .predict li .content .score p {
+    font-size: 18px;
+    margin: 10px 0;
+}

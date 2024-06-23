@@ -14,6 +14,7 @@ import { UserHomeComponent } from './components/user-home/user-home.component';
 import { UserPredictionsComponent } from './components/user-predictions/user-predictions.component';
 import { UserRankingComponent } from './components/user-ranking/user-ranking.component';
 import { GanasteComponent } from './ganaste/ganaste.component';
+import { UserFixtureComponent } from './components/user-fixture/user-fixture.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GanasteComponent } from './ganaste/ganaste.component';
     UserHomeComponent,
     UserPredictionsComponent,
     UserRankingComponent,
-    GanasteComponent
+    GanasteComponent,
+    UserFixtureComponent
   ],
   imports: [
     BrowserModule,

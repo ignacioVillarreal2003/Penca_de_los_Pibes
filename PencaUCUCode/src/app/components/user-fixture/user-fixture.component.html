@@ -1,0 +1,31 @@
+<app-user-header></app-user-header>
+
+<div class="predictions">
+    <div class="predict">
+        <ul *ngIf="matches">
+            <li id="match{{match.team1}}{{match.team2}}" *ngFor="let match of matches">
+                <div class="title">
+                    <p class="date">{{match.dateMatch.slice(0,10)}}</p>
+                    <p *ngIf="match.stage != 'Grupos'" class="group">{{match.stage}}</p>
+                    <p *ngIf="match.stage == 'Grupos'" class="group">Grupo {{match.teamGroup1}}</p>
+                </div>
+                <div class="content">
+                    <div class="team">
+                        <img src="../../../assets/countries/{{match.team1}}.png" alt="">
+                        <h3>{{match.team1}}</h3>
+                    </div>
+                    <div class="score">
+                        <p>{{match.scoreTeam1}}</p>
+                    </div>
+                    <div class="score">
+                        <p>{{match.scoreTeam2}}</p>
+                    </div>
+                    <div class="team">
+                        <img src="../../../assets/countries/{{match.team2}}.png" alt="">
+                        <h3>{{match.team2}}</h3>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
