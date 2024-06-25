@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="admin-home.component.css">
 <div class="admin-home">
     <header><h1>Penca UCU</h1></header>
     <div class="content">
@@ -217,8 +218,23 @@
                         <button class="btn-submit" (click)="PostWinners()">Mandar mensajes ganadores</button>
                     </div>
                     <div class="option-view inputChampion">
-                      <button class="btn-submit">Ingresar campeón y subcampeón</button>
+                      <button (click)="toggleChampion()" class="btn-submit">Ingresar campeón y subcampeón</button>
                     </div>
+                  @if(this.selectChampion) {
+                    <div class="flex">
+                      <label for="champion">Seleciona el campeón</label>
+                      <select [(ngModel)]="this.champion" id="champion" name="champion">
+                        <option [ngValue]="country.teamName" *ngFor="let country of countries">{{country.teamName}}</option>
+                      </select>
+                      <label for="subchampion">Seleciona el subcampeón</label>
+                      <select [(ngModel)]="this.subchampion" id="subchampion" name="subchampion">
+                        <option [ngValue]="country.teamName" *ngFor="let country of countries">{{country.teamName}}</option>
+                      </select>
+                    </div>
+                    <div>
+                      <button (click)="confirmChampion()" class="btn-submit">Confirmar</button>
+                    </div>
+                  }
                 </div>
             </div>
         </div>

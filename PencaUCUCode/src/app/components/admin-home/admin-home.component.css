@@ -227,3 +227,7 @@
 .inputChampion {
   margin-top: 12px;
 }
+
+.flex {
+  display: flex;
+}

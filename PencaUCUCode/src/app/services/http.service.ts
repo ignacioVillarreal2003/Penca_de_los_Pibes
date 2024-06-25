@@ -124,7 +124,7 @@ export class HttpService {
       datePrediction: datePrediction,
       scoreTeam1: match.scoreTeam1,
       scoreTeam2: match.scoreTeam2
-    }    
+    }
     return this.http.post<any>('http://localhost:3001/user/postMatchPrediction', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {
@@ -417,11 +417,15 @@ export class HttpService {
     );
   }
 
-  postChampionshipResult(champion: string, subchampion: string) {
+  postChampionshipResult(champion: ITeamAdmin, subchampion: ITeamAdmin) {
+
     const requestBody: any = {
       champion: champion,
       subchampion: subchampion
     }
+
+    console.log(requestBody);
+
     return this.http.post('http://localhost:3001/admin/championshipEnd', requestBody)
   }
 }

@@ -41,7 +41,7 @@ export class AdminHomeComponent {
     );
   }
 
-  PostChampionshipAdmin() {    
+  PostChampionshipAdmin() {
     if (this.championshipName && this.championshipStartDate && this.championshipEndDate) {
       this.httpService.PostChampionshipAdmin(this.championshipName, this.championshipStartDate, this.championshipEndDate).subscribe(
         (response: any) => {
@@ -391,9 +391,30 @@ export class AdminHomeComponent {
     })
   }
 
-  inputChampionshipResult(champion: string, subchampion: string) {
+  public selectChampion: boolean = false;
+  public champion: ITeamAdmin | undefined;
+  public subchampion: ITeamAdmin | undefined;
+
+  inputChampionshipResult(champion: ITeamAdmin, subchampion: ITeamAdmin) {
     this.httpService.postChampionshipResult(champion, subchampion).subscribe((response: any) => {
       console.log(response);
     });
+  }
+
+  toggleChampion() {
+    this.selectChampion = !this.selectChampion;
+  }
+
+  confirmChampion() {
+
+    if(this.champion != null && this.subchampion != null) {
+      this.inputChampionshipResult(this.champion, this.subchampion);
+      alert("Campeón y subcampeón seleccionados correctamente");
+      this.selectChampion = !this.selectChampion;
+    } else if( this.champion === this.subchampion){
+      alert("El campeón y el subampeón no pueden ser iguales");
+    } else {
+      alert("Los campos no deben esta vacíos");
+    }
   }
 }

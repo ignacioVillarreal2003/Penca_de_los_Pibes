@@ -13,7 +13,6 @@ import { UserHeaderComponent } from './components/user-header/user-header.compon
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { UserPredictionsComponent } from './components/user-predictions/user-predictions.component';
 import { UserRankingComponent } from './components/user-ranking/user-ranking.component';
-import { GanasteComponent } from './ganaste/ganaste.component';
 import { UserFixtureComponent } from './components/user-fixture/user-fixture.component';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { UserFixtureComponent } from './components/user-fixture/user-fixture.com
     UserHomeComponent,
     UserPredictionsComponent,
     UserRankingComponent,
-    GanasteComponent,
     UserFixtureComponent
   ],
   imports: [

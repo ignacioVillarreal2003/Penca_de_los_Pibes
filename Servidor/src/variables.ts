@@ -1,4 +1,4 @@
-let championship = "Copa América 2024";
+let championship = "Copa AmÃ©rica 2024";
 
 export function setChampionship(newChampionship: string) {
     championship = newChampionship;

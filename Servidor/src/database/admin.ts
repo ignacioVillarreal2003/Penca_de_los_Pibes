@@ -44,12 +44,9 @@ export async function getChampionSubchampion(championshipName: string): Promise<
     const query = `
         SELECT * FROM Pronostico_inicial WHERE championshipName = ?;`;
 
-    console.log(championshipName);
-
     return new Promise((resolve, reject) => {
         connection.query(query, [championshipName], (error: any, results: any) => {
             if (error) {
-                console.error(error);
                 return reject(error);
             }
             if (results.length > 0) {
