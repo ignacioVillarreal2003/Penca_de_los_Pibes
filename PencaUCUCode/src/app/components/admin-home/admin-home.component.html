@@ -164,15 +164,15 @@
 
             <div id="mode-result">
                 <div class="options">
-                    <button (click)="ChooseOptionResult(1)">Ver</button>
-                    <button (click)="ChooseOptionResult(2)">Crear</button>
-                    <button (click)="ChooseOptionResult(3)">Modificar</button>
+                    <button (click)="ChooseOptionResult(1)" (click)="GetMatches()">Ver</button>
+                    <button (click)="ChooseOptionResult(2)" (click)="GetMatches()">Crear</button>
+                    <button (click)="ChooseOptionResult(3)" (click)="GetMatches()">Modificar</button>
                 </div>
                 <div class="cont">
                     <div class="option-view">
                         <div class="data">
                             <label for="input-selection-championship-2">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-2" [(ngModel)]="resultSelectedChampionship" (change)="GetResults()">
+                            <select id="input-selection-championship-2" [(ngModel)]="resultSelectedChampionship" (change)="GetResults()" (click)="GetMatches()">
                                 <option [ngValue]="championship.championshipName" *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>
@@ -188,7 +188,7 @@
                         <button class="btn-submit" (click)="PostResult()">Crear</button>
                         <div class="data">
                             <label for="input-selection-championship-4">Selecciona un campeonato</label>
-                            <select id="input-selection-championship-4" [(ngModel)]="resultSelectedChampionship" (change)="GetResults()">
+                            <select id="input-selection-championship-4" [(ngModel)]="resultSelectedChampionship" (change)="GetResults()" (click)="GetMatches()">
                                 <option [ngValue]="championship.championshipName" *ngFor="let championship of championships">{{championship.championshipName}}</option>
                             </select>
                         </div>

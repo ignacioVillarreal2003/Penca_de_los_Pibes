@@ -377,8 +377,8 @@ export class HttpService {
       team2: resultSelectedMatch.team2,
       scoreTeam1: resultScoreTeam1,
       scoreTeam2: resultScoreTeam2,
-      dateMatch: new Date(resultSelectedMatch.dateMatch).toISOString().slice(0, 10)
-    }
+      dateMatch: resultSelectedMatch.dateMatch
+    }    
     return this.http.post<any>('http://localhost:3001/admin/postResultAdmin', requestBody, this.httpOptions).pipe(
       catchError(this.handleError),
       map(response => {

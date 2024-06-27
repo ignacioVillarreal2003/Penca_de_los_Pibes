@@ -196,14 +196,14 @@ export async function getResultsAdmin(championshipName: string): Promise<any> {
     });
 }
 
-export async function postResultAdmin(scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date): Promise<any> {
+export async function postResultAdmin(scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string): Promise<any> {        
     const query = `
         UPDATE Juegan_partido
         SET scoreTeam1 = ?, scoreTeam2 = ?
-        WHERE championshipName1 = ? AND team1 = ? AND team2 = ? AND dateMatch = ?;`;
+        WHERE championshipName1 = ? AND team1 = ? AND team2 = ?;`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [scoreTeam1, scoreTeam2, championshipName, team1, team2, dateMatch], (error: any, results: any) => {
+        connection.query(query, [scoreTeam1, scoreTeam2, championshipName, team1, team2], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);
@@ -230,16 +230,15 @@ export async function postPoints(ci: string, points: number): Promise<any> {
     });
 }
 
-export async function getPredictions(championshipName: string, team1: string, team2: string, dateMatch: Date): Promise<any> {
+export async function getPredictions(championshipName: string, team1: string, team2: string): Promise<any> {
     const query = `
         SELECT * FROM Predicen
-        WHERE championshipName1 = 'Copa América 2024' 
-        AND team1 = 'Paraguay' 
-        AND team2 = 'Costa Rica' 
-        AND dateMatch = '2024-06-24';`;
+        WHERE championshipName1 = ? 
+        AND team1 = ?
+        AND team2 = ?`;
 
     return new Promise((resolve, reject) => {
-        connection.query(query, [championshipName, team1, team2, dateMatch], (error: any, results: any) => {
+        connection.query(query, [championshipName, team1, team2], (error: any, results: any) => {
             if (error) {
                 console.error(error);
                 return reject(error);

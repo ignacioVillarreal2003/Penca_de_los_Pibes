@@ -106,15 +106,15 @@ INSERT INTO Participante (ci, score, username, mail) VALUES
 ('55555555', 60, 'Francisco', 'ignavillarreal31@gmail.com');
 
 INSERT INTO Carrera (career) VALUES
-('Ingeniería'),
+('Ingenieria'),
 ('Medicina'),
-('Psicología'),
+('Psicologia'),
 ('Negocios Internacionales');
 
 INSERT INTO Pertenecen (ci, career) VALUES
-('22222222', 'Psicología'),
+('22222222', 'Psicologia'),
 ('33333333', 'Negocios Internacionales'),
-('44444444', 'Ingeniería'),
+('44444444', 'Ingenieria'),
 ('55555555', 'Medicina');
 
 INSERT INTO Equipo (teamName) VALUES
@@ -136,48 +136,48 @@ INSERT INTO Equipo (teamName) VALUES
 ('Costa Rica');
 
 INSERT INTO Campeonato (championshipName, startDate, endDate) VALUES
-('Copa América 2024', '2024-06-23 19:57:00', '2024-07-14 19:57:00');
+('Copa America 2024', '2024-07-20 19:57:00', '2024-08-01 19:57:00');
 
 INSERT INTO Participan (championshipName, teamName, teamGroup) VALUES
-('Copa América 2024', 'Argentina', 'A'),
-('Copa América 2024', 'Canada', 'A'),
-('Copa América 2024', 'Peru', 'A'),
-('Copa América 2024', 'Chile', 'A'),
-('Copa América 2024', 'Ecuador', 'B'),
-('Copa América 2024', 'Venezuela', 'B'),
-('Copa América 2024', 'Mexico', 'B'),
-('Copa América 2024', 'Jamaica', 'B'),
-('Copa América 2024', 'USA', 'C'),
-('Copa América 2024', 'Bolivia', 'C'),
-('Copa América 2024', 'Uruguay', 'C'),
-('Copa América 2024', 'Panama', 'C'),
-('Copa América 2024', 'Colombia', 'D'),
-('Copa América 2024', 'Paraguay', 'D'),
-('Copa América 2024', 'Brasil', 'D'),
-('Copa América 2024', 'Costa Rica', 'D');
+('Copa America 2024', 'Argentina', 'A'),
+('Copa America 2024', 'Canada', 'A'),
+('Copa America 2024', 'Peru', 'A'),
+('Copa America 2024', 'Chile', 'A'),
+('Copa America 2024', 'Ecuador', 'B'),
+('Copa America 2024', 'Venezuela', 'B'),
+('Copa America 2024', 'Mexico', 'B'),
+('Copa America 2024', 'Jamaica', 'B'),
+('Copa America 2024', 'USA', 'C'),
+('Copa America 2024', 'Bolivia', 'C'),
+('Copa America 2024', 'Uruguay', 'C'),
+('Copa America 2024', 'Panama', 'C'),
+('Copa America 2024', 'Colombia', 'D'),
+('Copa America 2024', 'Paraguay', 'D'),
+('Copa America 2024', 'Brasil', 'D'),
+('Copa America 2024', 'Costa Rica', 'D');
 
 INSERT INTO Juegan_partido (dateMatch, team1, team2, championshipName1, championshipName2, location, scoreTeam1, scoreTeam2, stage) VALUES
-('2024-06-23 19:47:00', 'Argentina', 'Canada', 'Copa América 2024', 'Copa América 2024', 'Estadio A', 0, 0, 'Grupos'),
-('2024-06-20 20:37:00', 'Peru', 'Chile', 'Copa América 2024', 'Copa América 2024', 'Estadio B', 0, 0, 'Grupos'),
-('2024-06-22 21:27:00', 'Peru', 'Canada', 'Copa América 2024', 'Copa América 2024', 'Estadio C', 0, 0, 'Grupos'),
-('2024-06-22 19:57:00', 'Argentina', 'Chile', 'Copa América 2024', 'Copa América 2024', 'Estadio D', 0, 0, 'Grupos'),
-('2024-06-24 19:57:00', 'Argentina', 'Peru', 'Copa América 2024', 'Copa América 2024', 'Estadio E', 0, 0, 'Grupos'),
-('2024-06-24 19:57:00', 'Canada', 'Chile', 'Copa América 2024', 'Copa América 2024', 'Estadio F', 0, 0, 'Grupos'),
-('2024-06-20 19:57:00', 'Ecuador', 'Venezuela', 'Copa América 2024', 'Copa América 2024', 'Estadio A', 0, 0, 'Grupos'),
-('2024-06-20 19:57:00', 'Mexico', 'Jamaica', 'Copa América 2024', 'Copa América 2024', 'Estadio B', 0, 0, 'Grupos'),
-('2024-06-22 19:57:00', 'Ecuador', 'Jamaica', 'Copa América 2024', 'Copa América 2024', 'Estadio C', 0, 0, 'Grupos'),
-('2024-06-22 19:57:00', 'Venezuela', 'Chile', 'Copa América 2024', 'Copa América 2024', 'Estadio D', 0, 0, 'Grupos'),
-('2024-06-24 19:57:00', 'Ecuador', 'Mexico', 'Copa América 2024', 'Copa América 2024', 'Estadio E', 0, 0, 'Grupos'),
-('2024-06-24 19:57:00', 'Venezuela', 'Jamaica', 'Copa América 2024', 'Copa América 2024', 'Estadio F', 0, 0, 'Grupos'),
-('2024-06-20 19:57:00', 'USA', 'Bolivia', 'Copa América 2024', 'Copa América 2024', 'Estadio A', 0, 0, 'Grupos'),
-('2024-06-20 19:57:00', 'Panama', 'Uruguay', 'Copa América 2024', 'Copa América 2024', 'Estadio B', 0, 0, 'Grupos'),
-('2024-06-22 19:57:00', 'Panama', 'USA', 'Copa América 2024', 'Copa América 2024', 'Estadio C', 0, 0, 'Grupos'),
-('2024-06-22 19:57:00', 'Bolivia', 'Uruguay', 'Copa América 2024', 'Copa América 2024', 'Estadio D', 0, 0, 'Grupos'),
-('2024-06-24 19:57:00', 'USA', 'Uruguay', 'Copa América 2024', 'Copa América 2024', 'Estadio E', 0, 0, 'Grupos'),
-('2024-06-24 19:57:00', 'Bolivia', 'Panama', 'Copa América 2024', 'Copa América 2024', 'Estadio F', 0, 0, 'Grupos'),
-('2024-06-20 19:57:00', 'Colombia', 'Paraguay', 'Copa América 2024', 'Copa América 2024', 'Estadio A', 0, 0, 'Grupos'),
-('2024-06-20 19:57:00', 'Brasil', 'Costa Rica', 'Copa América 2024', 'Copa América 2024', 'Estadio B', 0, 0, 'Grupos'),
-('2024-06-22 19:57:00', 'Colombia', 'Costa Rica', 'Copa América 2024', 'Copa América 2024', 'Estadio C', 0, 0, 'Grupos'),
-('2024-06-22 19:57:00', 'Paraguay', 'Brasil', 'Copa América 2024', 'Copa América 2024', 'Estadio D', 0, 0, 'Grupos'),
-('2024-06-24 19:57:00', 'Colombia', 'Brasil', 'Copa América 2024', 'Copa América 2024', 'Estadio E', 0, 0, 'Grupos'),
-('2024-06-24 19:57:00', 'Paraguay', 'Costa Rica', 'Copa América 2024', 'Copa América 2024', 'Estadio F', 0, 0, 'Grupos');
+('2024-06-27 01:00:00', 'Argentina', 'Canada', 'Copa America 2024', 'Copa America 2024', 'Estadio A', 0, 0, 'Grupos'),
+('2024-07-20 20:37:00', 'Peru', 'Chile', 'Copa America 2024', 'Copa America 2024', 'Estadio B', 0, 0, 'Grupos'),
+('2024-07-22 21:27:00', 'Peru', 'Canada', 'Copa America 2024', 'Copa America 2024', 'Estadio C', 0, 0, 'Grupos'),
+('2024-07-22 19:57:00', 'Argentina', 'Chile', 'Copa America 2024', 'Copa America 2024', 'Estadio D', 0, 0, 'Grupos'),
+('2024-07-24 19:57:00', 'Argentina', 'Peru', 'Copa America 2024', 'Copa America 2024', 'Estadio E', 0, 0, 'Grupos'),
+('2024-07-24 19:57:00', 'Canada', 'Chile', 'Copa America 2024', 'Copa America 2024', 'Estadio F', 0, 0, 'Grupos'),
+('2024-07-20 19:57:00', 'Ecuador', 'Venezuela', 'Copa America 2024', 'Copa America 2024', 'Estadio A', 0, 0, 'Grupos'),
+('2024-07-20 19:57:00', 'Mexico', 'Jamaica', 'Copa America 2024', 'Copa America 2024', 'Estadio B', 0, 0, 'Grupos'),
+('2024-07-22 19:57:00', 'Ecuador', 'Jamaica', 'Copa America 2024', 'Copa America 2024', 'Estadio C', 0, 0, 'Grupos'),
+('2024-07-22 19:57:00', 'Venezuela', 'Chile', 'Copa America 2024', 'Copa America 2024', 'Estadio D', 0, 0, 'Grupos'),
+('2024-07-24 19:57:00', 'Ecuador', 'Mexico', 'Copa America 2024', 'Copa America 2024', 'Estadio E', 0, 0, 'Grupos'),
+('2024-07-24 19:57:00', 'Venezuela', 'Jamaica', 'Copa America 2024', 'Copa America 2024', 'Estadio F', 0, 0, 'Grupos'),
+('2024-07-20 19:57:00', 'USA', 'Bolivia', 'Copa America 2024', 'Copa America 2024', 'Estadio A', 0, 0, 'Grupos'),
+('2024-07-20 19:57:00', 'Panama', 'Uruguay', 'Copa America 2024', 'Copa America 2024', 'Estadio B', 0, 0, 'Grupos'),
+('2024-07-22 19:57:00', 'Panama', 'USA', 'Copa America 2024', 'Copa America 2024', 'Estadio C', 0, 0, 'Grupos'),
+('2024-07-22 19:57:00', 'Bolivia', 'Uruguay', 'Copa America 2024', 'Copa America 2024', 'Estadio D', 0, 0, 'Grupos'),
+('2024-07-24 19:57:00', 'USA', 'Uruguay', 'Copa America 2024', 'Copa America 2024', 'Estadio E', 0, 0, 'Grupos'),
+('2024-07-24 19:57:00', 'Bolivia', 'Panama', 'Copa America 2024', 'Copa America 2024', 'Estadio F', 0, 0, 'Grupos'),
+('2024-07-20 19:57:00', 'Colombia', 'Paraguay', 'Copa America 2024', 'Copa America 2024', 'Estadio A', 0, 0, 'Grupos'),
+('2024-07-20 19:57:00', 'Brasil', 'Costa Rica', 'Copa America 2024', 'Copa America 2024', 'Estadio B', 0, 0, 'Grupos'),
+('2024-07-22 19:57:00', 'Colombia', 'Costa Rica', 'Copa America 2024', 'Copa America 2024', 'Estadio C', 0, 0, 'Grupos'),
+('2024-07-22 19:57:00', 'Paraguay', 'Brasil', 'Copa America 2024', 'Copa America 2024', 'Estadio D', 0, 0, 'Grupos'),
+('2024-07-24 19:57:00', 'Colombia', 'Brasil', 'Copa America 2024', 'Copa America 2024', 'Estadio E', 0, 0, 'Grupos'),
+('2024-07-24 19:57:00', 'Paraguay', 'Costa Rica', 'Copa America 2024', 'Copa America 2024', 'Estadio F', 0, 0, 'Grupos');

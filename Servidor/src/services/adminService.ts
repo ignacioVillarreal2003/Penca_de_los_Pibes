@@ -124,21 +124,25 @@ export const getResultsAdmin = async (championshipName: string) => {
     }
 }
 
-export const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string, dateMatch: Date) => {
-    try {
-        await admin.postResultAdmin(scoreTeam1, scoreTeam2, championshipName, team1, team2, dateMatch);
-        const predicciones: any[] = await admin.getPredictions(championshipName, team1, team2, dateMatch);        
-        predicciones.forEach((e: any) => {
-            if (scoreTeam1 == e.scoreTeam1 && scoreTeam2 == e.scoreTeam2) {
-                admin.postPoints(e.ci, 4)
-            } else if (scoreTeam1 > scoreTeam2 && e.scoreTeam1 > e.scoreTeam2) {
-                admin.postPoints(e.ci, 2)
-            } else if (scoreTeam2 > scoreTeam1 && e.scoreTeam2 > e.scoreTeam1) {
-                admin.postPoints(e.ci, 2)
-            }
-        })
+export const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string) => {
+    try {                        
+        await admin.postResultAdmin(scoreTeam1, scoreTeam2, championshipName, team1, team2);
+        const predicciones: any[] = await admin.getPredictions(championshipName, team1, team2);            
+        if (predicciones){
+            predicciones.forEach((e: any) => {
+                if (scoreTeam1 == e.scoreTeam1 && scoreTeam2 == e.scoreTeam2) {
+                    admin.postPoints(e.ci, 4)
+                } else if (scoreTeam1 > scoreTeam2 && e.scoreTeam1 > e.scoreTeam2) {
+                    admin.postPoints(e.ci, 2)
+                } else if (scoreTeam2 > scoreTeam1 && e.scoreTeam2 > e.scoreTeam1) {
+                    admin.postPoints(e.ci, 2)
+                }
+            })
+        }    
         return { status: 200, message: "Resultado atribuído con éxito" };
     } catch (error) {
+        console.log(error);
+        
         throw new Error("Error procesando los datos.");
     }
 }

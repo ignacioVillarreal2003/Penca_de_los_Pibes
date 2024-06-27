@@ -131,11 +131,26 @@ export class AdminHomeComponent {
   matchStage: string | undefined = undefined;
   matchLocation: string | undefined = undefined;
 
+  FormatChampionshipMatches() {
+    this.matches.forEach(match => {
+      const dateObj = new Date(match.dateMatch);
+      const year = dateObj.getFullYear();
+      const month = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+      const day = ('0' + dateObj.getDate()).slice(-2);
+      const hours = ('0' + dateObj.getHours()).slice(-2);
+      const minutes = ('0' + dateObj.getMinutes()).slice(-2);
+      const seconds = ('0' + dateObj.getSeconds()).slice(-2);
+      match.dateMatch = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.000Z`;
+    });
+    console.log(this.matches);
+  }
+
   GetMatches() {
     if (this.matchSelectedChampionship) {
       this.httpService.GetMatchesAdmin(this.matchSelectedChampionship).subscribe(
         (response: IMatchAdmin[]) => {
           this.matches = response;
+          this.FormatChampionshipMatches();
         },
         (error: any) => {
           this.ErrorMessage(error);
@@ -183,7 +198,7 @@ export class AdminHomeComponent {
   }
 
   PostResult() {
-    if (this.resultSelectedChampionship && this.resultSelectedMatch && this.resultScoreTeam1 && this.resultScoreTeam2) {
+    if (this.resultSelectedChampionship && this.resultSelectedMatch) {      
       this.httpService.PostResultAdmin(this.resultSelectedChampionship, this.resultSelectedMatch, this.resultScoreTeam1, this.resultScoreTeam2).subscribe(
         (response: any) => {
           this.SuccesMessage(response)

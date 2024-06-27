@@ -182,11 +182,11 @@ export const getResultsAdmin = async (req: any, res: any) => {
 
 export const postResultAdmin = async (req: any, res: any) => {
     try {
-        const { body } = req;
-        if (!body.championshipName || !body.team1 || !body.team2 || !body.scoreTeam1 || !body.scoreTeam2 || !body.dateMatch) {
+        const { body } = req;        
+        if (!body.championshipName || !body.team1 || !body.team2) {
             return res.status(500).send({ message: "Error procesando los datos." });
         } else {
-            const result = await adminServices.postResultAdmin(body.scoreTeam1, body.scoreTeam2, body.championshipName, body.team1, body.team2, body.dateMatch);
+            const result = await adminServices.postResultAdmin(body.scoreTeam1, body.scoreTeam2, body.championshipName, body.team1, body.team2);
             if (result.message) {
                 res.status(result.status).send({ message: result.message })
             } else {
