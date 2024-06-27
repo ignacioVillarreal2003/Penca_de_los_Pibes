@@ -28,7 +28,7 @@ seguido del comando:
 ```
 ng serve --open
 ```
-Con esto quedará abierto en localhost:3001 la aplicación.
+Con esto quedará abierto en localhost:4200 la aplicación.
 
 ## Server 
 Posicionarse en la carpeta /servidor en una nueva terminal y escribir el comando:
