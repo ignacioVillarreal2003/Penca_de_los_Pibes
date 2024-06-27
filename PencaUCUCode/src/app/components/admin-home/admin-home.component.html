@@ -14,10 +14,10 @@
         <div class="modes">
             <div id="mode-championship">
                 <div class="options">
-                    <button (click)="ChooseOptionChampionship(1)">Ver</button>
-                    <button (click)="ChooseOptionChampionship(2)">Crear</button>
-                    <button (click)="ChooseOptionChampionship(3)">Modificar</button>
-                    <button (click)="ChooseOptionChampionship(4)">Activar</button>
+                    <button (click)="ChooseOptionChampionship(1)" (click)="GetChampionships()">Ver</button>
+                    <button (click)="ChooseOptionChampionship(2)" (click)="GetChampionships()">Crear</button>
+                    <button (click)="ChooseOptionChampionship(3)" (click)="GetChampionships()">Modificar</button>
+                    <button (click)="ChooseOptionChampionship(4)" (click)="GetChampionships()">Activar</button>
                 </div>
                 <div class="cont">
                     <div class="option-view">
@@ -55,10 +55,10 @@
 
             <div id="mode-team">
                 <div class="options">
-                    <button (click)="ChooseOptionTeam(1)">Ver</button>
-                    <button (click)="ChooseOptionTeam(2)">Crear</button>
-                    <button (click)="ChooseOptionTeam(3)">Modificar</button>
-                    <button (click)="ChooseOptionTeam(4)">Añadir equipo</button>
+                    <button (click)="ChooseOptionTeam(1)" (click)="GetAllTeams()">Ver</button>
+                    <button (click)="ChooseOptionTeam(2)" (click)="GetAllTeams()">Crear</button>
+                    <button (click)="ChooseOptionTeam(3)" (click)="GetAllTeams()">Modificar</button>
+                    <button (click)="ChooseOptionTeam(4)" (click)="GetAllTeams()">Añadir equipo</button>
                 </div>
                 <div class="cont">
                     <div class="option-view">

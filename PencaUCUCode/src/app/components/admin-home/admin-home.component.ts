@@ -77,7 +77,7 @@ export class AdminHomeComponent {
     if (this.teamSelectedChampionship) {
       this.httpService.GetTeamsAdmin(this.teamSelectedChampionship).subscribe(
         (response: ITeamAdmin[]) => {
-          this.teams = response;
+          this.teams = response;          
         },
         (error: any) => {
           this.ErrorMessage(error);

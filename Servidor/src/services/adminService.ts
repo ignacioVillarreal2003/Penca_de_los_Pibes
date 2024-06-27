@@ -127,7 +127,9 @@ export const getResultsAdmin = async (championshipName: string) => {
 export const postResultAdmin = async (scoreTeam1: number, scoreTeam2: number, championshipName: string, team1: string, team2: string) => {
     try {                        
         await admin.postResultAdmin(scoreTeam1, scoreTeam2, championshipName, team1, team2);
-        const predicciones: any[] = await admin.getPredictions(championshipName, team1, team2);            
+        const predicciones: any[] = await admin.getPredictions(championshipName, team1, team2);    
+        console.log(predicciones);
+                
         if (predicciones){
             predicciones.forEach((e: any) => {
                 if (scoreTeam1 == e.scoreTeam1 && scoreTeam2 == e.scoreTeam2) {
